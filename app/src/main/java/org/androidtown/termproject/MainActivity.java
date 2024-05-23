@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         EditText emailEditText = findViewById(R.id.emailEditText);
         EditText passwordEditText = findViewById(R.id.passwordEditText);
         Button loginButton = findViewById(R.id.loginButton);
-        TextView textViewUserEmail = findViewById(R.id.textViewUserEmail);
+        TextView registerTextView = findViewById(R.id.registerTextView);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button registerButton = findViewById(R.id.register);
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        registerTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, register_1.class));
@@ -71,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String email = dataSnapshot.getValue(String.class);
-                textViewUserEmail.setText(email);
+                if (email != null) {
+                    Toast.makeText(MainActivity.this, "Welcome " + email, Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -106,4 +107,5 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 }
+
 
