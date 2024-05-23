@@ -1,82 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#FFFFFF"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textViewSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign up"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create an account to get started"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        android:textColor="#888888" />
 
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email" />
+        android:hint="Email Address"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/edit_text_background" />
 
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        android:hint="Create a password"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:inputType="textPassword"
+        android:background="@drawable/edit_text_background" />
+
+    <TextView
+        android:id="@+id/textViewPasswordHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Use English and numbers and more than 8 digits"
+        android:textSize="12sp"
+        android:layout_marginTop="4dp"
+        android:textColor="#888888" />
 
     <EditText
         android:id="@+id/confirmPasswordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Confirm Password"
-        android:inputType="textPassword" />
-
-    <CheckBox
-        android:id="@+id/artCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="미술" />
-
-    <CheckBox
-        android:id="@+id/cookingCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="요리" />
-
-    <CheckBox
-        android:id="@+id/programmingCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="프로그래밍" />
-
-    <CheckBox
-        android:id="@+id/exerciseCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="운동" />
-
-    <CheckBox
-        android:id="@+id/photographyCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="사진" />
-
-    <CheckBox
-        android:id="@+id/etcCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="기타" />
+        android:hint="Confirm password"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:inputType="textPassword"
+        android:background="@drawable/edit_text_background" />
 
     <CheckBox
         android:id="@+id/agreeCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I agree to the privacy policy" />
+        android:text="I've read and agree with the Terms and Conditions and the Privacy Policy."
+        android:layout_marginTop="20dp" />
 
     <Button
         android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register" />
+        android:text="Sign Up"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="#FFFFFF"
+        android:padding="12dp" />
 
     <Button
         android:id="@+id/backButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Back" />
+        android:text="Back"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#DDDDDD"
+        android:textColor="#FFFFFF"
+        android:padding="12dp" />
+
 </LinearLayout>
