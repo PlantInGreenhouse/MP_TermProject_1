@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TermProject</string>
+    <!-- 새로 추가할 문자열 리소스 -->
+    <string name="image_button_desc">Test Image Button</string>
+</resources>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "965564499199",
+    "firebase_url": "https://mplogin-ae298-default-rtdb.firebaseio.com",
+    "project_id": "mplogin-ae298",
+    "storage_bucket": "mplogin-ae298.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:965564499199:android:c67ba0c872f8f3de0538ca",
+        "android_client_info": {
+          "package_name": "org.androidtown.termproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "965564499199-920f9akclj7r1ankv8s3o2mpjlakjk21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDK4iiS1s_qZpO3hR3Kdr3LkgkYHs4mfu8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "965564499199-920f9akclj7r1ankv8s3o2mpjlakjk21.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

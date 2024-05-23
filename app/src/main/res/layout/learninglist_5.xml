@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- 추가할 뷰 요소들 -->
+    <TextView
+        android:id="@+id/lobbyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="내 학습창"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <ImageButton
+            android:id="@+id/nav1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/nav1"
+            android:layout_margin="8dp"
+            android:scaleType="fitCenter" />
+
+        <ImageButton
+            android:id="@+id/nav2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/nav2"
+            android:layout_margin="8dp"
+            android:scaleType="fitCenter"
+            />
+
+        <ImageButton
+            android:id="@+id/nav3"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/nav3"
+            android:layout_margin="8dp"
+            android:scaleType="fitCenter"
+            />
+
+        <ImageButton
+            android:id="@+id/nav4"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/nav4"
+            android:layout_margin="8dp"
+            android:scaleType="fitCenter"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
