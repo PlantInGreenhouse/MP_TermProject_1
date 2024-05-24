@@ -92,5 +92,4 @@
         android:backgroundTint="#DDDDDD"
         android:textColor="#FFFFFF"
         android:padding="12dp" />
-
 </LinearLayout>
