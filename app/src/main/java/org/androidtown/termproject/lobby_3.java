@@ -1,5 +1,6 @@
 package org.androidtown.termproject;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,9 +16,9 @@ public class lobby_3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lobby_3);
 
-        ImageButton button2 = findViewById(R.id.nav2);
-        ImageButton button3 = findViewById(R.id.nav3);
-        ImageButton button4 = findViewById(R.id.nav4);
+        ImageButton button3 = findViewById(R.id.marketIcon);
+        ImageButton button2 = findViewById(R.id.studyIcon);
+        ImageButton button4 = findViewById(R.id.myPageIcon);
 
 
         button2.setOnClickListener(new View.OnClickListener() {
@@ -41,13 +42,5 @@ public class lobby_3 extends AppCompatActivity {
             }
         });
 
-        Button backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 이전 페이지로 돌아가는 메서드 호출
-                finish();
-            }
-        });
     }
 }
