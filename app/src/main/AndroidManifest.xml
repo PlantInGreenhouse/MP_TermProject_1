@@ -28,6 +28,8 @@
         <activity android:name=".register_1" />
         <activity android:name=".shoppinglist_7" />
         <activity android:name=".study_4" />
+        <activity android:name=".lectureMode_6_1" />
+        <activity android:name=".lectureModeRegist_6_1_1" />
     </application>
 
 </manifest>

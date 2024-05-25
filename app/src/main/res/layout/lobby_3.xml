@@ -47,7 +47,7 @@
         </RelativeLayout>
 
         <!-- 장바구니 아이콘 -->
-        <ImageView
+        <ImageButton
             android:id="@+id/cartIcon"
             android:layout_width="30dp"
             android:layout_height="30dp"

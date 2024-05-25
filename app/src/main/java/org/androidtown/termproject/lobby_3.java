@@ -15,12 +15,18 @@ public class lobby_3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lobby_3);
-
+        ImageButton button1 = findViewById(R.id.cartIcon);
         ImageButton button3 = findViewById(R.id.marketIcon);
         ImageButton button2 = findViewById(R.id.studyIcon);
         ImageButton button4 = findViewById(R.id.myPageIcon);
 
 
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(lobby_3.this, shoppinglist_7.class));
+            }
+        });
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

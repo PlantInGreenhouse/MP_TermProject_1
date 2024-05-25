@@ -1,11 +1,12 @@
 package org.androidtown.termproject;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import org.androidtown.termproject.R;
 import android.widget.Button;
 import android.widget.ImageButton;
+import org.androidtown.termproject.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,17 +16,17 @@ public class mypage_6 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage_6);
 
-        ImageButton button1 = findViewById(R.id.nav1);
-        ImageButton button2 = findViewById(R.id.nav2);
-        ImageButton button3 = findViewById(R.id.nav3);
+        ImageButton button1 = findViewById(R.id.cartIcon);
+        ImageButton button2 = findViewById(R.id.studyIcon);
+        ImageButton button3 = findViewById(R.id.marketIcon);
+
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mypage_6.this, lobby_3.class));
+                startActivity(new Intent(mypage_6.this, shoppinglist_7.class));
             }
         });
-
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,13 +41,21 @@ public class mypage_6 extends AppCompatActivity {
             }
         });
 
-
-        Button backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
+        // 로그아웃 버튼 이건 지우면 안됨
+        Button logoutButton = findViewById(R.id.logoutButton);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 이전 페이지로 돌아가는 메서드 호출
-                finish();
+                startActivity(new Intent(mypage_6.this, MainActivity.class));
+            }
+        });
+
+        Button lectureModeButton = findViewById(R.id.lectureMode);
+        lectureModeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mypage_6.this, lectureMode_6_1.class));
             }
         });
     }
