@@ -42,6 +42,7 @@ dependencies {
     implementation("com.google.firebase:firebase-database:20.1.0") // 추가된 의존성
     implementation ("com.firebaseui:firebase-ui-auth:7.2.0")
     implementation("com.google.android.gms:play-services-auth:20.3.0") // 추가된 종속성
+    implementation ("com.google.firebase:firebase-storage:20.0.0") // 동영상 업로드 용
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
