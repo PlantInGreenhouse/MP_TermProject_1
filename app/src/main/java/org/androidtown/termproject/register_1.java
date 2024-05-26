@@ -2,7 +2,6 @@ package org.androidtown.termproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -54,25 +53,13 @@ public class register_1 extends AppCompatActivity {
                 String password = passwordEditText.getText().toString().trim();
                 String confirmPassword = confirmPasswordEditText.getText().toString().trim();
 
-                // 유효성 검사 수행
-                if (name.isEmpty()) {
-                    Toast.makeText(register_1.this, "Please enter your name.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (!isValidEmail(email)) {
-                    Toast.makeText(register_1.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (!isValidPassword(password)) {
-                    Toast.makeText(register_1.this, "Password must be at least 8 characters long and include both letters and numbers.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
                 // 약관 동의 체크 확인
                 if (!agreeCheckBox.isChecked()) {
                     Toast.makeText(register_1.this, "Please agree to the privacy policy.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (name.isEmpty()) {
+                    Toast.makeText(register_1.this, "Please enter your name.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -97,31 +84,6 @@ public class register_1 extends AppCompatActivity {
         });
     }
 
-    // 이메일 유효성 검사
-    private boolean isValidEmail(String email) {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
-    // 비밀번호 유효성 검사
-    private boolean isValidPassword(String password) {
-        if (password.length() < 8) {
-            return false;
-        }
-        boolean hasLetter = false;
-        boolean hasDigit = false;
-        for (char c : password.toCharArray()) {
-            if (Character.isLetter(c)) {
-                hasLetter = true;
-            } else if (Character.isDigit(c)) {
-                hasDigit = true;
-            }
-            if (hasLetter && hasDigit) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     // 사용자 등록 메서드
     private void registerUser(String name, String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -131,12 +93,8 @@ public class register_1 extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // 회원가입 성공
                             FirebaseUser user = mAuth.getCurrentUser();
-<<<<<<< HEAD
                             String userId = user.getUid();
-                            writeNewUser(userId, email);
-=======
                             writeNewUser(user.getUid(), name, email);
->>>>>>> fd2529e263f31465196ea15f868e49e872f3b762
                             Toast.makeText(register_1.this, "Registration successful!", Toast.LENGTH_SHORT).show();
                             // category로 이동
                             Intent intent = new Intent(register_1.this, category.class);
@@ -161,21 +119,18 @@ public class register_1 extends AppCompatActivity {
     }
 
     // 새로운 사용자 데이터를 데이터베이스에 저장하는 메서드
-<<<<<<< HEAD
-    private void writeNewUser(String userId, String email) {
-        User user = new User(userId, email);
-=======
     private void writeNewUser(String userId, String name, String email) {
         User user = new User(userId, name, email);
->>>>>>> fd2529e263f31465196ea15f868e49e872f3b762
         mDatabase.child("users").child(userId).setValue(user);
     }
 
     // 사용자 클래스 정의
     public static class User {
         public String userId;
+
         public String name;
         public String email;
+
 
         public User() {
             // Default constructor required for calls to DataSnapshot.getValue(User.class)
