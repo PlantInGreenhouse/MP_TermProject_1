@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -27,7 +28,8 @@ import com.google.firebase.storage.UploadTask;
 
 public class lectureModeRegist_6_1_1 extends AppCompatActivity {
     private static final int PICK_VIDEO_REQUEST = 1;
-    private Button btnUploadVideo;
+    private EditText etVideoTitle, etVideoCategory, etVideoDescription;
+    private Button btnUploadVideo, btnSaveToDatabase;
     private TextView tvUploadStatus;
     private VideoView videoView;
     private Uri videoUri;
@@ -41,7 +43,11 @@ public class lectureModeRegist_6_1_1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lecturemoderegist_6_1_1);
 
+        etVideoTitle = findViewById(R.id.etVideoTitle);
+        etVideoCategory = findViewById(R.id.etVideoCategory);
+        etVideoDescription = findViewById(R.id.etVideoDescription);
         btnUploadVideo = findViewById(R.id.btnUploadVideo);
+        btnSaveToDatabase = findViewById(R.id.btnSaveToDatabase);
         tvUploadStatus = findViewById(R.id.tvUploadStatus);
         videoView = findViewById(R.id.videoView);
         storage = FirebaseStorage.getInstance();
@@ -55,13 +61,13 @@ public class lectureModeRegist_6_1_1 extends AppCompatActivity {
             }
         });
 
-        Button videoRegister = findViewById(R.id.videoRegistter);
-        videoRegister.setOnClickListener(new View.OnClickListener() {
+        btnSaveToDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(lectureModeRegist_6_1_1.this, lobby_3.class));
+                saveVideoDetailsToDatabase();
             }
         });
+
 
         Button btnPlayVideo = findViewById(R.id.btnPlayVideo);
         btnPlayVideo.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +108,6 @@ public class lectureModeRegist_6_1_1 extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     videoUrl = uri.toString();
                                     tvUploadStatus.setText("Upload Successful: " + videoUrl);
-                                    saveVideoUrlToDatabase(videoUrl);
                                     Toast.makeText(lectureModeRegist_6_1_1.this, "Video Uploaded", Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -122,9 +127,28 @@ public class lectureModeRegist_6_1_1 extends AppCompatActivity {
         }
     }
 
-    private void saveVideoUrlToDatabase(String videoUrl) {
+    private void saveVideoDetailsToDatabase() {
         String videoId = databaseReference.push().getKey();
-        databaseReference.child(videoId).setValue(videoUrl);
+        VideoDetails videoDetails = new VideoDetails(
+                etVideoTitle.getText().toString(),
+                etVideoCategory.getText().toString(),
+                etVideoDescription.getText().toString(),
+                videoUrl
+        );
+        if (videoId != null) {
+            databaseReference.child(videoId).setValue(videoDetails).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(lectureModeRegist_6_1_1.this, "Details Saved", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(lectureModeRegist_6_1_1.this, mypage_6.class));
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(lectureModeRegist_6_1_1.this, "Failed to save details", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     private void playVideoFromFirebase() {
@@ -132,7 +156,7 @@ public class lectureModeRegist_6_1_1 extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot videoSnapshot : dataSnapshot.getChildren()) {
-                    String videoUrl = videoSnapshot.getValue(String.class);
+                    String videoUrl = videoSnapshot.child("url").getValue(String.class);
                     if (videoUrl != null) {
                         playVideo(videoUrl);
                         break; // 처음 발견된 동영상 URL을 재생
