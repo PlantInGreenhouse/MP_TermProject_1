@@ -76,6 +76,14 @@ public class lectureModeRegist_6_1_1 extends AppCompatActivity {
                 playVideoFromFirebase();
             }
         });
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 뒤로 가기 버튼을 누르면 mypage_6 클래스로 이동
+                startActivity(new Intent(lectureModeRegist_6_1_1.this, lectureMode_6_1.class));
+            }
+        });
     }
 
     private void chooseVideo() {

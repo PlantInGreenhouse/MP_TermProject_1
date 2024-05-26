@@ -19,6 +19,7 @@ public class mypage_6 extends AppCompatActivity {
         ImageButton button1 = findViewById(R.id.cartIcon);
         ImageButton button2 = findViewById(R.id.studyIcon);
         ImageButton button3 = findViewById(R.id.marketIcon);
+        ImageButton button4 = findViewById(R.id.homeIcon);
 
 
         button1.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +39,12 @@ public class mypage_6 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mypage_6.this, learninglist_5.class));
+            }
+        });
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mypage_6.this, lobby_3.class));
             }
         });
 

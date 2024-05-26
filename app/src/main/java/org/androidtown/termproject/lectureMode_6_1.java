@@ -20,5 +20,13 @@ public class lectureMode_6_1 extends AppCompatActivity {
                 startActivity(new Intent(lectureMode_6_1.this, lectureModeRegist_6_1_1.class));
             }
         });
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 뒤로 가기 버튼을 누르면 mypage_6 클래스로 이동
+                startActivity(new Intent(lectureMode_6_1.this, mypage_6.class));
+            }
+        });
     }
 }
