@@ -36,6 +36,7 @@ public class register_1 extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         // UI 요소 초기화
+        EditText nameEditText = findViewById(R.id.nameEditText);
         EditText emailEditText = findViewById(R.id.emailEditText);
         EditText passwordEditText = findViewById(R.id.passwordEditText);
         EditText confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText);
@@ -48,11 +49,17 @@ public class register_1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 입력된 값 가져오기
+                String name = nameEditText.getText().toString().trim();
                 String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
                 String confirmPassword = confirmPasswordEditText.getText().toString().trim();
 
                 // 유효성 검사 수행
+                if (name.isEmpty()) {
+                    Toast.makeText(register_1.this, "Please enter your name.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (!isValidEmail(email)) {
                     Toast.makeText(register_1.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
                     return;
@@ -76,7 +83,7 @@ public class register_1 extends AppCompatActivity {
                 }
 
                 // 사용자 등록
-                registerUser(email, password);
+                registerUser(name, email, password);
             }
         });
 
@@ -116,7 +123,7 @@ public class register_1 extends AppCompatActivity {
     }
 
     // 사용자 등록 메서드
-    private void registerUser(String email, String password) {
+    private void registerUser(String name, String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -124,7 +131,7 @@ public class register_1 extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // 회원가입 성공
                             FirebaseUser user = mAuth.getCurrentUser();
-                            writeNewUser(user.getUid(), email);
+                            writeNewUser(user.getUid(), name, email);
                             Toast.makeText(register_1.this, "Registration successful!", Toast.LENGTH_SHORT).show();
                             // Category로 이동
                             Intent intent = new Intent(register_1.this, category.class);
@@ -147,24 +154,24 @@ public class register_1 extends AppCompatActivity {
     }
 
     // 새로운 사용자 데이터를 데이터베이스에 저장하는 메서드
-    private void writeNewUser(String userId, String email) {
-        // 새로운 사용자 키 생성
-        String key = mDatabase.child("users").push().getKey();
-        User user = new User(userId, email);
-        mDatabase.child("users").child(key).setValue(user);
+    private void writeNewUser(String userId, String name, String email) {
+        User user = new User(userId, name, email);
+        mDatabase.child("users").child(userId).setValue(user);
     }
 
     // 사용자 클래스 정의
     public static class User {
         public String userId;
+        public String name;
         public String email;
 
         public User() {
             // Default constructor required for calls to DataSnapshot.getValue(User.class)
         }
 
-        public User(String userId, String email) {
+        public User(String userId, String name, String email) {
             this.userId = userId;
+            this.name = name;
             this.email = email;
         }
     }

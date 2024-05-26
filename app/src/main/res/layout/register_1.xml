@@ -28,6 +28,16 @@
         android:textColor="#888888" />
 
     <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:inputType="textPersonName"
+        android:background="@drawable/edit_text_background" />
+
+    <EditText
         android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
