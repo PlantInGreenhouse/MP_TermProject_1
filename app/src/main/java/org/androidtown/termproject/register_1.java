@@ -39,7 +39,7 @@ public class register_1 extends AppCompatActivity {
         EditText passwordEditText = findViewById(R.id.passwordEditText);
         EditText confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText);
         CheckBox agreeCheckBox = findViewById(R.id.agreeCheckBox);
-        Button registerButton = findViewById(R.id.registerButton);
+        Button registerButton = findViewById(R.id.nextButton);
         Button backButton = findViewById(R.id.backButton);
 
         // 회원가입 버튼 클릭 리스너 설정
@@ -89,8 +89,8 @@ public class register_1 extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             writeNewUser(user.getUid(), email);
                             Toast.makeText(register_1.this, "Registration successful!", Toast.LENGTH_SHORT).show();
-                            // MainActivity로 돌아가기
-                            Intent intent = new Intent(register_1.this, MainActivity.class);
+                            // Category로 이동
+                            Intent intent = new Intent(register_1.this, category.class);
                             startActivity(intent);
                             finish(); // 현재 Activity 종료
                         } else {

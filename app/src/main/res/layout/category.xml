@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+
+    <TextView
+        android:id="@+id/tv_categories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categories of interest"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/tv_instruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please check the field you are interested in (at least one)"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
+        android:textColor="#888888"/>
+
+    <CheckBox
+        android:id="@+id/cb_art"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Art" />
+
+    <CheckBox
+        android:id="@+id/cb_cooking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cooking" />
+
+    <CheckBox
+        android:id="@+id/cb_programming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Programming" />
+
+    <CheckBox
+        android:id="@+id/cb_workout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Work out" />
+
+    <CheckBox
+        android:id="@+id/cb_photos_videos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Photos &amp; Videos" />
+
+    <CheckBox
+        android:id="@+id/cb_etc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="etc" />
+
+    <Button
+        android:id="@+id/SignUpButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="#FFFFFF"
+        android:padding="12dp" />
+</LinearLayout>
