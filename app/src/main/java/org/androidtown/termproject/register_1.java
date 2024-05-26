@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.util.Patterns;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -62,6 +63,16 @@ public class register_1 extends AppCompatActivity {
                     Toast.makeText(register_1.this, "Please enter your name.", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                // 유효성 검사 수행
+                if (!isValidEmail(email)) {
+                    Toast.makeText(register_1.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (!isValidPassword(password)) {
+                    Toast.makeText(register_1.this, "Password must be at least 8 characters long and include both letters and numbers.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 // 비밀번호 일치 여부 확인
                 if (!password.equals(confirmPassword)) {
@@ -82,6 +93,30 @@ public class register_1 extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    // 이메일 유효성 검사
+    private boolean isValidEmail(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    // 비밀번호 유효성 검사
+    private boolean isValidPassword(String password) {
+        if (password.length() < 8) {
+            return false;
+        }
+        boolean hasLetter = false;
+        boolean hasDigit = false;
+        for (char c : password.toCharArray()) {
+            if (Character.isLetter(c)) {
+                hasLetter = true;
+            } else if (Character.isDigit(c)) {
+                hasDigit = true;
+            }
+            if (hasLetter && hasDigit) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // 사용자 등록 메서드
