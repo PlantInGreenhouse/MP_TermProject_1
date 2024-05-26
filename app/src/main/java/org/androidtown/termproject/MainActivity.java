@@ -64,22 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, register_1.class));
             }
         });
-
-        // 데이터 읽기
-        databaseReference.child("users").child("email").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String email = dataSnapshot.getValue(String.class);
-                if (email != null) {
-                    Toast.makeText(MainActivity.this, "Welcome " + email, Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainActivity.this, "Failed to read value.", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void loginUser(String email, String password) {
@@ -90,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                            // 로그인 성공 후 이메일을 데이터베이스에 저장
-                            databaseReference.child("users").child("email").setValue(email);
                             // 로비 페이지로 이동
                             startActivity(new Intent(MainActivity.this, lobby_3.class));
                         } else {
@@ -107,5 +89,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 }
+
 
 

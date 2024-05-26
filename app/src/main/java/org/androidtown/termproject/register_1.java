@@ -87,10 +87,13 @@ public class register_1 extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // 회원가입 성공
                             FirebaseUser user = mAuth.getCurrentUser();
-                            writeNewUser(user.getUid(), email);
+                            String userId = user.getUid();
+                            writeNewUser(userId, email);
                             Toast.makeText(register_1.this, "Registration successful!", Toast.LENGTH_SHORT).show();
-                            // Category로 이동
+                            // category로 이동
                             Intent intent = new Intent(register_1.this, category.class);
+                            intent.putExtra("userId", userId);
+                            intent.putExtra("email", email);
                             startActivity(intent);
                             finish(); // 현재 Activity 종료
                         } else {
@@ -111,10 +114,8 @@ public class register_1 extends AppCompatActivity {
 
     // 새로운 사용자 데이터를 데이터베이스에 저장하는 메서드
     private void writeNewUser(String userId, String email) {
-        // 새로운 사용자 키 생성
-        String key = mDatabase.child("users").push().getKey();
         User user = new User(userId, email);
-        mDatabase.child("users").child(key).setValue(user);
+        mDatabase.child("users").child(userId).setValue(user);
     }
 
     // 사용자 클래스 정의
