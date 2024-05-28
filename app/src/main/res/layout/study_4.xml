@@ -85,8 +85,8 @@
                 android:id="@+id/category_programming"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Programming"
-                android:background="@drawable/unselected_button" />
+                android:background="@drawable/unselected_button"
+                android:text="Programming" />
 
             <Button
                 android:id="@+id/category_workout"
