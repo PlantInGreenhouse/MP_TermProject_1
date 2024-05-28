@@ -94,12 +94,13 @@ public class study_4 extends AppCompatActivity {
     }
 
     private void addPostView(Post post) {
-        RelativeLayout postLayout = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.post_layout, null);
+        View postLayout = LayoutInflater.from(this).inflate(R.layout.post_layout, postsLayout, false);
 
         TextView categoryTextView = postLayout.findViewById(R.id.postCategoryTextView);
         TextView titleTextView = postLayout.findViewById(R.id.postTitleTextView);
         TextView authorTextView = postLayout.findViewById(R.id.postAuthorTextView);
 
+        // Assuming 'category' is a List<String>
         StringBuilder categoriesBuilder = new StringBuilder();
         for (String category : post.category) {
             categoriesBuilder.append(category).append(" ");

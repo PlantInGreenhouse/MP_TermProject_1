@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <!-- 상단 바 -->
     <RelativeLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#B6E6FC">
+        android:background="#B6E6FC"
+        android:padding="8dp">
 
         <!-- 왼쪽 로고 아이콘 -->
         <ImageView
@@ -29,21 +30,20 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="#000"
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerInParent="true" />
 
         <Button
             android:id="@+id/button_writing"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="writting"
             android:drawableLeft="@drawable/ic_writing"
             android:background="@drawable/custom_writing_button"
             android:textColor="#000000"
-            android:padding="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_alignParentEnd="true" />
-
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
     </RelativeLayout>
 
     <!-- 카테고리 가로 스크롤 -->
@@ -65,53 +65,72 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="All"
-                android:background="@drawable/selected_button" />
+                android:background="@drawable/selected_button"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/category_art"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Art"
-                android:background="@drawable/unselected_button" />
+                android:background="@drawable/unselected_button"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/category_cooking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cooking"
-                android:background="@drawable/unselected_button" />
+                android:background="@drawable/unselected_button"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/category_programming"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Programming"
                 android:background="@drawable/unselected_button"
-                android:text="Programming" />
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/category_workout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Work out"
-                android:background="@drawable/unselected_button" />
+                android:background="@drawable/unselected_button"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/category_photos_videos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Photos &amp; Videos"
-                android:background="@drawable/unselected_button" />
+                android:background="@drawable/unselected_button"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/category_etc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="etc"
-                android:background="@drawable/unselected_button" />
-
+                android:background="@drawable/unselected_button"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp"
+                android:textSize="14sp" />
         </LinearLayout>
     </HorizontalScrollView>
-
 
     <!-- 본문 내용 -->
     <ScrollView
@@ -127,14 +146,17 @@
             android:orientation="vertical"
             android:padding="10dp">
 
+            <!-- 포스트 레이아웃 -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#fff"
-                android:padding="10dp"
+                android:background="@drawable/post_background"
+                android:padding="16dp"
                 android:layout_marginBottom="10dp"
+                android:elevation="4dp"
+                android:backgroundTint="@android:color/white"
                 android:clickable="true"
-                android:onClick="onPostClick">
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -143,14 +165,14 @@
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="2dp"
-
                     android:layout_marginBottom="2dp"
                     android:background="@drawable/selected_button"
                     android:gravity="center"
                     android:minWidth="40dp"
                     android:padding="2dp"
                     android:text="Art"
-                    android:textColor="#000" />
+                    android:textColor="#000"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/post_text1"
@@ -158,8 +180,8 @@
                     android:layout_height="wrap_content"
                     android:text="이것은 제목입니다 초코케이크 야무지게 먹는 방법"
                     android:layout_marginTop="30dp"
-
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textColor="#000" />
 
                 <TextView
                     android:id="@+id/writerName1"
@@ -170,7 +192,9 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="10dp"
                     android:drawableLeft="@drawable/ic_avatar"
-                    android:drawablePadding="10dp"/>
+                    android:drawablePadding="10dp"
+                    android:textSize="14sp"
+                    android:textColor="#BDBDBD" />
 
                 <TextView
                     android:id="@+id/like_count1"
@@ -180,17 +204,23 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignBaseline="@id/writerName1"
                     android:drawableLeft="@drawable/ic_thumb_up"
-                    android:drawablePadding="10dp"/>
-
+                    android:drawablePadding="10dp"
+                    android:textSize="14sp"
+                    android:textColor="#BDBDBD" />
             </RelativeLayout>
+
+            <!-- 추가 포스트는 위 레이아웃을 복사하여 사용 -->
+            <!-- 예를 들어, 두 번째 포스트 -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#fff"
-                android:padding="10dp"
+                android:background="@drawable/post_background"
+                android:padding="16dp"
                 android:layout_marginBottom="10dp"
+                android:elevation="4dp"
+                android:backgroundTint="@android:color/white"
                 android:clickable="true"
-                android:onClick="onPostClick">
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -199,14 +229,14 @@
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="2dp"
-
                     android:layout_marginBottom="2dp"
                     android:background="@drawable/selected_button"
                     android:gravity="center"
                     android:minWidth="40dp"
                     android:padding="2dp"
                     android:text="Art"
-                    android:textColor="#000" />
+                    android:textColor="#000"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/post_text2"
@@ -214,8 +244,8 @@
                     android:layout_height="wrap_content"
                     android:text="이것은 제목입니다 초코케이크 야무지게 먹는 방법"
                     android:layout_marginTop="30dp"
-
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textColor="#000" />
 
                 <TextView
                     android:id="@+id/writerName2"
@@ -226,7 +256,9 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="10dp"
                     android:drawableLeft="@drawable/ic_avatar"
-                    android:drawablePadding="10dp"/>
+                    android:drawablePadding="10dp"
+                    android:textSize="14sp"
+                    android:textColor="#BDBDBD" />
 
                 <TextView
                     android:id="@+id/like_count2"
@@ -236,175 +268,14 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignBaseline="@id/writerName2"
                     android:drawableLeft="@drawable/ic_thumb_up"
-                    android:drawablePadding="10dp"/>
-
+                    android:drawablePadding="10dp"
+                    android:textSize="14sp"
+                    android:textColor="#BDBDBD" />
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:padding="10dp"
-                android:layout_marginBottom="10dp"
-                android:clickable="true"
-                android:onClick="onPostClick">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="2dp"
+            <!-- 추가 포스트 복사 -->
+            <!-- 필요에 따라 더 많은 포스트 추가 -->
 
-                    android:layout_marginBottom="2dp"
-                    android:background="@drawable/selected_button"
-                    android:gravity="center"
-                    android:minWidth="40dp"
-                    android:padding="2dp"
-                    android:text="Art"
-                    android:textColor="#000" />
-
-                <TextView
-                    android:id="@+id/post_text3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="이것은 제목입니다 초코케이크 야무지게 먹는 방법"
-                    android:layout_marginTop="30dp"
-
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/writerName3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Leeseojeong"
-                    android:layout_below="@id/post_text3"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="10dp"
-                    android:drawableLeft="@drawable/ic_avatar"
-                    android:drawablePadding="10dp"/>
-
-                <TextView
-                    android:id="@+id/like_count3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="47"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignBaseline="@id/writerName3"
-                    android:drawableLeft="@drawable/ic_thumb_up"
-                    android:drawablePadding="10dp"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:padding="10dp"
-                android:layout_marginBottom="10dp"
-                android:clickable="true"
-                android:onClick="onPostClick">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="2dp"
-
-                    android:layout_marginBottom="2dp"
-                    android:background="@drawable/selected_button"
-                    android:gravity="center"
-                    android:minWidth="40dp"
-                    android:padding="2dp"
-                    android:text="Art"
-                    android:textColor="#000" />
-
-                <TextView
-                    android:id="@+id/post_text4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="이것은 제목입니다 초코케이크 야무지게 먹는 방법"
-                    android:layout_marginTop="30dp"
-
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/writerName4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Leeseojeong"
-                    android:layout_below="@id/post_text4"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="10dp"
-                    android:drawableLeft="@drawable/ic_avatar"
-                    android:drawablePadding="10dp"/>
-
-                <TextView
-                    android:id="@+id/like_count4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="47"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignBaseline="@id/writerName4"
-                    android:drawableLeft="@drawable/ic_thumb_up"
-                    android:drawablePadding="10dp"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:padding="10dp"
-                android:layout_marginBottom="10dp"
-                android:clickable="true"
-                android:onClick="onPostClick">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="2dp"
-
-                    android:layout_marginBottom="2dp"
-                    android:background="@drawable/selected_button"
-                    android:gravity="center"
-                    android:minWidth="40dp"
-                    android:padding="2dp"
-                    android:text="Art"
-                    android:textColor="#000" />
-
-                <TextView
-                    android:id="@+id/post_text5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="이것은 제목입니다 초코케이크 야무지게 먹는 방법"
-                    android:layout_marginTop="30dp"
-
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/writerName5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Leeseojeong"
-                    android:layout_below="@id/post_text5"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="10dp"
-                    android:drawableLeft="@drawable/ic_avatar"
-                    android:drawablePadding="10dp"/>
-
-                <TextView
-                    android:id="@+id/like_count5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="47"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignBaseline="@id/writerName5"
-                    android:drawableLeft="@drawable/ic_thumb_up"
-                    android:drawablePadding="10dp"/>
-
-            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 
@@ -437,7 +308,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textColor="#000000" />
         </LinearLayout>
         <!-- Study -->
         <LinearLayout
@@ -458,7 +330,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Study"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textColor="#000000" />
         </LinearLayout>
         <!-- Market -->
         <LinearLayout
@@ -479,7 +352,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Market"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textColor="#000000" />
         </LinearLayout>
         <!-- My Page -->
         <LinearLayout
@@ -498,7 +372,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Page" />
+                android:text="My Page"
+                android:textSize="12sp"
+                android:textColor="#000000" />
         </LinearLayout>
     </LinearLayout>
 

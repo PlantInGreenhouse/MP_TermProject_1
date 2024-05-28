@@ -1,11 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#fff"
-    android:padding="10dp"
+    android:background="@drawable/post_background"
+    android:padding="16dp"
     android:layout_marginBottom="10dp"
+    android:elevation="4dp"
+    android:backgroundTint="@android:color/white"
     android:clickable="true"
-    android:onClick="onPostClick">
+    android:layout_marginTop="10dp">
 
     <TextView
         android:id="@+id/postCategoryTextView"
@@ -18,26 +20,43 @@
         android:layout_marginBottom="2dp"
         android:background="@drawable/selected_button"
         android:gravity="center"
+        android:minWidth="40dp"
         android:padding="2dp"
-        android:text="Category"
-        android:textColor="#000" />
+        android:text="Art"
+        android:textColor="#000"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/postTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="이것은 제목입니다 초코케이크 야무지게 먹는 방법"
         android:layout_marginTop="30dp"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textColor="#000" />
 
     <TextView
         android:id="@+id/postAuthorTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Author"
+        android:text="Leeseojeong"
         android:layout_below="@id/postTitleTextView"
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp"
         android:drawableLeft="@drawable/ic_avatar"
-        android:drawablePadding="10dp"/>
+        android:drawablePadding="10dp"
+        android:textSize="14sp"
+        android:textColor="#BDBDBD" />
+
+    <TextView
+        android:id="@+id/like_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="47"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBaseline="@id/postAuthorTextView"
+        android:drawableLeft="@drawable/ic_thumb_up"
+        android:drawablePadding="10dp"
+        android:textSize="14sp"
+        android:textColor="#BDBDBD" />
 </RelativeLayout>
