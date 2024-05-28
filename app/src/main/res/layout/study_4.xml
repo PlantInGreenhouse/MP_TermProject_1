@@ -36,7 +36,7 @@
             android:id="@+id/button_writing"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="writing"
+            android:text="writting"
             android:drawableLeft="@drawable/ic_writing"
             android:background="@drawable/custom_writing_button"
             android:textColor="#000000"
@@ -121,6 +121,7 @@
         android:layout_above="@id/bottomNavBar">
 
         <LinearLayout
+            android:id="@+id/postsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

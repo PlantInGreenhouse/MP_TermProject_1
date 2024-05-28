@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="제목 입력" />
+
+    <EditText
+        android:id="@+id/contentEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="내용 입력"
+        android:layout_below="@id/titleEditText"
+        android:layout_marginTop="16dp" />
+
+    <LinearLayout
+        android:id="@+id/categoriesLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/contentEditText"
+        android:layout_marginTop="16dp">
+
+        <CheckBox
+            android:id="@+id/categoryArt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Art" />
+
+        <CheckBox
+            android:id="@+id/categoryCooking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Art" />
+
+        <CheckBox
+            android:id="@+id/categoryProgramming"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Programming" />
+
+        <CheckBox
+            android:id="@+id/categoryWorkout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Art" />
+
+        <CheckBox
+            android:id="@+id/PhotoVideos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Art" />
+
+        <CheckBox
+            android:id="@+id/categoryEtc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Art" />
+
+        <!-- 추가 카테고리 체크박스 -->
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/submitPostButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="등록"
+        android:layout_below="@id/categoriesLayout"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>
