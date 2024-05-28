@@ -20,6 +20,7 @@ public class mypage_6 extends AppCompatActivity {
         ImageButton button2 = findViewById(R.id.studyIcon);
         ImageButton button3 = findViewById(R.id.marketIcon);
         ImageButton button4 = findViewById(R.id.homeIcon);
+        ImageButton editIcon = findViewById(R.id.edit_icon);
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +50,13 @@ public class mypage_6 extends AppCompatActivity {
             }
         });
 
+        editIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편집 아이콘 클릭 시 수행할 작업
+            }
 
+        });
 
         // 로그아웃 버튼 이건 지우면 안됨
         ImageButton logoutButton = findViewById(R.id.LogOut_button);
@@ -67,6 +74,7 @@ public class mypage_6 extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(mypage_6.this, lectureMode_6_1.class));
             }
+
         });
     }
 }

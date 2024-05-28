@@ -20,20 +20,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="My page"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
-        <ImageView
-            android:id="@+id/profile_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/profile"
-            android:layout_gravity="center"
-            android:padding="8dp"
-            android:layout_marginTop="16dp"
-            android:scaleType="centerCrop"
-            android:background="@drawable/rounded_corner" />/>
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp">
+
+            <org.androidtown.termproject.RoundedImageView
+                android:id="@+id/profile_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/profile"
+                android:scaleType="centerCrop" />
+
+            <ImageButton
+                android:id="@+id/edit_icon"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_edit"
+                android:layout_alignBottom="@id/profile_image"
+                android:layout_alignEnd="@id/profile_image"
+                android:layout_margin="2dp"/>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/User_name"
