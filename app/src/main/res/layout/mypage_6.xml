@@ -43,7 +43,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="35dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -74,7 +74,9 @@
                 android:id="@+id/MyInformation_button"
                 android:layout_width="23dp"
                 android:layout_height="23dp"
-                android:src="@drawable/right_errow" />
+                android:src="@drawable/right_errow"
+                android:background="@android:color/white"/>
+
         </LinearLayout>
 
         <View
@@ -104,7 +106,8 @@
                 android:id="@+id/LectureMode_button"
                 android:layout_width="23dp"
                 android:layout_height="23dp"
-                android:src="@drawable/right_errow" />
+                android:src="@drawable/right_errow"
+                android:background="@android:color/white"/>
         </LinearLayout>
 
         <View
@@ -134,7 +137,8 @@
                 android:id="@+id/OderList_button"
                 android:layout_width="23dp"
                 android:layout_height="23dp"
-                android:src="@drawable/right_errow" />
+                android:src="@drawable/right_errow"
+                android:background="@android:color/white"/>
         </LinearLayout>
 
         <View
@@ -156,7 +160,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Logout"
+                android:text="Log out"
                 android:textSize="16sp"
                 android:layout_weight="1" />
 
@@ -164,7 +168,8 @@
                 android:id="@+id/LogOut_button"
                 android:layout_width="23dp"
                 android:layout_height="23dp"
-                android:src="@drawable/right_errow" />
+                android:src="@drawable/right_errow"
+                android:background="@android:color/white"/>
         </LinearLayout>
 
         <View
@@ -194,7 +199,8 @@
                 android:id="@+id/QA_button"
                 android:layout_width="23dp"
                 android:layout_height="23dp"
-                android:src="@drawable/right_errow" />
+                android:src="@drawable/right_errow"
+                android:background="@android:color/white"/>
         </LinearLayout>
 
         <View
@@ -225,7 +231,8 @@
                 android:id="@+id/homeIcon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_home" />
+                android:src="@drawable/ic_home"
+                android:background="@android:color/white"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -246,7 +253,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_study"
-                />
+                android:background="@android:color/white"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -266,7 +273,8 @@
                 android:id="@+id/marketIcon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_market" />
+                android:src="@drawable/ic_market"
+                android:background="@android:color/white"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -286,7 +294,8 @@
                 android:id="@+id/myPageIcon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_mypage" />
+                android:src="@drawable/ic_mypage"
+                android:background="@android:color/white"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

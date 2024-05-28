@@ -878,7 +878,8 @@
                 android:id="@+id/homeIcon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_home" />
+                android:src="@drawable/ic_home"
+                android:background="@android:color/white"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -899,7 +900,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_study"
-                />
+                android:background="@android:color/white"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -919,7 +920,8 @@
                 android:id="@+id/marketIcon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_market" />
+                android:src="@drawable/ic_market"
+                android:background="@android:color/white"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -939,15 +941,12 @@
                 android:id="@+id/myPageIcon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_mypage" />
+                android:src="@drawable/ic_mypage"
+                android:background="@android:color/white"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="My Page" />
         </LinearLayout>
     </LinearLayout>
-
-
-
-
 </RelativeLayout>

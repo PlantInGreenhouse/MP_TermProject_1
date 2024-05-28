@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/passwordEditText"
         android:layout_marginTop="32dp"
-        android:text="Login"
+        android:text="Log  in"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@android:color/white" />
 

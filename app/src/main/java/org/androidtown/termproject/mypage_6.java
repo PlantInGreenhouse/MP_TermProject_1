@@ -24,7 +24,7 @@ public class mypage_6 extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mypage_6.this, shoppinglist_7.class));
+                startActivity(new Intent(mypage_6.this, mypage_6.class));
             }
         });
 
@@ -48,6 +48,8 @@ public class mypage_6 extends AppCompatActivity {
                 startActivity(new Intent(mypage_6.this, lobby_3.class));
             }
         });
+
+
 
         // 로그아웃 버튼 이건 지우면 안됨
         ImageButton logoutButton = findViewById(R.id.LogOut_button);
