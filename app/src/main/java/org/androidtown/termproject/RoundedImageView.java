@@ -12,7 +12,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 public class RoundedImageView extends AppCompatImageView {
     private Paint paint = new Paint();
-    private int cornerRadius = 20;  // 원하는 둥근 모서리 반경
+    private int cornerRadius = 30;  // Desired corner radius
 
     public RoundedImageView(Context context) {
         super(context);
@@ -35,14 +35,19 @@ public class RoundedImageView extends AppCompatImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas bitmapCanvas = new Canvas(bitmap);
-        super.onDraw(bitmapCanvas);
+        int width = getWidth();
+        int height = getHeight();
 
-        BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-        paint.setShader(shader);
+        if (width > 0 && height > 0) {
+            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            Canvas bitmapCanvas = new Canvas(bitmap);
+            super.onDraw(bitmapCanvas);
 
-        RectF rect = new RectF(0, 0, getWidth(), getHeight());
-        canvas.drawRoundRect(rect, cornerRadius, cornerRadius, paint);
+            BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+            paint.setShader(shader);
+
+            RectF rect = new RectF(0, 0, width, height);
+            canvas.drawRoundRect(rect, cornerRadius, cornerRadius, paint);
+        }
     }
 }
