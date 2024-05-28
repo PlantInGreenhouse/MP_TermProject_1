@@ -1,4 +1,4 @@
 package org.androidtown.termproject;
 
-public class writtin {
+public class writting {
 }
