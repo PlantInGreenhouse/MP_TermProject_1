@@ -36,6 +36,9 @@
         <activity android:name=".lectureMode_6_1" />
         <activity android:name=".lectureModeRegist_6_1_1" />
         <activity android:name=".category" />
+        <activity android:name=".NewPostActivity" />
+        <activity android:name=".writting" />
+        <activity android:name=".VideoDetails" />
     </application>
 
 </manifest>

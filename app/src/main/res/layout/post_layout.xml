@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:padding="10dp"
+    android:layout_marginBottom="10dp"
+    android:clickable="true"
+    android:onClick="onPostClick">
+
+    <TextView
+        android:id="@+id/postCategoryTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/selected_button"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="Category"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/postTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:layout_marginTop="30dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/postAuthorTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Author"
+        android:layout_below="@id/postTitleTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/ic_avatar"
+        android:drawablePadding="10dp"/>
+</RelativeLayout>

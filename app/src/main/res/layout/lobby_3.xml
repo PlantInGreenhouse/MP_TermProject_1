@@ -61,7 +61,7 @@
     <!--컨텐츠 부분 (스크롤) -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_below="@id/topBar"
         android:layout_above="@id/bottomNavBar">
 
@@ -84,7 +84,7 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="10dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -95,9 +95,9 @@
                     <LinearLayout
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="8dp"
                         android:background="#DDDDDD"
+                        android:orientation="vertical"
                         android:padding="8dp">
 
                         <ImageView
@@ -122,9 +122,9 @@
                     <LinearLayout
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="8dp"
                         android:background="#DDDDDD"
+                        android:orientation="vertical"
                         android:padding="8dp">
 
                         <ImageView
@@ -149,9 +149,9 @@
                     <LinearLayout
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="8dp"
                         android:background="#DDDDDD"
+                        android:orientation="vertical"
                         android:padding="8dp">
 
                         <ImageView
@@ -176,9 +176,9 @@
                     <LinearLayout
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="8dp"
                         android:background="#DDDDDD"
+                        android:orientation="vertical"
                         android:padding="8dp">
 
                         <ImageView
@@ -203,9 +203,9 @@
                     <LinearLayout
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="8dp"
                         android:background="#DDDDDD"
+                        android:orientation="vertical"
                         android:padding="8dp">
 
                         <ImageView
@@ -230,9 +230,9 @@
                     <LinearLayout
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="8dp"
                         android:background="#DDDDDD"
+                        android:orientation="vertical"
                         android:padding="8dp">
 
                         <ImageView
@@ -257,9 +257,9 @@
                     <LinearLayout
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="8dp"
                         android:background="#DDDDDD"
+                        android:orientation="vertical"
                         android:padding="8dp">
 
                         <ImageView
@@ -284,9 +284,9 @@
                     <LinearLayout
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="8dp"
                         android:background="#DDDDDD"
+                        android:orientation="vertical"
                         android:padding="8dp">
 
                         <ImageView
@@ -311,9 +311,9 @@
                     <LinearLayout
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="8dp"
                         android:background="#DDDDDD"
+                        android:orientation="vertical"
                         android:padding="8dp">
 
                         <ImageView
@@ -338,9 +338,9 @@
                     <LinearLayout
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="8dp"
                         android:background="#DDDDDD"
+                        android:orientation="vertical"
                         android:padding="8dp">
 
                         <ImageView
@@ -369,7 +369,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="40dp"
                 android:text="You Like Categories New Class"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -377,7 +377,7 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="10dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -657,7 +657,203 @@
 
                 </LinearLayout>
             </HorizontalScrollView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Category"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:rowCount="2"
+                android:layout_marginTop="10dp">
+
+                <!-- Art Button -->
+                <FrameLayout
+                    android:layout_width="10dp"
+                    android:layout_height="100dp"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:layout_margin="10dp">
+
+                    <ImageButton
+                        android:id="@+id/button_art"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rounded_corners"
+                        android:src="@drawable/art"
+                        android:scaleType="centerCrop"
+                        android:clipToOutline="true"
+                        android:alpha="0.4"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="ART"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+                </FrameLayout>
+
+                <!-- Cooking Button -->
+                <FrameLayout
+                    android:layout_width="10dp"
+                    android:layout_height="100dp"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:layout_margin="10dp">
+                    <ImageButton
+                        android:id="@+id/button_cooking"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rounded_corners"
+                        android:src="@drawable/cooking"
+                        android:scaleType="centerCrop"
+                        android:clipToOutline="true"
+                        android:alpha="0.4"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="COOKING"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+                </FrameLayout>
+
+                <!-- Programming Button -->
+                <FrameLayout
+                    android:layout_width="10dp"
+                    android:layout_height="100dp"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:layout_margin="10dp">
+
+                    <ImageButton
+                        android:id="@+id/button_programming"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rounded_corners"
+                        android:src="@drawable/programming"
+                        android:scaleType="centerCrop"
+                        android:clipToOutline="true"
+                        android:alpha="0.4"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="PROGRAMMING"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+                </FrameLayout>
+
+                <!-- Workout Button -->
+                <FrameLayout
+                    android:layout_width="10dp"
+                    android:layout_height="100dp"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:layout_margin="10dp">
+
+                    <ImageButton
+                        android:id="@+id/button_workout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rounded_corners"
+                        android:src="@drawable/workout"
+                        android:scaleType="centerCrop"
+                        android:clipToOutline="true"
+                        android:alpha="0.4"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="WORKOUT"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+                </FrameLayout>
+
+                <!-- Photos & Videos Button -->
+                <FrameLayout
+                    android:layout_width="10dp"
+                    android:layout_height="100dp"
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:layout_margin="10dp">
+
+                    <ImageButton
+                        android:id="@+id/button_photos_videos"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rounded_corners"
+                        android:src="@drawable/photovideo"
+                        android:scaleType="centerCrop"
+                        android:clipToOutline="true"
+                        android:alpha="0.4"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="PHOTOS &amp; VIDEOS"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+                </FrameLayout>
+
+                <!-- Etc Button -->
+                <FrameLayout
+                    android:layout_width="10dp"
+                    android:layout_height="100dp"
+                    android:layout_row="1"
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:layout_margin="10dp">
+
+                    <ImageButton
+                        android:id="@+id/button_etc"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rounded_corners"
+                        android:src="@drawable/etc"
+                        android:scaleType="centerCrop"
+                        android:clipToOutline="true"
+                        android:alpha="0.4"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="ETC"
+                        android:textColor="#000000"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+                </FrameLayout>
+
+            </GridLayout>
+
         </LinearLayout>
+
     </ScrollView>
 
     <!-- 하단 네비게이션 바 -->
@@ -749,5 +945,9 @@
                 android:layout_height="wrap_content"
                 android:text="My Page" />
         </LinearLayout>
-        </LinearLayout>
+    </LinearLayout>
+
+
+
+
 </RelativeLayout>
