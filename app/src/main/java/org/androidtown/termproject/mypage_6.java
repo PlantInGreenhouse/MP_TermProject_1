@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Button;
 import org.androidtown.termproject.R;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,11 +16,10 @@ public class mypage_6 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage_6);
 
-        ImageButton button1 = findViewById(R.id.cartIcon);
+        ImageButton button1 = findViewById(R.id.myPageIcon);
         ImageButton button2 = findViewById(R.id.studyIcon);
         ImageButton button3 = findViewById(R.id.marketIcon);
         ImageButton button4 = findViewById(R.id.homeIcon);
-
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,6 +27,7 @@ public class mypage_6 extends AppCompatActivity {
                 startActivity(new Intent(mypage_6.this, shoppinglist_7.class));
             }
         });
+
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +41,7 @@ public class mypage_6 extends AppCompatActivity {
                 startActivity(new Intent(mypage_6.this, learninglist_5.class));
             }
         });
+
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +50,7 @@ public class mypage_6 extends AppCompatActivity {
         });
 
         // 로그아웃 버튼 이건 지우면 안됨
-        Button logoutButton = findViewById(R.id.logoutButton);
+        ImageButton logoutButton = findViewById(R.id.LogOut_button);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +59,7 @@ public class mypage_6 extends AppCompatActivity {
             }
         });
 
-        Button lectureModeButton = findViewById(R.id.lectureMode);
+        ImageButton lectureModeButton = findViewById(R.id.LectureMode_button);
         lectureModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

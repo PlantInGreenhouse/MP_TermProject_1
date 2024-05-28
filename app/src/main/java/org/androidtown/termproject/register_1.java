@@ -127,7 +127,6 @@ public class register_1 extends AppCompatActivity {
     // 사용자 클래스 정의
     public static class User {
         public String userId;
-
         public String name;
         public String email;
 
