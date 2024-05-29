@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class study_4 extends AppCompatActivity {
@@ -28,6 +30,8 @@ public class study_4 extends AppCompatActivity {
     private LinearLayout postsLayout;
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
+    private List<Post> allPosts = new ArrayList<>();
+    private Button selectedButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,19 +75,58 @@ public class study_4 extends AppCompatActivity {
                 startActivity(new Intent(study_4.this, mypage_6.class));
             }
         });
+
+        // 카테고리 버튼 설정
+        final Button allButton = findViewById(R.id.category_all);
+        final Button artButton = findViewById(R.id.category_art);
+        final Button cookingButton = findViewById(R.id.category_cooking);
+        final Button programmingButton = findViewById(R.id.category_programming);
+        final Button workoutButton = findViewById(R.id.category_workout);
+        final Button photosVideosButton = findViewById(R.id.category_photos_videos);
+        final Button etcButton = findViewById(R.id.category_etc);
+
+        selectedButton = allButton; // 초기 선택된 버튼
+
+        // All 버튼을 기본 선택 상태로 설정
+        allButton.setBackgroundResource(R.drawable.selected_button);
+        allButton.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+
+        View.OnClickListener categoryClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedButton != null) {
+                    selectedButton.setBackgroundResource(R.drawable.unselected_button);
+                    selectedButton.setTextColor(ContextCompat.getColor(study_4.this, R.color.unselected_text_color));
+                }
+                selectedButton = (Button) v;
+                selectedButton.setBackgroundResource(R.drawable.selected_button);
+                selectedButton.setTextColor(ContextCompat.getColor(study_4.this, android.R.color.white));
+                filterPostsByCategory(selectedButton.getText().toString());
+            }
+        };
+
+        allButton.setOnClickListener(categoryClickListener);
+        artButton.setOnClickListener(categoryClickListener);
+        cookingButton.setOnClickListener(categoryClickListener);
+        programmingButton.setOnClickListener(categoryClickListener);
+        workoutButton.setOnClickListener(categoryClickListener);
+        photosVideosButton.setOnClickListener(categoryClickListener);
+        etcButton.setOnClickListener(categoryClickListener);
     }
 
     private void loadPosts() {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                allPosts.clear();
                 postsLayout.removeAllViews(); // 기존 뷰 삭제
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Post post = postSnapshot.getValue(Post.class);
                     if (post != null) {
-                        addPostView(post);
+                        allPosts.add(post);
                     }
                 }
+                filterPostsByCategory(selectedButton.getText().toString());
             }
 
             @Override
@@ -93,6 +136,15 @@ public class study_4 extends AppCompatActivity {
         });
     }
 
+    private void filterPostsByCategory(String category) {
+        postsLayout.removeAllViews();
+        for (Post post : allPosts) {
+            if (category.equals("All") || post.category.contains(category)) {
+                addPostView(post);
+            }
+        }
+    }
+
     private void addPostView(Post post) {
         View postLayout = LayoutInflater.from(this).inflate(R.layout.post_layout, postsLayout, false);
 
@@ -100,7 +152,6 @@ public class study_4 extends AppCompatActivity {
         TextView titleTextView = postLayout.findViewById(R.id.postTitleTextView);
         TextView authorTextView = postLayout.findViewById(R.id.postAuthorTextView);
 
-        // Assuming 'category' is a List<String>
         StringBuilder categoriesBuilder = new StringBuilder();
         for (String category : post.category) {
             categoriesBuilder.append(category).append(" ");

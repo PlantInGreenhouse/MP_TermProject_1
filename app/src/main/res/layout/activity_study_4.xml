@@ -58,60 +58,73 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="8dp">
 
             <Button
                 android:id="@+id/category_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="All"
-                android:background="@drawable/selected_button" />
+                android:background="@drawable/selected_button"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"/>
 
             <Button
                 android:id="@+id/category_art"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Art"
-                android:background="@drawable/unselected_button" />
+                android:background="@drawable/unselected_button"
+                android:textColor="#757575"
+                android:textSize="14sp"/>
 
             <Button
                 android:id="@+id/category_cooking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cooking"
-                android:background="@drawable/unselected_button" />
+                android:background="@drawable/unselected_button"
+                android:textColor="#757575"
+                android:textSize="14sp"/>
 
             <Button
                 android:id="@+id/category_programming"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Programming"
                 android:background="@drawable/unselected_button"
-                android:text="Programming" />
+                android:textColor="#757575"
+                android:textSize="14sp"/>
 
             <Button
                 android:id="@+id/category_workout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Work out"
-                android:background="@drawable/unselected_button" />
+                android:background="@drawable/unselected_button"
+                android:textColor="#757575"
+                android:textSize="14sp"/>
 
             <Button
                 android:id="@+id/category_photos_videos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Photos &amp; Videos"
-                android:background="@drawable/unselected_button" />
+                android:background="@drawable/unselected_button"
+                android:textColor="#757575"
+                android:textSize="14sp"/>
 
             <Button
                 android:id="@+id/category_etc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="etc"
-                android:background="@drawable/unselected_button" />
-
+                android:background="@drawable/unselected_button"
+                android:textColor="#757575"
+                android:textSize="14sp"/>
         </LinearLayout>
     </HorizontalScrollView>
-
 
     <!-- 본문 내용 -->
     <ScrollView
