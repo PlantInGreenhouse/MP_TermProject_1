@@ -1,21 +1,54 @@
 package org.androidtown.termproject;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Button;
-import org.androidtown.termproject.R;
-
+import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class mypage_6 extends AppCompatActivity {
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+    private TextView userNameTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage_6);
 
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        userNameTextView = findViewById(R.id.User_name);
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            String userId = user.getUid();
+            mDatabase.child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null) {
+                        userNameTextView.setText(user.name);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle possible errors
+                }
+            });
+        }
+
+        // 기존 코드
         ImageButton button1 = findViewById(R.id.myPageIcon);
         ImageButton button2 = findViewById(R.id.studyIcon);
         ImageButton button3 = findViewById(R.id.marketIcon);
@@ -74,7 +107,18 @@ public class mypage_6 extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(mypage_6.this, lectureMode_6_1.class));
             }
-
         });
+    }
+
+    public static class User {
+        public String name;
+        public String email;
+
+        public User() {}
+
+        public User(String name, String email) {
+            this.name = name;
+            this.email = email;
+        }
     }
 }
