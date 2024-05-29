@@ -96,7 +96,7 @@ public class study_4 extends AppCompatActivity {
             public void onClick(View v) {
                 if (selectedButton != null) {
                     selectedButton.setBackgroundResource(R.drawable.unselected_button);
-                    selectedButton.setTextColor(ContextCompat.getColor(study_4.this, R.color.unselected_text_color));
+                    selectedButton.setTextColor(ContextCompat.getColor(study_4.this, R.color.gray));
                 }
                 selectedButton = (Button) v;
                 selectedButton.setBackgroundResource(R.drawable.selected_button);
