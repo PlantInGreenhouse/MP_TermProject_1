@@ -36,7 +36,7 @@ public class study_4 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_study_4);
+        setContentView(R.layout.study_4);
 
         postsLayout = findViewById(R.id.postsLayout);
         databaseReference = FirebaseDatabase.getInstance().getReference("study_text");
