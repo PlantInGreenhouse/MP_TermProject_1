@@ -1,10 +1,13 @@
 package org.androidtown.termproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,33 +29,58 @@ import java.util.List;
 public class NewPostActivity extends AppCompatActivity {
 
     private EditText titleEditText, contentEditText;
-    private CheckBox categoryArt, categoryProgramming, categoryCooking, categoryWorkout, categoryPhotoVideos, categoryEtc;
-    private Button uploadButton; 
+    private Spinner categorySpinner;
+    private Button submitPostButton;
 
     private DatabaseReference databaseReference;
     private DatabaseReference usersReference;
     private FirebaseAuth mAuth;
     private String author;
+    private String selectedCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.writting);
 
+        Button backBtn = findViewById(R.id.button_back);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NewPostActivity.this, study_4.class));
+            }
+        });
+
         titleEditText = findViewById(R.id.titleEditText);
         contentEditText = findViewById(R.id.contentsEditText);
-        categoryArt = findViewById(R.id.categoryArt);
-        categoryCooking = findViewById(R.id.categoryCooking);
-        categoryProgramming = findViewById(R.id.categoryProgramming);
-        categoryWorkout = findViewById(R.id.categoryWorkout);
-        categoryPhotoVideos = findViewById(R.id.PhotoVideos);
-        categoryEtc = findViewById(R.id.categoryEtc);
-
-        uploadButton = findViewById(R.id.uploadButton);
+        categorySpinner = findViewById(R.id.categorySpinner);
+        submitPostButton = findViewById(R.id.uploadButton);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("study_text");
         usersReference = FirebaseDatabase.getInstance().getReference("users");
         mAuth = FirebaseAuth.getInstance();
+
+        // 스피너 항목 배열 정의
+        String[] items = {"Art", "Cooking", "Programming", "Work out", "Photos & Videos", "etc"};
+
+        // 어댑터 설정
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(adapter);
+
+        // 스피너 항목 선택 이벤트 처리
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedCategory = parent.getItemAtPosition(position).toString();
+                Toast.makeText(parent.getContext(), selectedCategory + " 선택됨", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                selectedCategory = null;
+            }
+        });
 
         // Retrieve the author's name
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -73,7 +101,7 @@ public class NewPostActivity extends AppCompatActivity {
             });
         }
 
-        uploadButton.setOnClickListener(new View.OnClickListener() {
+        submitPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 submitPost();
@@ -84,17 +112,16 @@ public class NewPostActivity extends AppCompatActivity {
     private void submitPost() {
         String title = titleEditText.getText().toString().trim();
         String content = contentEditText.getText().toString().trim();
-        List<String> categories = new ArrayList<>();
 
-        if (categoryArt.isChecked()) categories.add("Art");
-        if (categoryCooking.isChecked()) categories.add("Cooking");
-        if (categoryProgramming.isChecked()) categories.add("Programming");
-        if (categoryWorkout.isChecked()) categories.add("Work out");
-        if (categoryPhotoVideos.isChecked()) categories.add("Photos & Videos");
-        if (categoryEtc.isChecked()) categories.add("etc");
+        if (selectedCategory == null || selectedCategory.isEmpty()) {
+            Toast.makeText(this, "카테고리를 선택해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (author != null) {
             String postId = databaseReference.push().getKey();
+            List<String> categories = new ArrayList<>();
+            categories.add(selectedCategory);
             Post newPost = new Post(title, content, categories, author);
 
             if (postId != null) {

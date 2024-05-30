@@ -4,17 +4,17 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/titleEditText"
+        android:id="@+id/titleEditText1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="제목 입력" />
 
     <EditText
-        android:id="@+id/contentEditText"
+        android:id="@+id/contentEditText1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="내용 입력"
-        android:layout_below="@id/titleEditText"
+        android:layout_below="@id/titleEditText1"
         android:layout_marginTop="16dp" />
 
     <LinearLayout
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/contentEditText"
+        android:layout_below="@id/contentEditText1"
         android:layout_marginTop="16dp">
 
         <CheckBox
