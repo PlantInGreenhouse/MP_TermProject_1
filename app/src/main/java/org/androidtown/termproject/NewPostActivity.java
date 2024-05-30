@@ -27,7 +27,7 @@ public class NewPostActivity extends AppCompatActivity {
 
     private EditText titleEditText, contentEditText;
     private CheckBox categoryArt, categoryProgramming, categoryCooking, categoryWorkout, categoryPhotoVideos, categoryEtc;
-    private Button submitPostButton;
+    private Button uploadButton; 
 
     private DatabaseReference databaseReference;
     private DatabaseReference usersReference;
@@ -37,10 +37,10 @@ public class NewPostActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_post);
+        setContentView(R.layout.writting);
 
         titleEditText = findViewById(R.id.titleEditText);
-        contentEditText = findViewById(R.id.contentEditText);
+        contentEditText = findViewById(R.id.contentsEditText);
         categoryArt = findViewById(R.id.categoryArt);
         categoryCooking = findViewById(R.id.categoryCooking);
         categoryProgramming = findViewById(R.id.categoryProgramming);
@@ -48,7 +48,7 @@ public class NewPostActivity extends AppCompatActivity {
         categoryPhotoVideos = findViewById(R.id.PhotoVideos);
         categoryEtc = findViewById(R.id.categoryEtc);
 
-        submitPostButton = findViewById(R.id.submitPostButton);
+        uploadButton = findViewById(R.id.uploadButton);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("study_text");
         usersReference = FirebaseDatabase.getInstance().getReference("users");
@@ -73,7 +73,7 @@ public class NewPostActivity extends AppCompatActivity {
             });
         }
 
-        submitPostButton.setOnClickListener(new View.OnClickListener() {
+        uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 submitPost();
