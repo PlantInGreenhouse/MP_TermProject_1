@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class study_4 extends AppCompatActivity {
@@ -126,6 +127,8 @@ public class study_4 extends AppCompatActivity {
                         allPosts.add(post);
                     }
                 }
+                // 최신 글이 제일 위에 보이도록 리스트 역순으로 정렬
+                Collections.reverse(allPosts);
                 filterPostsByCategory(selectedButton.getText().toString());
             }
 
