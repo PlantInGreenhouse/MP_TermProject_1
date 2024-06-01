@@ -98,7 +98,7 @@
         android:background="@drawable/stroke"/>
 
     <!-- 업로드 버튼 / 제목, 내용, 카테고리 다 선택해야만 업로드 버튼이 활성화되도록 해놨어요 자바코드는 모름 ㅋ-->
-    <Button
+    <android.widget.Button
         android:id="@+id/uploadButton"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
@@ -109,6 +109,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="Upload"
+        android:textAllCaps="false"
         android:background="@drawable/selected_button"/>
 
 

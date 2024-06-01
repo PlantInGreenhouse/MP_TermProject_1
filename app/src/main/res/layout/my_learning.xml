@@ -45,7 +45,6 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <!-- First Item -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,14 +61,14 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="Oil pastel drawing"
                     android:textColor="#000000"
                     android:textSize="16sp"
@@ -77,7 +76,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="Leeseojeong"
                     android:textColor="#888888"
                     android:textSize="14sp" />
@@ -107,14 +106,14 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="UI/UX"
                     android:textColor="#000000"
                     android:textSize="16sp"
@@ -122,7 +121,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="Leeseojeong"
                     android:textColor="#888888"
                     android:textSize="14sp" />
@@ -152,14 +151,14 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="Baking"
                     android:textColor="#000000"
                     android:textSize="16sp"
@@ -167,7 +166,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="Leeseojeong"
                     android:textColor="#888888"
                     android:textSize="14sp" />
