@@ -39,6 +39,7 @@
         <activity android:name=".shoppinglist_7" />
         <activity android:name=".study_4" />
         <activity android:name=".VideoDetails" />
+        <activity android:name=".my_information" />
     </application>
 
 </manifest>

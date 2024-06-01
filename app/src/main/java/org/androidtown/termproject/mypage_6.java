@@ -87,6 +87,8 @@ public class mypage_6 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 편집 아이콘 클릭 시 수행할 작업
+                startActivity(new Intent(mypage_6.this, my_information.class));
+
             }
 
         });
