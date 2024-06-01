@@ -3,6 +3,8 @@
     <style name="Base.Theme.TermProject" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimaryDark">#000000</item>
     </style>
 
     <style name="Theme.TermProject" parent="Base.Theme.TermProject" />
