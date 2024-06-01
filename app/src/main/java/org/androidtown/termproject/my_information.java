@@ -8,14 +8,18 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class my_information extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -94,11 +98,41 @@ public class my_information extends AppCompatActivity {
         currentPasswordEditText = findViewById(R.id.currentPassword);
         updateButton = findViewById(R.id.update);
 
+        // Fetch and set user information
+        fetchUserInfo();
+
         // Set update button listener
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 reauthenticateAndUpdateUser();
+            }
+        });
+    }
+
+    private void fetchUserInfo() {
+        DatabaseReference userRef = mDatabase.child(user.getUid());
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    String name = dataSnapshot.child("name").getValue(String.class);
+                    String email = dataSnapshot.child("email").getValue(String.class);
+
+                    if (name != null) {
+                        nameEditText.setText(name);
+                    }
+
+                    if (email != null) {
+                        emailEditText.setText(email);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(my_information.this, "데이터를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -152,5 +186,3 @@ public class my_information extends AppCompatActivity {
                 });
     }
 }
-
-
