@@ -20,7 +20,7 @@
             android:text="Lecturer Mode"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginTop="8dp" />
+            android:layout_margin="10dp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -47,41 +47,45 @@
             android:layout_marginBottom="35dp"/>
     </LinearLayout>
 
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_above="@id/lectureRegister"
         android:layout_below="@id/profile_section"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/my_learning_item_background"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp">
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/my_learning_item_background"
+                android:clickable="true"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/thumbnail_1"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:scaleType="centerCrop"
+                    android:src="" />
 
                 <TextView
+                    android:id="@+id/title_1"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
+                    android:layout_toEndOf="@id/thumbnail_1"
                     android:text="Oil pastel drawing"
                     android:textColor="#000000"
                     android:textSize="16sp"
@@ -90,43 +94,45 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
+                    android:layout_below="@id/title_1"
+                    android:layout_alignStart="@id/title_1"
                     android:text="Leeseojeong"
                     android:textColor="#888888"
                     android:textSize="14sp" />
-            </LinearLayout>
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="Arrow"
-                android:src="@drawable/right_errow" />
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/right_errow" />
+            </RelativeLayout>
 
-        <!-- Second Item -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/my_learning_item_background"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/my_learning_item_background"
+                android:clickable="true"
+                android:padding="16dp">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/thumbnail_2"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:scaleType="centerCrop"
+                    android:src="" />
 
                 <TextView
+                    android:id="@+id/title_2"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
+                    android:layout_toEndOf="@id/thumbnail_2"
                     android:text="UI/UX"
                     android:textColor="#000000"
                     android:textSize="16sp"
@@ -135,43 +141,45 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
+                    android:layout_below="@id/title_2"
+                    android:layout_alignStart="@id/title_2"
                     android:text="Leeseojeong"
                     android:textColor="#888888"
                     android:textSize="14sp" />
-            </LinearLayout>
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="Arrow"
-                android:src="@drawable/right_errow" />
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/right_errow" />
+            </RelativeLayout>
 
-        <!-- Third Item -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/my_learning_item_background"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/my_learning_item_background"
+                android:clickable="true"
+                android:padding="16dp">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/thumbnail_3"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:scaleType="centerCrop"
+                    android:src="" />
 
                 <TextView
+                    android:id="@+id/title_3"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
+                    android:layout_toEndOf="@id/thumbnail_3"
                     android:text="Baking"
                     android:textColor="#000000"
                     android:textSize="16sp"
@@ -180,46 +188,195 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
+                    android:layout_below="@id/title_3"
+                    android:layout_alignStart="@id/title_3"
                     android:text="Leeseojeong"
                     android:textColor="#888888"
                     android:textSize="14sp" />
-            </LinearLayout>
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="Arrow"
-                android:src="@drawable/right_errow" />
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/right_errow" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/my_learning_item_background"
+                android:clickable="true"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/thumbnail_4"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:scaleType="centerCrop"
+                    android:src="" />
+
+                <TextView
+                    android:id="@+id/title_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_toEndOf="@id/thumbnail_4"
+                    android:text="Stealing a Bicycle"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/title_4"
+                    android:layout_alignStart="@id/title_4"
+                    android:text="Leeseojeong"
+                    android:textColor="#888888"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/right_errow" />
+            </RelativeLayout>
         </LinearLayout>
-    </LinearLayout>
-
-
-
+    </ScrollView>
 
     <android.widget.Button
         android:id="@+id/button_back"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/custom_writing_button"
+        android:drawableLeft="@drawable/ic_back"
+        android:paddingLeft="15dp"
+        android:paddingRight="17dp"
         android:text="Back"
         android:textAllCaps="false"
-        android:textSize="13dp"
-        android:drawableLeft="@drawable/ic_back"
-        android:background="@drawable/custom_writing_button"
         android:textColor="#000000"
-        android:layout_alignParentStart="true"
-        android:layout_margin="20dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="17dp"/>
+        android:textSize="13dp" />
 
     <android.widget.Button
         android:id="@+id/lectureRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:text="강의 등록하기"
-        android:layout_margin="30dp"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/bottomNavBar"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/selected_button"
+        android:text="Upload Lecture"
         android:textAllCaps="false"
-        android:background="@drawable/selected_button"/>
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
+
+    <!-- 하단 네비게이션 바 -->
+    <LinearLayout
+        android:id="@+id/bottomNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:padding="8dp"
+        android:weightSum="4">
+        <!-- Home -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/homeIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_home"
+                android:background="@android:color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <!-- Study -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/studyIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_study"
+                android:background="@android:color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Study"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <!-- Market -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/marketIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_market"
+                android:background="@android:color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Market"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <!-- My Page -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/myPageIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_mypage"
+                android:background="@android:color/white"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Page" />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
