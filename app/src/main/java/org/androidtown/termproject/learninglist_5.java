@@ -13,16 +13,17 @@ public class learninglist_5 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.learninglist_5);
+        setContentView(R.layout.my_learning);
 
-        ImageButton button1 = findViewById(R.id.nav1);
-        ImageButton button2 = findViewById(R.id.nav2);
-        ImageButton button4 = findViewById(R.id.nav4);
+        // 기존 코드
+        ImageButton button1 = findViewById(R.id.myPageIcon);
+        ImageButton button2 = findViewById(R.id.studyIcon);
+        ImageButton button4 = findViewById(R.id.homeIcon);
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(learninglist_5.this, lobby_3.class));
+                startActivity(new Intent(learninglist_5.this, mypage_6.class));
             }
         });
 
@@ -37,17 +38,9 @@ public class learninglist_5 extends AppCompatActivity {
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(learninglist_5.this, mypage_6.class));
-            }
-        });
-
-        Button backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 이전 페이지로 돌아가는 메서드 호출
-                finish();
+                startActivity(new Intent(learninglist_5.this, lobby_3.class));
             }
         });
     }
+
 }

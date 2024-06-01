@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,7 +54,10 @@ public class mypage_6 extends AppCompatActivity {
         ImageButton button2 = findViewById(R.id.studyIcon);
         ImageButton button3 = findViewById(R.id.marketIcon);
         ImageButton button4 = findViewById(R.id.homeIcon);
-        ImageButton editIcon = findViewById(R.id.edit_icon);
+        ImageButton MyInformation_button = findViewById(R.id.MyInformation_button);
+        ImageButton LectureMode_button = findViewById(R.id.LectureMode_button);
+        LinearLayout MyInformation = findViewById(R.id.MyInformation);
+        LinearLayout LectureMode = findViewById(R.id.LectureMode);
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,11 +87,38 @@ public class mypage_6 extends AppCompatActivity {
             }
         });
 
-        editIcon.setOnClickListener(new View.OnClickListener() {
+        MyInformation_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 편집 아이콘 클릭 시 수행할 작업
                 startActivity(new Intent(mypage_6.this, my_information.class));
+
+            }
+
+        });
+        MyInformation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편집 아이콘 클릭 시 수행할 작업
+                startActivity(new Intent(mypage_6.this, my_information.class));
+
+            }
+
+        });
+        LectureMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편집 아이콘 클릭 시 수행할 작업
+                startActivity(new Intent(mypage_6.this, lectureMode_6_1.class));
+
+            }
+
+        });
+        LectureMode_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편집 아이콘 클릭 시 수행할 작업
+                startActivity(new Intent(mypage_6.this, lectureMode_6_1.class));
 
             }
 
@@ -102,12 +133,12 @@ public class mypage_6 extends AppCompatActivity {
                 startActivity(new Intent(mypage_6.this, MainActivity.class));
             }
         });
-
-        ImageButton lectureModeButton = findViewById(R.id.LectureMode_button);
-        lectureModeButton.setOnClickListener(new View.OnClickListener() {
+        LinearLayout LogOut = findViewById(R.id.LogOut);
+        LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mypage_6.this, lectureMode_6_1.class));
+                // 이전 페이지로 돌아가는 메서드 호출
+                startActivity(new Intent(mypage_6.this, MainActivity.class));
             }
         });
     }
