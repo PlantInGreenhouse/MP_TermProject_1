@@ -35,6 +35,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/profile"
+                android:background="@drawable/rounded_corners"
                 android:scaleType="centerCrop" />
 
             <ImageButton
