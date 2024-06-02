@@ -50,7 +50,7 @@
             android:id="@+id/item_minus"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/Minus"
+            android:src="@drawable/minus"
             android:background="@null"
             android:contentDescription="Minus" />
 
@@ -68,7 +68,7 @@
             android:id="@+id/item_plus"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/Add"
+            android:src="@drawable/add"
             android:background="@null"
             android:contentDescription="Plus" />
     </LinearLayout>
