@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/background">
+
+
+    <android.widget.Button
+        android:id="@+id/button_back"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/custom_writing_button"
+        android:drawableLeft="@drawable/ic_back"
+        android:paddingLeft="15dp"
+        android:paddingRight="17dp"
+        android:text="Back"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="13dp" />
+
+    <TextView
+        android:id="@+id/lectureUpload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lecturer Upload"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal"
+        android:padding="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"/>
+
+    <!-- 제목 입력 필드 -->
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_back"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/gray"
+        android:hint="Title"
+        android:padding="10dp" />
+
+    <!-- 카테고리 스피너 -->
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/titleEditText"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="16dp"
+        android:drawableRight="@drawable/ic_down"
+        android:drawablePadding="10dp"
+        android:spinnerMode="dropdown"
+        />
+
+    <!-- 내용 입력 필드 -->
+    <EditText
+        android:id="@+id/contentsEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/categorySpinner"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="15dp"
+        android:layout_weight="1"
+        android:background="@drawable/stroke"
+        android:backgroundTint="@color/gray"
+        android:gravity="top"
+        android:hint="Type something here..."
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:padding="15dp" />
+
+
+    <RelativeLayout
+        android:id="@+id/contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contentsEditText"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Contents"
+            />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/plus"
+            android:clickable="true"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@id/lectureRegister"
+        android:layout_below="@id/contents"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stroke"
+                android:padding="10dp"
+                android:layout_marginBottom="16dp"
+                android:hint="Please enter your comment"
+                android:drawableRight="@drawable/blueAdd"
+                android:drawablePadding="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stroke"
+                android:padding="10dp"
+                android:layout_marginBottom="16dp"
+                android:hint="Please enter your comment"
+                android:drawableRight="@drawable/blueAdd"
+                android:drawablePadding="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stroke"
+                android:padding="10dp"
+                android:layout_marginBottom="16dp"
+                android:hint="Please enter your comment"
+                android:drawableRight="@drawable/blueAdd"
+                android:drawablePadding="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stroke"
+                android:padding="10dp"
+                android:layout_marginBottom="16dp"
+                android:hint="Please enter your comment"
+                android:drawableRight="@drawable/blueAdd"
+                android:drawablePadding="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stroke"
+                android:padding="10dp"
+                android:layout_marginBottom="16dp"
+                android:hint="Please enter your comment"
+                android:drawableRight="@drawable/blueAdd"
+                android:drawablePadding="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stroke"
+                android:padding="10dp"
+                android:layout_marginBottom="16dp"
+                android:hint="Please enter your comment"
+                android:drawableRight="@drawable/blueAdd"
+                android:drawablePadding="10dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+    <android.widget.Button
+        android:id="@+id/item_registeration"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomNavBar"
+        android:layout_alignStart="@id/bottomNavBar"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/custom_writing_button"
+        android:text="Registeration of items"
+        android:textAllCaps="false"
+        android:textSize="13sp" />
+
+    <android.widget.Button
+        android:id="@+id/lectureRegister"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomNavBar"
+        android:layout_alignEnd="@id/bottomNavBar"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/selected_button"
+        android:text="Upload Lecture"
+        android:textAllCaps="false"
+        android:textSize="12sp" />
+
+
+    <!-- 하단 네비게이션 바 -->
+    <LinearLayout
+        android:id="@+id/bottomNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:padding="8dp"
+        android:weightSum="4">
+        <!-- Home -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/homeIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_home"
+                android:background="@android:color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <!-- Study -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/studyIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_study"
+                android:background="@android:color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Study"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <!-- Market -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/marketIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_market"
+                android:background="@android:color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Market"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <!-- My Page -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/myPageIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_mypage"
+                android:background="@android:color/white"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Page" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
