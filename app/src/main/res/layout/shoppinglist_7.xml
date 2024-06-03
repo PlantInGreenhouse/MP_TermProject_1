@@ -7,7 +7,7 @@
 
     <!-- 상단 바 -->
     <RelativeLayout
-        android:id="@+id/toolbarTitle"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/white">
@@ -44,7 +44,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@+id/toolbarTitle"
+        android:layout_below="@id/toolbar"
         android:layout_above="@id/total_container"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="81dp"
