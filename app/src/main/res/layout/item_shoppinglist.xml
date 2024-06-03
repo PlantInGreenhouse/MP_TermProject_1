@@ -6,12 +6,15 @@
 
     <ImageView
         android:id="@+id/item_image"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="90dp"
+        android:layout_height="100dp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:background="#E0E0E0"
-        android:contentDescription="Item Image" />
+        android:background="@drawable/rounded_corners"
+        android:src="@drawable/art"
+        android:scaleType="centerCrop"
+        android:clipToOutline="true"
+        android:alpha="0.4"/>
 
     <TextView
         android:id="@+id/item_title"
@@ -19,37 +22,27 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/item_image"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
         android:text="Amazing T-shirt"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textColor="#000000"
         android:textStyle="bold"
         android:layout_alignTop="@id/item_image"/>
 
-    <TextView
-        android:id="@+id/item_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:text="12,000"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:layout_centerVertical="true"/>
-
     <LinearLayout
+        android:id="@+id/item_controls"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/item_title"
         android:layout_toEndOf="@id/item_image"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="80dp"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
         <ImageButton
             android:id="@+id/item_minus"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:src="@drawable/minus"
             android:background="@null"
             android:contentDescription="Minus" />
@@ -57,26 +50,37 @@
         <TextView
             android:id="@+id/item_count"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1"
-            android:textSize="16sp"
+            android:layout_height="28dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="1"
+            android:textSize="18sp" />
 
         <ImageButton
             android:id="@+id/item_plus"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:src="@drawable/add"
             android:background="@null"
             android:contentDescription="Plus" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="80dp"
+        android:text="12,000"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:textStyle="bold"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/item_image"
-        android:layout_marginTop="8dp"
+        android:layout_below="@+id/item_image"
+        android:layout_marginTop="20dp"
         android:background="#D3D3D3"/>
 </RelativeLayout>
