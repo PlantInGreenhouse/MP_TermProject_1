@@ -63,6 +63,7 @@
                 android:orientation="vertical">
                 <!-- 아이템 레이아웃 파일 포함 -->
                 <!-- 여기에서 반복하여 item_layout.xml을 포함시킬 것 -->
+                <include layout="@layout/item_shoppinglist" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
