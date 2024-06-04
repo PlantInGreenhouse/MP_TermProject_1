@@ -65,48 +65,6 @@
             android:paddingRight="10dp"
             android:layout_marginTop="18dp">
 
-<<<<<<< HEAD
-<!--            <TextView-->
-<!--                android:id="@+id/content_item_1"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="1. Introduction To Website Design"-->
-<!--                android:background="@color/light_gray"-->
-<!--                android:textColor="#000000"-->
-<!--                android:padding="16dp"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/content_item_2"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="2. What Is Figma?"-->
-<!--                android:background="@color/light_gray"-->
-<!--                android:textColor="#000000"-->
-<!--                android:padding="16dp"-->
-<!--                android:layout_marginTop="8dp"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/content_item_3"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="3. Figma Tools"-->
-<!--                android:background="@color/light_gray"-->
-<!--                android:textColor="#000000"-->
-<!--                android:padding="16dp"-->
-<!--                android:layout_marginTop="8dp"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/content_item_4"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="4. Practice"-->
-<!--                android:background="@color/light_gray"-->
-<!--                android:textColor="#000000"-->
-<!--                android:padding="16dp"-->
-<!--                android:layout_marginTop="8dp"/>-->
-        </LinearLayout>
-    </RelativeLayout>
-=======
             <!-- Course Title -->
             <TextView
                 android:id="@+id/course_title"
@@ -215,7 +173,6 @@
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
->>>>>>> d2843f8a19f5039ac2e443abd5d6985ec18dcfe8
 
     <!-- Subscribe and Ordering Buttons -->
     <LinearLayout
@@ -237,12 +194,7 @@
             android:textColor="#FFFFFF"
             android:textAllCaps="false"
             android:layout_weight="1"
-<<<<<<< HEAD
-            android:padding="16dp"
-            />
-=======
             android:padding="16dp"/>
->>>>>>> d2843f8a19f5039ac2e443abd5d6985ec18dcfe8
 
         <android.widget.Button
             android:id="@+id/ordering_items_button"
@@ -337,11 +289,6 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:src="@drawable/ic_home"
-            android:background="@null"
-=======
->>>>>>> d2843f8a19f5039ac2e443abd5d6985ec18dcfe8
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
