@@ -1,19 +1,310 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:background="#FFFFFF">
 
-    <!-- 추가할 뷰 요소들 -->
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- Image Section -->
+    <ImageView
+        android:id="@+id/course_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/oilpastel_item"
+        android:scaleType="centerCrop"/>
+
+    <!-- Tabs -->
+    <LinearLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Second Activity"
-        android:textSize="24sp"/>
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
+        android:layout_below="@id/course_image"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <android.widget.Button
+            android:id="@+id/tab_about"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="About"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:background="@color/colorPrimary" />
+
+        <android.widget.Button
+            android:id="@+id/tab_reviews"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Reviews"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:background="@color/white" />
+    </LinearLayout>
+
+    <!-- Black Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_below="@id/tab_layout"
+        android:background="#000000"/>
+
+    <!-- Scrollable Content Section -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/tab_layout"
+        android:layout_above="@+id/button_layout"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:id="@+id/title_content_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginTop="18dp">
+
+            <!-- Course Title -->
+            <TextView
+                android:id="@+id/course_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UI/UX"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#000000"/>
+
+            <!-- Course Author -->
+            <LinearLayout
+                android:id="@+id/course_author_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/course_title"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <ImageView
+                    android:id="@+id/author_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/lecturer"
+                    android:layout_marginEnd="8dp"/>
+
+                <TextView
+                    android:id="@+id/course_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="By Leesoejeong"
+                    android:textSize="14sp"
+                    android:textColor="#666666"/>
+            </LinearLayout>
+
+            <!-- Course Description -->
+            <TextView
+                android:id="@+id/course_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/course_author_layout"
+                android:layout_marginTop="16dp"
+                android:text="Welcome To Our Comprehensive Course On UI/UX Design! This Course Is Designed For Anyone Looking To Delve Into The World Of User Interface And User Experience Design. Whether You're A Beginner Or A Seasoned Professional Wanting To Refresh Your Skills."
+                android:textSize="14sp"
+                android:textColor="#000000"/>
+
+            <!-- Contents Header -->
+            <TextView
+                android:id="@+id/course_contents"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/course_description"
+                android:layout_marginTop="20dp"
+                android:text="Contents"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:textStyle="bold"/>
+
+            <!-- Content Items -->
+            <LinearLayout
+                android:id="@+id/content_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/course_contents"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/content_item_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1. Introduction To Website Design"
+                    android:background="#F4F6FF"
+                    android:textColor="#000000"
+                    android:padding="16dp"/>
+
+                <TextView
+                    android:id="@+id/content_item_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2. What Is Figma?"
+                    android:background="#F4F6FF"
+                    android:textColor="#000000"
+                    android:padding="16dp"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/content_item_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="3. Figma Tools"
+                    android:background="#F4F6FF"
+                    android:textColor="#000000"
+                    android:padding="16dp"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/content_item_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="4. Practice"
+                    android:background="#F4F6FF"
+                    android:textColor="#000000"
+                    android:padding="16dp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <!-- Subscribe and Ordering Buttons -->
+    <LinearLayout
+        android:id="@+id/button_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Back" />
-</LinearLayout>
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_above="@id/bottomNavBar"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp">
+
+        <android.widget.Button
+            android:id="@+id/subscribe_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Subscribe"
+            android:background="@color/colorPrimary"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:padding="16dp"/>
+
+        <android.widget.Button
+            android:id="@+id/ordering_items_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Ordering Items"
+            android:background="@color/gray"
+            android:textColor="#000000"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:padding="16dp"/>
+    </LinearLayout>
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:id="@+id/bottomNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="4">
+
+        <!-- Home -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/homeIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@null"
+                android:src="@drawable/ic_home" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Study -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/studyIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@null"
+                android:src="@drawable/ic_study" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Study"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Market -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/marketIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@null"
+                android:src="@drawable/ic_learning" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My learning"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- My Page -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/myPageIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@null"
+                android:src="@drawable/ic_home" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Page"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

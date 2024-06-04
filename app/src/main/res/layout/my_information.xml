@@ -40,7 +40,7 @@
                 android:src="@drawable/profile"
                 android:scaleType="centerCrop"
                 android:clipToOutline="true"
-                android:alpha="0.4"/>
+                />
 
         </RelativeLayout>
     </LinearLayout>
