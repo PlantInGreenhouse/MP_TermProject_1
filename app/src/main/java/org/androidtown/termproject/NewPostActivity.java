@@ -54,7 +54,7 @@ public class NewPostActivity extends AppCompatActivity {
         titleEditText = findViewById(R.id.titleEditText);
         contentEditText = findViewById(R.id.contentsEditText);
         categorySpinner = findViewById(R.id.categorySpinner);
-        submitPostButton = findViewById(R.id.uploadButton);
+        submitPostButton = findViewById(R.id.UploadButton);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("study_text");
         usersReference = FirebaseDatabase.getInstance().getReference("users");
