@@ -5,5 +5,6 @@
     <color name="colorPrimary">#006FFD</color>
     <color name="background">#FFFFFFFF</color>
     <color name="gray">#C5C6CC</color>
+    <color name="darkgray">#828282</color>
     <color name="signiture_color">#B6E6FC</color>
 </resources>
