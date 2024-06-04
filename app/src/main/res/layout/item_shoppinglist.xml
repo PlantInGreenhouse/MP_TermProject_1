@@ -36,6 +36,20 @@
         android:textStyle="bold"
         android:layout_alignTop="@id/item_image"/>
 
+    <!-- Minus Button Next to Title -->
+
+    <ImageButton
+        android:id="@+id/item_title_minus"
+        android:layout_width="15dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/item_title"
+        android:background="@null"
+        android:contentDescription="Minus"
+        android:src="@drawable/remove"
+        android:alpha="0.6"/>
+
     <LinearLayout
         android:id="@+id/item_controls"
         android:layout_width="wrap_content"
