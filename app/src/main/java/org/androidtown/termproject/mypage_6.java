@@ -13,7 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
@@ -60,8 +60,7 @@ public class mypage_6 extends AppCompatActivity {
                     if (user != null) {
                         userNameTextView.setText(user.name);
                         if (user.profileImageUrl != null && !user.profileImageUrl.isEmpty()) {
-                            // Picasso 또는 Glide를 사용하여 프로필 이미지를 로드합니다.
-                            // Picasso.get().load(user.profileImageUrl).into(profileImageView);
+                            Picasso.get().load(user.profileImageUrl).into(profileImageView);
                         }
                     }
                 }
