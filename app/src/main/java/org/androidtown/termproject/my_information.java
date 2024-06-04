@@ -1,24 +1,19 @@
 package org.androidtown.termproject;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,135 +23,187 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-
 public class my_information extends AppCompatActivity {
-    private static final int PICK_IMAGE_REQUEST = 1;
-    private static final String TAG = "mypage_6";
-
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-    private StorageReference mStorageRef;
+    private Button updateButton;
+    private FirebaseUser user;
+    private EditText nameEditText;
+    private EditText emailEditText;
+    private EditText passwordEditText;
+    private EditText currentPasswordEditText;
     private ImageView profileImageView;
-    private TextView userNameTextView;
-    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_information);
 
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mStorageRef = FirebaseStorage.getInstance().getReference("profile_pic");
-        profileImageView = findViewById(R.id.profile_image);
-        userNameTextView = findViewById(R.id.nameEditText);
+        // Navigation buttons
+        ImageButton button1 = findViewById(R.id.myPageIcon);
+        ImageButton button2 = findViewById(R.id.studyIcon);
+        ImageButton button3 = findViewById(R.id.marketIcon);
+        ImageButton button4 = findViewById(R.id.homeIcon);
+        Button backBtn = findViewById(R.id.button_back);
 
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user != null) {
-            String userId = user.getUid();
-            mDatabase.child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    User user = dataSnapshot.getValue(User.class);
-                    if (user != null) {
-                        userNameTextView.setText(user.name);
-                        if (user.profileImageUrl != null && !user.profileImageUrl.isEmpty()) {
-                            Picasso.get().load(user.profileImageUrl).into(profileImageView);
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.e(TAG, "Database error: " + databaseError.getMessage());
-                }
-            });
-        }
-
-        ImageButton editIcon = findViewById(R.id.edit_icon);
-        editIcon.setOnClickListener(new View.OnClickListener() {
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFileChooser();
+                startActivity(new Intent(my_information.this, lobby_3.class));
             }
         });
 
-        // 나머지 버튼 설정 코드 ...
-    }
-
-    private void openFileChooser() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, PICK_IMAGE_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            imageUri = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                profileImageView.setImageBitmap(bitmap);
-                uploadImageToFirebase();
-            } catch (IOException e) {
-                Log.e(TAG, "Error getting image: " + e.getMessage());
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(my_information.this, study_4.class));
             }
+        });
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(my_information.this, learninglist_5.class));
+            }
+        });
+
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(my_information.this, mypage_6.class));
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(my_information.this, mypage_6.class));
+            }
+        });
+
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+
+        if (user == null) {
+            Toast.makeText(this, "사용자가 로그인되어 있지 않습니다.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
         }
+
+        // Initialize Database Reference
+        mDatabase = FirebaseDatabase.getInstance().getReference("users");
+
+        // Initialize UI elements
+        nameEditText = findViewById(R.id.nameEditText);
+        emailEditText = findViewById(R.id.emailEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+        currentPasswordEditText = findViewById(R.id.currentPassword);
+        updateButton = findViewById(R.id.update);
+        profileImageView = findViewById(R.id.profile_image);
+
+        // Fetch and set user information
+        fetchUserInfo();
+
+        // Set update button listener
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reauthenticateAndUpdateUser();
+            }
+        });
+
+        // Load profile image
+        loadProfileImage();
     }
 
-    private void uploadImageToFirebase() {
-        if (imageUri != null) {
-            FirebaseUser user = mAuth.getCurrentUser();
-            if (user != null) {
-                String userId = user.getUid();
-                StorageReference fileReference = mStorageRef.child(userId + ".jpg");
+    private void fetchUserInfo() {
+        DatabaseReference userRef = mDatabase.child(user.getUid());
 
-                fileReference.putFile(imageUri)
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        String downloadUrl = uri.toString();
-                                        mDatabase.child("users").child(userId).child("profileImageUrl").setValue(downloadUrl);
-                                        // 프로필 이미지를 업데이트합니다
-                                        Picasso.get().load(downloadUrl).into(profileImageView);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    String name = dataSnapshot.child("name").getValue(String.class);
+                    String email = dataSnapshot.child("email").getValue(String.class);
+
+                    if (name != null) {
+                        nameEditText.setText(name);
+                    }
+
+                    if (email != null) {
+                        emailEditText.setText(email);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(my_information.this, "데이터를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void reauthenticateAndUpdateUser() {
+        String name = nameEditText.getText().toString().trim();
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+        String currentPassword = currentPasswordEditText.getText().toString().trim();
+
+        if (name.isEmpty() || email.isEmpty() || password.isEmpty() || currentPassword.isEmpty()) {
+            Toast.makeText(this, "모든 필드를 채워야 합니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Get user's current email and password for reauthentication
+        AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), currentPassword);
+
+        user.reauthenticate(credential)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Reauthentication successful
+                        updateEmailAndPassword(email, password, name);
+                    } else {
+                        Toast.makeText(my_information.this, "재인증에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void updateEmailAndPassword(String email, String password, String name) {
+        user.updateEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        user.updatePassword(password)
+                                .addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        // Update user information in the database
+                                        DatabaseReference userRef = mDatabase.child(user.getUid());
+                                        userRef.child("name").setValue(name);
+                                        userRef.child("email").setValue(email);
+
+                                        Toast.makeText(my_information.this, "사용자 정보가 업데이트되었습니다.", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(my_information.this, mypage_6.class));
+                                    } else {
+                                        Toast.makeText(my_information.this, "비밀번호 업데이트에 실패했습니다.", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.e(TAG, "Image upload failed: " + e.getMessage());
-                            }
-                        });
-            } else {
-                Log.e(TAG, "User is not authenticated");
-            }
-        } else {
-            Log.e(TAG, "Image URI is null");
-        }
+                    } else {
+                        Toast.makeText(my_information.this, "이메일 업데이트에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
-    public static class User {
-        public String name;
-        public String email;
-        public String profileImageUrl;
+    private void loadProfileImage() {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference profileImageRef = storageRef.child("profile_images/" + user.getUid() + ".jpg");
 
-        public User() {}
-
-        public User(String name, String email, String profileImageUrl) {
-            this.name = name;
-            this.email = email;
-            this.profileImageUrl = profileImageUrl;
-        }
+        profileImageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+            Picasso.get().load(uri).into(profileImageView);
+        }).addOnFailureListener(e -> {
+            Toast.makeText(my_information.this, "프로필 이미지를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
+        });
     }
 }
