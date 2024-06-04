@@ -126,44 +126,44 @@
             android:orientation="vertical"
             android:layout_marginTop="8dp">
 
-            <TextView
-                android:id="@+id/content_item_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="1. Introduction To Website Design"
-                android:background="@color/light_gray"
-                android:textColor="#000000"
-                android:padding="16dp"/>
+<!--            <TextView-->
+<!--                android:id="@+id/content_item_1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="1. Introduction To Website Design"-->
+<!--                android:background="@color/light_gray"-->
+<!--                android:textColor="#000000"-->
+<!--                android:padding="16dp"/>-->
 
-            <TextView
-                android:id="@+id/content_item_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="2. What Is Figma?"
-                android:background="@color/light_gray"
-                android:textColor="#000000"
-                android:padding="16dp"
-                android:layout_marginTop="8dp"/>
+<!--            <TextView-->
+<!--                android:id="@+id/content_item_2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="2. What Is Figma?"-->
+<!--                android:background="@color/light_gray"-->
+<!--                android:textColor="#000000"-->
+<!--                android:padding="16dp"-->
+<!--                android:layout_marginTop="8dp"/>-->
 
-            <TextView
-                android:id="@+id/content_item_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="3. Figma Tools"
-                android:background="@color/light_gray"
-                android:textColor="#000000"
-                android:padding="16dp"
-                android:layout_marginTop="8dp"/>
+<!--            <TextView-->
+<!--                android:id="@+id/content_item_3"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="3. Figma Tools"-->
+<!--                android:background="@color/light_gray"-->
+<!--                android:textColor="#000000"-->
+<!--                android:padding="16dp"-->
+<!--                android:layout_marginTop="8dp"/>-->
 
-            <TextView
-                android:id="@+id/content_item_4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="4. Practice"
-                android:background="@color/light_gray"
-                android:textColor="#000000"
-                android:padding="16dp"
-                android:layout_marginTop="8dp"/>
+<!--            <TextView-->
+<!--                android:id="@+id/content_item_4"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="4. Practice"-->
+<!--                android:background="@color/light_gray"-->
+<!--                android:textColor="#000000"-->
+<!--                android:padding="16dp"-->
+<!--                android:layout_marginTop="8dp"/>-->
         </LinearLayout>
     </RelativeLayout>
 
@@ -189,7 +189,7 @@
             android:textAllCaps="false"
             android:layout_weight="1"
             android:padding="16dp"
-            android:cornerRadius="8dp"/>
+            />
 
         <android.widget.Button
             android:id="@+id/ordering_items_button"
@@ -244,7 +244,7 @@
             android:id="@+id/nav_my_page"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_my_page"
+            android:src="@drawable/ic_home"
             android:background="@null"
             android:layout_weight="1"
             android:contentDescription="My Page"/>
