@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/background"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registration of items"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"
+        android:gravity="center" />
+
+    <ImageButton
+        android:id="@+id/upload_image"
+        android:layout_width="61dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/stroke"
+        android:src="@drawable/ic_fileupload" />
+
+    <EditText
+        android:id="@+id/title_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter the title"
+        android:textSize="13sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background" />
+
+    <EditText
+        android:id="@+id/price_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter the price"
+        android:textSize="13sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:inputType="numberDecimal" />
+
+    <android.widget.Button
+        android:id="@+id/upload_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload"
+        android:textColor="@color/black"
+        android:padding="12dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/selected_button"
+        android:textAllCaps="false"
+        />
+
+</LinearLayout>
