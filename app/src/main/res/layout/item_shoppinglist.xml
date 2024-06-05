@@ -47,7 +47,7 @@
         android:layout_toEndOf="@id/item_title"
         android:background="@null"
         android:contentDescription="Minus"
-        android:src="@drawable/remove"
+        android:src="@drawable/ic_close"
         android:alpha="0.6"/>
 
     <LinearLayout

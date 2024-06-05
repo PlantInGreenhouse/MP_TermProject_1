@@ -270,7 +270,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:background="@null"
-                android:src="@drawable/ic_my_page" />
+                android:src="@drawable/ic_mypage" />
 
             <TextView
                 android:layout_width="wrap_content"
