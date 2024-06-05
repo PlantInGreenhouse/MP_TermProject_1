@@ -26,7 +26,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class lectureModeRegist_6_1_1 extends AppCompatActivity {
+public class upload_video extends AppCompatActivity {
     private static final int PICK_VIDEO_REQUEST = 1;
     private EditText etVideoTitle, etVideoCategory, etVideoDescription;
     private Button btnUploadVideo, btnSaveToDatabase;
@@ -41,7 +41,7 @@ public class lectureModeRegist_6_1_1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lecturemoderegist_6_1_1);
+        setContentView(R.layout.lecture_upload);
 
         etVideoTitle = findViewById(R.id.etVideoTitle);
         etVideoCategory = findViewById(R.id.etVideoCategory);
@@ -81,7 +81,7 @@ public class lectureModeRegist_6_1_1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 뒤로 가기 버튼을 누르면 mypage_6 클래스로 이동
-                startActivity(new Intent(lectureModeRegist_6_1_1.this, lectureMode_6_1.class));
+                startActivity(new Intent(upload_video.this, lectureMode_6_1.class));
             }
         });
     }
@@ -116,7 +116,7 @@ public class lectureModeRegist_6_1_1 extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     videoUrl = uri.toString();
                                     tvUploadStatus.setText("Upload Successful: " + videoUrl);
-                                    Toast.makeText(lectureModeRegist_6_1_1.this, "Video Uploaded", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(upload_video.this, "Video Uploaded", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -126,12 +126,12 @@ public class lectureModeRegist_6_1_1 extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                             tvUploadStatus.setText("Upload Failed");
                             Log.e("Firebase Upload", "Error: " + e.getMessage());
-                            Toast.makeText(lectureModeRegist_6_1_1.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(upload_video.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         } else {
             tvUploadStatus.setText("No file selected");
-            Toast.makeText(lectureModeRegist_6_1_1.this, "No file selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(upload_video.this, "No file selected", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -147,13 +147,13 @@ public class lectureModeRegist_6_1_1 extends AppCompatActivity {
             databaseReference.child(videoId).setValue(videoDetails).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    Toast.makeText(lectureModeRegist_6_1_1.this, "Details Saved", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(lectureModeRegist_6_1_1.this, mypage_6.class));
+                    Toast.makeText(upload_video.this, "Details Saved", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(upload_video.this, mypage_6.class));
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(lectureModeRegist_6_1_1.this, "Failed to save details", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(upload_video.this, "Failed to save details", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -174,7 +174,7 @@ public class lectureModeRegist_6_1_1 extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(lectureModeRegist_6_1_1.this, "Failed to load video URL", Toast.LENGTH_SHORT).show();
+                Toast.makeText(upload_video.this, "Failed to load video URL", Toast.LENGTH_SHORT).show();
             }
         });
     }

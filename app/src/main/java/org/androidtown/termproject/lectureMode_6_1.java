@@ -1,13 +1,10 @@
 package org.androidtown.termproject;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import org.androidtown.termproject.R;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,6 +54,9 @@ public class lectureMode_6_1 extends AppCompatActivity {
         ImageButton button4 = findViewById(R.id.homeIcon);
         Button uploadBtn = findViewById(R.id.lectureRegister);
         Button button_back = findViewById(R.id.button_back);
+        Button order_check = findViewById(R.id.order_check);
+        Button Upload_lecture = findViewById(R.id.lectureRegister);
+
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,13 +88,25 @@ public class lectureMode_6_1 extends AppCompatActivity {
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(lectureMode_6_1.this, lectureModeRegist_6_1_1.class));
+                startActivity(new Intent(lectureMode_6_1.this, lecture_upload.class));
             }
         });
         button_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(lectureMode_6_1.this, mypage_6.class));
+            }
+        });
+        order_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(lectureMode_6_1.this, OrderCheck.class));
+            }
+        });
+        uploadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(lectureMode_6_1.this, lecture_upload.class));
             }
         });
     }

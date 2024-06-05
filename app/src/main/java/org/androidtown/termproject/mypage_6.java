@@ -94,6 +94,10 @@ public class mypage_6 extends AppCompatActivity {
         ImageButton LectureMode_button = findViewById(R.id.LectureMode_button);
         LinearLayout MyInformation = findViewById(R.id.MyInformation);
         LinearLayout LectureMode = findViewById(R.id.LectureMode);
+        LinearLayout QA = findViewById(R.id.QA);
+        ImageButton QAI = findViewById(R.id.QA_button);
+        LinearLayout OrderList = findViewById(R.id.OderList);
+        ImageButton OrderBtn = findViewById(R.id.OderList_button);
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +159,42 @@ public class mypage_6 extends AppCompatActivity {
             public void onClick(View v) {
                 // 편집 아이콘 클릭 시 수행할 작업
                 startActivity(new Intent(mypage_6.this, lectureMode_6_1.class));
+
+            }
+
+        });
+        QA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편집 아이콘 클릭 시 수행할 작업
+                startActivity(new Intent(mypage_6.this, qna.class));
+
+            }
+
+        });
+        QAI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편집 아이콘 클릭 시 수행할 작업
+                startActivity(new Intent(mypage_6.this, qna.class));
+
+            }
+
+        });
+        OrderList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편집 아이콘 클릭 시 수행할 작업
+                startActivity(new Intent(mypage_6.this, OrderList.class));
+
+            }
+
+        });
+        OrderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 편집 아이콘 클릭 시 수행할 작업
+                startActivity(new Intent(mypage_6.this, OrderList.class));
 
             }
 

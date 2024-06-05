@@ -29,7 +29,7 @@
         <activity android:name=".learninglist_5" />
         <activity android:name=".lecture_8" />
         <activity android:name=".lectureMode_6_1" />
-        <activity android:name=".lectureModeRegist_6_1_1" />
+        <activity android:name=".lecture_upload" />
         <activity android:name=".lobby_3" />
         <activity android:name=".mypage_6" />
         <activity android:name=".NewPostActivity" />
@@ -39,6 +39,10 @@
         <activity android:name=".study_4" />
         <activity android:name=".VideoDetails" />
         <activity android:name=".my_information" />
+        <activity android:name=".qna" />
+        <activity android:name=".OrderList" />
+        <activity android:name=".OrderCheck" />
+        <activity android:name=".registeration_of_items" />
     </application>
 
 </manifest>

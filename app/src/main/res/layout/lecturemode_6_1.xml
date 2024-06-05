@@ -277,11 +277,14 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/bottomNavBar"
         android:layout_alignStart="@id/bottomNavBar"
-        android:layout_margin="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/custom_writing_button"
         android:text="Order Check"
         android:textAllCaps="false"
-        android:textSize="13sp"/>
+        android:textSize="13sp" />
 
     <android.widget.Button
         android:id="@+id/lectureRegister"
@@ -289,7 +292,10 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/bottomNavBar"
         android:layout_alignEnd="@id/bottomNavBar"
-        android:layout_margin="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/selected_button"
         android:text="Upload Lecture"
         android:textAllCaps="false"
