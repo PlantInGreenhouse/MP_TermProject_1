@@ -120,17 +120,20 @@
                     android:background="@color/white"
                     android:layout_margin="5dp"
                     />
+
                 <android.widget.Button
                     android:id="@+id/delete"
                     android:layout_width="50dp"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
-                    android:text="삭제"
-                    android:textSize="11sp"
-                    android:textColor="@color/darkgray"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
                     android:background="@color/white"
-                    android:layout_margin="5dp"
-                    />
+                    android:text="삭제"
+                    android:textColor="@color/darkgray"
+                    android:textSize="11sp" />
 
                 <TextView
                     android:id="@+id/item_price"
