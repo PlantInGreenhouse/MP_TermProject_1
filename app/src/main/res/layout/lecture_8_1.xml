@@ -1,0 +1,282 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Image Section -->
+    <ImageView
+        android:id="@+id/course_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/oilpastel_item"
+        android:scaleType="centerCrop"/>
+
+    <!-- Tabs -->
+    <LinearLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/course_image"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <android.widget.Button
+            android:id="@+id/tab_about"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="About"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:background="@color/white" />
+
+        <android.widget.Button
+            android:id="@+id/tab_reviews"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Reviews"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:background="@color/colorPrimary" />
+    </LinearLayout>
+
+    <!-- Black Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_below="@id/tab_layout"
+        android:background="#000000"/>
+
+    <!-- Scrollable Content Section -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/tab_layout"
+        android:layout_above="@+id/button_layout"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:id="@+id/title_content_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginTop="18dp">
+
+            <!-- Course Title -->
+            <TextView
+                android:id="@+id/course_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UI/UX"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#000000"/>
+
+            <!-- Course Author -->
+            <LinearLayout
+                android:id="@+id/course_author_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/course_title"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <ImageView
+                    android:id="@+id/author_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/lecturer"
+                    android:layout_marginEnd="8dp"/>
+
+                <TextView
+                    android:id="@+id/course_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="By Leesoejeong"
+                    android:textSize="14sp"
+                    android:textColor="#666666"/>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/course_author_layout"
+                android:background="#F4F6FF"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:layout_marginTop="18dp">
+
+                <ImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/profile" />
+
+                <TextView
+                    android:id="@+id/usernameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/profile_image"
+                    android:layout_alignTop="@id/profile_image"
+                    android:layout_marginStart="16dp"
+                    android:text="Kimsonghui"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/feedbackTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/usernameTextView"
+                    android:layout_marginStart="-47dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_toEndOf="@id/profile_image"
+                    android:lineSpacingExtra="8dp"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="This Course Provided Me With The Practical Skills And Confidence To Start My Career In UI/UX Design. The Hands-On Projects And Expert Guidance Were Invaluable."
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <!-- Subscribe and Ordering Buttons -->
+    <LinearLayout
+        android:id="@+id/button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_above="@id/bottomNavBar"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp">
+
+        <android.widget.Button
+            android:id="@+id/subscribe_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Subscribe"
+            android:background="@color/colorPrimary"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:padding="16dp"/>
+
+        <android.widget.Button
+            android:id="@+id/ordering_items_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Ordering Items"
+            android:background="@color/gray"
+            android:textColor="#000000"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:padding="16dp"/>
+    </LinearLayout>
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:id="@+id/bottomNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="4">
+
+        <!-- Home -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/homeIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@null"
+                android:src="@drawable/ic_home" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Study -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/studyIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@null"
+                android:src="@drawable/ic_study" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Study"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Market -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/marketIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@null"
+                android:src="@drawable/ic_learning" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My learning"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- My Page -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/myPageIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@null"
+                android:src="@drawable/ic_my_page" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Page"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
