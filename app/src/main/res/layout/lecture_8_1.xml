@@ -28,8 +28,8 @@
             android:layout_weight="1"
             android:text="About"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:background="@color/colorPrimary" />
+            android:textColor="#000000"
+            android:background="@color/white" />
 
         <android.widget.Button
             android:id="@+id/tab_reviews"
@@ -38,8 +38,8 @@
             android:layout_weight="1"
             android:text="Reviews"
             android:textAllCaps="false"
-            android:textColor="#000000"
-            android:background="@color/white" />
+            android:textColor="#ffffff"
+            android:background="@color/colorPrimary" />
     </LinearLayout>
 
     <!-- Black Divider -->
@@ -65,42 +65,22 @@
             android:paddingRight="10dp"
             android:layout_marginTop="18dp">
 
-            <!-- Course Title and Category Button -->
-            <LinearLayout
-                android:id="@+id/course_title_selection"
-                android:layout_width="match_parent"
+            <!-- Course Title -->
+            <TextView
+                android:id="@+id/course_title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/course_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="UI/UX"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="#000000"
-                    android:layout_marginRight="250dp"/>
-
-                <android.widget.Button
-                    android:id="@+id/category_art"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:background="@drawable/unselected_button"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="5dp"
-                    android:text="Art"
-                    android:textAllCaps="false"
-                    android:textSize="14sp" />
-            </LinearLayout>
+                android:text="UI/UX"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#000000"/>
 
             <!-- Course Author -->
             <LinearLayout
                 android:id="@+id/course_author_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/course_title_selection"
+                android:layout_below="@id/course_title"
                 android:orientation="horizontal"
                 android:layout_marginTop="5dp">
 
@@ -120,77 +100,49 @@
                     android:textColor="#666666"/>
             </LinearLayout>
 
-            <!-- Course Description -->
-            <TextView
-                android:id="@+id/course_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/course_author_layout"
-                android:layout_marginTop="16dp"
-                android:text="Welcome To Our Comprehensive Course On UI/UX Design! This Course Is Designed For Anyone Looking To Delve Into The World Of User Interface And User Experience Design. Whether You're A Beginner Or A Seasoned Professional Wanting To Refresh Your Skills."
-                android:textSize="14sp"
-                android:textColor="#000000"/>
-
-            <!-- Contents Header -->
-            <TextView
-                android:id="@+id/course_contents"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/course_description"
-                android:layout_marginTop="20dp"
-                android:text="Contents"
-                android:textSize="18sp"
-                android:textColor="#000000"
-                android:textStyle="bold"/>
-
-            <!-- Content Items -->
-            <LinearLayout
-                android:id="@+id/content_list"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/course_contents"
+                android:layout_below="@id/course_author_layout"
+                android:background="#F4F6FF"
+                android:elevation="4dp"
                 android:orientation="vertical"
-                android:layout_marginTop="8dp">
+                android:padding="20dp"
+                android:layout_marginTop="18dp">
+
+                <ImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/profile" />
 
                 <TextView
-                    android:id="@+id/content_item_1"
-                    android:layout_width="match_parent"
+                    android:id="@+id/usernameTextView"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1. Introduction To Website Design"
-                    android:background="#F4F6FF"
+                    android:layout_toEndOf="@id/profile_image"
+                    android:layout_alignTop="@id/profile_image"
+                    android:layout_marginStart="16dp"
+                    android:text="Kimsonghui"
                     android:textColor="#000000"
-                    android:padding="16dp"/>
+                    android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/content_item_2"
-                    android:layout_width="match_parent"
+                    android:id="@+id/feedbackTextView"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2. What Is Figma?"
-                    android:background="#F4F6FF"
+                    android:layout_below="@id/usernameTextView"
+                    android:layout_marginStart="-47dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_toEndOf="@id/profile_image"
+                    android:lineSpacingExtra="8dp"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="This Course Provided Me With The Practical Skills And Confidence To Start My Career In UI/UX Design. The Hands-On Projects And Expert Guidance Were Invaluable."
                     android:textColor="#000000"
-                    android:padding="16dp"
-                    android:layout_marginTop="8dp"/>
+                    android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/content_item_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="3. Figma Tools"
-                    android:background="#F4F6FF"
-                    android:textColor="#000000"
-                    android:padding="16dp"
-                    android:layout_marginTop="8dp"/>
+            </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/content_item_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="4. Practice"
-                    android:background="#F4F6FF"
-                    android:textColor="#000000"
-                    android:padding="16dp"
-                    android:layout_marginTop="8dp"/>
-            </LinearLayout>
         </RelativeLayout>
     </ScrollView>
 
@@ -318,7 +270,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:background="@null"
-                android:src="@drawable/ic_home" />
+                android:src="@drawable/ic_mypage" />
 
             <TextView
                 android:layout_width="wrap_content"

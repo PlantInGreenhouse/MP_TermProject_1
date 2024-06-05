@@ -1,0 +1,316 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <!-- 상단 바 -->
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#B6E6FC"
+        android:padding="8dp">
+
+        <!-- 왼쪽 로고 아이콘 -->
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/title_study"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Learning"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_centerInParent="true" />
+
+        <android.widget.Button
+            android:id="@+id/button_review"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="review"
+            android:textAllCaps="false"
+            android:textSize="12dp"
+            android:drawableLeft="@drawable/ic_writing"
+            android:background="@drawable/custom_writing_button"
+            android:textColor="#000000"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lecture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topBar"
+        android:paddingStart="30dp"
+        android:paddingTop="15dp">
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="UI/UX"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/writerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Leeseojeong"
+            android:layout_below="@id/title"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/lecturer"
+            android:drawablePadding="10dp"
+            android:textSize="14sp"
+            android:textColor="@color/darkgray" />
+
+
+
+
+
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@id/bottomNavBar"
+        android:layout_below="@id/lecture"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/my_learning_item_background"
+                android:clickable="true"
+                android:padding="16dp">
+
+
+                <TextView
+                    android:id="@+id/chapter1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1.   Introduction to Website Design"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:paddingStart="5dp"/>
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_play"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/my_learning_item_background"
+                android:clickable="true"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/chapter2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2.   What is Figma?"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:paddingStart="5dp"/>
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_play"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/my_learning_item_background"
+                android:clickable="true"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/chapter3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3.   Figma Tools"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:paddingStart="5dp"/>
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_play"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/my_learning_item_background"
+                android:clickable="true"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/chapter4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.   practice"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:paddingStart="5dp"/>
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_play"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- 하단 네비게이션 바 -->
+    <LinearLayout
+        android:id="@+id/bottomNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:padding="8dp"
+        android:weightSum="4">
+        <!-- Home -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/homeIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_home"
+                android:background="@android:color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textSize="12sp"
+                android:textColor="#000000" />
+        </LinearLayout>
+        <!-- Study -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/studyIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_study"
+                android:background="@android:color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Study"
+                android:textSize="12sp"
+                android:textColor="#000000" />
+        </LinearLayout>
+        <!-- Market -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/marketIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_market"
+                android:background="@android:color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Market"
+                android:textSize="12sp"
+                android:textColor="#000000" />
+        </LinearLayout>
+        <!-- My Page -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/myPageIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_mypage"
+                android:background="@android:color/white"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Page"
+                android:textSize="12sp"
+                android:textColor="#000000" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
