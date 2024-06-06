@@ -6,7 +6,6 @@
     tools:context=".MainActivity"
     android:background="@color/background">
 
-
     <!-- 상단 바 -->
     <RelativeLayout
         android:id="@+id/topBar"
@@ -55,7 +54,6 @@
             android:paddingRight="17dp"/>
     </RelativeLayout>
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -64,8 +62,6 @@
         android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:layout_marginBottom="10dp">
-
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -84,7 +80,6 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:backgroundTint="@color/gray"/>
-
 
             <TextView
                 android:id="@+id/writerName"
@@ -157,94 +152,15 @@
                 android:background="@color/gray"
                 android:layout_marginTop="16dp"/>
 
-
-            <RelativeLayout
-                android:id="@+id/comment"
+            <LinearLayout
+                android:id="@+id/comment_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_below="@id/horizontalLine">
+                android:layout_below="@id/horizontalLine"/>
 
-                <RelativeLayout
-                    android:id="@+id/comment1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:paddingTop="10dp">
-
-                    <ImageView
-                        android:id="@+id/writer1"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginStart="5dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_avatar" />
-
-                    <TextView
-                        android:id="@+id/writer1Name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/writer1"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="Kimsonghui"
-                        android:textColor="@color/darkgray"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/writer1Name"
-                        android:layout_alignStart="@id/writer1Name"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="저두 요새 너투브 보고 초코 케이크 먹방에 관심이 생겼는데.. 같이 해 보실래요?^^.."
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <android.widget.Button
-                        android:id="@+id/modify"
-                        android:layout_width="40dp"
-                        android:layout_height="30dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_toLeftOf="@+id/delete"
-                        android:background="@color/white"
-                        android:text="수정"
-                        android:textColor="@color/darkgray"
-                        android:textSize="11sp" />
-
-                    <android.widget.Button
-                        android:id="@+id/delete"
-                        android:layout_width="40dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@color/white"
-                        android:text="삭제"
-                        android:textColor="@color/darkgray"
-                        android:textSize="11sp" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/gray"
-                        android:layout_alignParentBottom="true"/>
-
-                </RelativeLayout>
-
-            </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
-
-
 
     <LinearLayout
         android:id="@+id/upload_comment"
@@ -281,6 +197,5 @@
             android:padding="5dp"
             android:layout_marginEnd="5dp"/>
     </LinearLayout>
-
 
 </RelativeLayout>

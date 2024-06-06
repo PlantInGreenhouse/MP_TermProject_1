@@ -198,7 +198,7 @@ public class my_information extends AppCompatActivity {
     private void loadProfileImage() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageReference profileImageRef = storageRef.child("profile_images/" + user.getUid() + ".jpg");
+        StorageReference profileImageRef = storageRef.child("profile_pic/" + user.getUid() + ".jpg");
 
         profileImageRef.getDownloadUrl().addOnSuccessListener(uri -> {
             Picasso.get().load(uri).into(profileImageView);

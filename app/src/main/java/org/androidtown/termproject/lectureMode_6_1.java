@@ -1,10 +1,13 @@
 package org.androidtown.termproject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,17 +19,25 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class lectureMode_6_1 extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private TextView userNameTextView;
+    private ImageView profileImageView;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lecturemode_6_1);
+
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         userNameTextView = findViewById(R.id.User_name);
+        profileImageView = findViewById(R.id.profile_image);
 
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
@@ -37,14 +48,19 @@ public class lectureMode_6_1 extends AppCompatActivity {
                     mypage_6.User user = dataSnapshot.getValue(mypage_6.User.class);
                     if (user != null) {
                         userNameTextView.setText(user.name);
+                        if (user.profileImageUrl != null && !user.profileImageUrl.isEmpty()) {
+                            Picasso.get().load(user.profileImageUrl).into(profileImageView);
+                        }
                     }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // Handle possible errors
+                    Toast.makeText(lectureMode_6_1.this, "Failed to load user data", Toast.LENGTH_SHORT).show();
                 }
             });
+
+            loadProfileImage(userId);
         }
 
         // 기존 코드
@@ -56,7 +72,6 @@ public class lectureMode_6_1 extends AppCompatActivity {
         Button button_back = findViewById(R.id.button_back);
         Button order_check = findViewById(R.id.order_check);
         Button Upload_lecture = findViewById(R.id.lectureRegister);
-
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +92,6 @@ public class lectureMode_6_1 extends AppCompatActivity {
                 startActivity(new Intent(lectureMode_6_1.this, learninglist_5.class));
             }
         });
-
 
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,5 +125,15 @@ public class lectureMode_6_1 extends AppCompatActivity {
         });
     }
 
+    private void loadProfileImage(String userId) {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference profileImageRef = storageRef.child("profile_pic/" + userId + ".jpg");
 
+        profileImageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+            Picasso.get().load(uri).into(profileImageView);
+        }).addOnFailureListener(e -> {
+            Toast.makeText(lectureMode_6_1.this, "프로필 이미지를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
+        });
+    }
 }

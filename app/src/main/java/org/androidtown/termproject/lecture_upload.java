@@ -38,6 +38,8 @@ public class lecture_upload extends AppCompatActivity {
         Button backBtn = findViewById(R.id.button_back);
         Button item_registeration = findViewById(R.id.item_registeration);
         Button UploadBtn = findViewById(R.id.lectureRegister);
+
+        // 네비게이션 버튼들 설정
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,26 +67,31 @@ public class lecture_upload extends AppCompatActivity {
                 startActivity(new Intent(lecture_upload.this, lobby_3.class));
             }
         });
+
+        // 뒤로가기 버튼 설정
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(lecture_upload.this, registeration_of_items.class);
-                intent.putExtra("DELETE_ITEMS", true);
+                // 아이템 등록 초기화 없이 돌아가기
+                Intent intent = new Intent(lecture_upload.this, lectureMode_6_1.class);
                 startActivity(intent);
-                startActivity(new Intent(lecture_upload.this, lectureMode_6_1.class));
             }
         });
+
+        // 아이템 등록 버튼 설정
         item_registeration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(lecture_upload.this, registeration_of_items.class));
             }
         });
+
+        // 업로드 버튼 설정
         UploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(lecture_upload.this, lectureMode_6_1.class);
-                intent.putExtra("DELETE_ITEMS", true);
+                Intent intent = new Intent(lecture_upload.this, registeration_of_items.class);
+                intent.putExtra("DELETE_ITEMS", true); // 아이템을 지우는 플래그 추가
                 startActivity(intent);
             }
         });

@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -119,9 +118,9 @@ public class registeration_of_items extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(registeration_of_items.this, lecture_upload.class);
-                intent.putExtra("DELETE_ITEMS", true);
-                startActivity(intent);
+                itemContainer.removeAllViews();
+                // 'DELETE_ITEMS' 플래그 없이 이동
+                startActivity(new Intent(registeration_of_items.this, lecture_upload.class));
             }
         });
     }
@@ -218,7 +217,7 @@ public class registeration_of_items extends AppCompatActivity {
             userRef.child("name").get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     String userName = task.getResult().getValue(String.class);
-                    DatabaseReference itemRef = mDatabase.child("registeration_of_item").push();
+                    DatabaseReference itemRef = mDatabase.child("registeration_of_item").child(userId).push();
 
                     Map<String, Object> itemData = new HashMap<>();
                     itemData.put("title", titleInput.getText().toString());
@@ -233,7 +232,7 @@ public class registeration_of_items extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(registeration_of_items.this, "Item uploaded successfully", Toast.LENGTH_SHORT).show();
-                                addItemToLayout(titleInput.getText().toString(), priceInput.getText().toString(), imageUrl);
+                                addItemToLayout(itemRef.getKey(), titleInput.getText().toString(), priceInput.getText().toString(), imageUrl);
                             } else {
                                 Toast.makeText(registeration_of_items.this, "Failed to upload item", Toast.LENGTH_SHORT).show();
                             }
@@ -246,7 +245,7 @@ public class registeration_of_items extends AppCompatActivity {
         }
     }
 
-    private void addItemToLayout(String title, String price, String imageUrl) {
+    private void addItemToLayout(String itemId, String title, String price, String imageUrl) {
         // 레이아웃에 새 아이템 추가하는 코드
         LayoutInflater inflater = LayoutInflater.from(this);
         View itemLayout = inflater.inflate(R.layout.item_layout, itemContainer, false);
@@ -270,6 +269,10 @@ public class registeration_of_items extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 itemContainer.removeView(itemLayout);
+                // Firebase에서 항목 삭제
+                String userId = mAuth.getCurrentUser().getUid();
+                DatabaseReference itemRef = mDatabase.child("registeration_of_item").child(userId).child(itemId);
+                itemRef.removeValue();
             }
         });
 
@@ -278,24 +281,31 @@ public class registeration_of_items extends AppCompatActivity {
     }
 
     private void loadItemsFromDatabase() {
-        DatabaseReference itemRef = mDatabase.child("registeration_of_item");
+        itemContainer.removeAllViews();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            String userId = user.getUid();
+            DatabaseReference itemRef = mDatabase.child("registeration_of_item").child(userId);
 
-        itemRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String title = snapshot.child("title").getValue(String.class);
-                    String price = snapshot.child("price").getValue(String.class);
-                    String imageUrl = snapshot.child("imageUrl").getValue(String.class);
+            itemRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    itemContainer.removeAllViews();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        String itemId = snapshot.getKey();
+                        String title = snapshot.child("title").getValue(String.class);
+                        String price = snapshot.child("price").getValue(String.class);
+                        String imageUrl = snapshot.child("imageUrl").getValue(String.class);
 
-                    addItemToLayout(title, price, imageUrl);
+                        addItemToLayout(itemId, title, price, imageUrl);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(registeration_of_items.this, "Failed to load items", Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(registeration_of_items.this, "Failed to load items", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }

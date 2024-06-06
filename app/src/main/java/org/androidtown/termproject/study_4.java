@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,12 +15,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -124,6 +127,7 @@ public class study_4 extends AppCompatActivity {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Post post = postSnapshot.getValue(Post.class);
                     if (post != null) {
+                        post.id = postSnapshot.getKey(); // post 객체에 ID 저장
                         allPosts.add(post);
                     }
                 }
@@ -154,6 +158,7 @@ public class study_4 extends AppCompatActivity {
         TextView categoryTextView = postLayout.findViewById(R.id.postCategoryTextView);
         TextView titleTextView = postLayout.findViewById(R.id.postTitleTextView);
         TextView authorTextView = postLayout.findViewById(R.id.postAuthorTextView);
+        ImageView authorImageView = postLayout.findViewById(R.id.postAuthorImageView);
 
         StringBuilder categoriesBuilder = new StringBuilder();
         for (String category : post.category) {
@@ -164,22 +169,60 @@ public class study_4 extends AppCompatActivity {
         titleTextView.setText(post.title);
         authorTextView.setText(post.author);
 
+        // 사용자 프로필 이미지를 불러오는 코드
+        if (post.authorId != null) {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(post.authorId);
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        String profileImageUrl = dataSnapshot.child("profileImageUrl").getValue(String.class);
+                        if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
+                            // 프로필 이미지가 Firebase Storage에 저장된 경우 URL을 가져와서 Glide로 로드
+                            StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(profileImageUrl);
+                            storageReference.getDownloadUrl().addOnSuccessListener(uri -> Glide.with(study_4.this).load(uri).into(authorImageView)).addOnFailureListener(e -> authorImageView.setImageResource(R.drawable.ic_avatar));
+                        } else {
+                            authorImageView.setImageResource(R.drawable.ic_avatar); // 기본 이미지
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(study_4.this, "Failed to load author image.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            authorImageView.setImageResource(R.drawable.ic_avatar); // 기본 이미지
+        }
+
+        postLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(study_4.this, view_study_post.class);
+                intent.putExtra("POST_ID", post.id); // 글 ID를 넘김
+                startActivity(intent);
+            }
+        });
+
         postsLayout.addView(postLayout);
     }
 
     private static class Post {
-        public String title, content, author;
+        public String id;
+        public String title, content, author, authorId;
         public List<String> category;
 
         public Post() {
             // Default constructor required for calls to DataSnapshot.getValue(Post.class)
         }
 
-        public Post(String title, String content, List<String> category, String author) {
+        public Post(String title, String content, List<String> category, String author, String authorId) {
             this.title = title;
             this.content = content;
             this.category = category;
             this.author = author;
+            this.authorId = authorId;
         }
     }
 }

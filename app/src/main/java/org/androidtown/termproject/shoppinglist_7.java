@@ -82,7 +82,7 @@ public class shoppinglist_7 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int count = Integer.parseInt(itemCount.getText().toString());
-                if (count > 0) {
+                if (count > 1) {
                     count--;
                     itemCount.setText(String.valueOf(count));
                     updateItemPrice(count);
