@@ -56,179 +56,198 @@
     </RelativeLayout>
 
 
-
-    <!-- 제목 입력 필드 -->
-    <TextView
-        android:id="@+id/post_title"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_above="@id/upload_comment"
         android:layout_below="@id/topBar"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginStart="10dp"
-        android:paddingStart="20dp"
-        android:text="초코케이크 같이 야무지게 먹을 사람 9해요"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:backgroundTint="@color/gray"/>
-
-
-    <TextView
-        android:id="@+id/writerName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:paddingStart="10dp"
-        android:text="Leeseojeong"
-        android:layout_below="@id/post_title"
-        android:layout_alignParentStart="true"
-        android:drawableLeft="@drawable/ic_avatar"
-        android:drawablePadding="10dp"
-        android:textSize="14sp"
-        android:textColor="#BDBDBD" />
-
-    <TextView
-        android:id="@+id/like_count1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:paddingEnd="10dp"
-        android:text="2024.04.28 15:34"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBaseline="@id/writerName"
-        android:drawablePadding="10dp"
-        android:textSize="14sp"
-        android:textColor="@color/gray" />
-
-    <!-- 내용 입력 필드 -->
-    <TextView
-        android:id="@+id/post_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/writerName"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_weight="1"
-        android:gravity="top"
-        android:text="초코 케이크 먹방만 봐봤지 실제로 먹어보는 건 처음이라 어떻게 먹어야 할 지 잘 모르겠네요 ;;
-같이 강의 보면서 얘기나눌 분 구해요~(^^)
-까톡으로 얘기만 나누셔도 되고, 같이 만나서 먹어도 됩니다~(편하신 대로^^)
-참고로 저는 서초구 거주 중인 30대 아줌마입니다(^^).
-저는 이틀에 한 번 먹을 예정입니다~(^^)
-같이 참여하실 분은 댓글 부탁해용~(^^)"
-        android:padding="10dp"/>
-
-    <TextView
-        android:id="@+id/like_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="47"
-        android:layout_marginStart="20dp"
-        android:paddingStart="10dp"
-        android:layout_below="@id/post_content"
-        android:drawableLeft="@drawable/ic_thumb_up"
-        android:drawablePadding="10dp"
-        android:drawableTint="@color/signiture_color"
-        android:textSize="14sp"
-        android:textColor="@color/darkgray" />
-
-    <View
-        android:id="@+id/horizontalLine"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/like_count"
-        android:background="@color/gray"
-        android:layout_marginTop="16dp" />
-
-    <RelativeLayout
-        android:id="@+id/comment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
-        android:layout_below="@id/horizontalLine">
+        android:layout_marginBottom="10dp">
+
+
 
         <RelativeLayout
-            android:id="@+id/comment1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="10dp">
+            android:orientation="vertical">
+            <!-- 제목 입력 필드 -->
+            <TextView
+                android:id="@+id/post_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
+                android:paddingStart="20dp"
+                android:text="초코케이크 같이 야무지게 먹을 사람 9해요"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/gray"/>
 
-            <ImageView
-                android:id="@+id/writer1"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+
+            <TextView
+                android:id="@+id/writerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:paddingStart="10dp"
+                android:text="Leeseojeong"
+                android:layout_below="@id/post_title"
                 android:layout_alignParentStart="true"
-                android:layout_marginEnd="15dp"
-                android:layout_marginStart="5dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_avatar" />
+                android:drawableLeft="@drawable/ic_avatar"
+                android:drawablePadding="10dp"
+                android:textSize="14sp"
+                android:textColor="#BDBDBD" />
 
             <TextView
-                android:id="@+id/writer1Name"
+                android:id="@+id/like_count1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/writer1"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:text="Kimsonghui"
-                android:textColor="@color/darkgray"
-                android:textSize="14sp" />
+                android:layout_marginEnd="16dp"
+                android:paddingEnd="10dp"
+                android:text="2024.04.28 15:34"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBaseline="@id/writerName"
+                android:drawablePadding="10dp"
+                android:textSize="14sp"
+                android:textColor="@color/gray" />
+
+            <!-- 내용 입력 필드 -->
+            <TextView
+                android:id="@+id/post_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/writerName"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:gravity="top"
+                android:text="초코 케이크 먹방만 봐봤지 실제로 먹어보는 건 처음이라 어떻게 먹어야 할 지 잘 모르겠네요 ;;
+\n같이 강의 보면서 얘기나눌 분 구해요~(^^)\n까톡으로 얘기만 나누셔도 되고, 같이 만나서 먹어도 됩니다~(편하신 대로^^)\n
+참고로 저는 서초구 거주 중인 30대 아줌마입니다(^^).\n
+저는 이틀에 한 번 먹을 예정입니다~(^^)\n
+같이 참여하실 분은 댓글 부탁해용~(^^)"
+                android:padding="10dp"
+                android:singleLine="false"
+                android:inputType="textMultiLine"
+                android:textSize="16sp"/>
 
             <TextView
+                android:id="@+id/like_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/writer1Name"
-                android:layout_alignStart="@id/writer1Name"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="저두 요새 너투브 보고 초코 케이크 먹방에 관심이 생겼는데.. 같이 해 보실래요?^^.."
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:text="47"
+                android:layout_marginStart="20dp"
+                android:paddingStart="10dp"
+                android:layout_below="@id/post_content"
+                android:drawableLeft="@drawable/ic_thumb_up"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/signiture_color"
+                android:textSize="14sp"
+                android:textColor="@color/darkgray" />
 
-            <android.widget.Button
-                android:id="@+id/modify"
-                android:layout_width="40dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_toLeftOf="@+id/delete"
-                android:background="@color/white"
-                android:text="수정"
-                android:textColor="@color/darkgray"
-                android:textSize="11sp" />
+            <View
+                android:id="@+id/horizontalLine"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/like_count"
+                android:background="@color/gray"
+                android:layout_marginTop="16dp"/>
 
-            <android.widget.Button
-                android:id="@+id/delete"
-                android:layout_width="40dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@color/white"
-                android:text="삭제"
-                android:textColor="@color/darkgray"
-                android:textSize="11sp" />
 
+            <RelativeLayout
+                android:id="@+id/comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/horizontalLine">
+
+                <RelativeLayout
+                    android:id="@+id/comment1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/writer1"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginStart="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_avatar" />
+
+                    <TextView
+                        android:id="@+id/writer1Name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/writer1"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Kimsonghui"
+                        android:textColor="@color/darkgray"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/writer1Name"
+                        android:layout_alignStart="@id/writer1Name"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="저두 요새 너투브 보고 초코 케이크 먹방에 관심이 생겼는데.. 같이 해 보실래요?^^.."
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <android.widget.Button
+                        android:id="@+id/modify"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_toLeftOf="@+id/delete"
+                        android:background="@color/white"
+                        android:text="수정"
+                        android:textColor="@color/darkgray"
+                        android:textSize="11sp" />
+
+                    <android.widget.Button
+                        android:id="@+id/delete"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@color/white"
+                        android:text="삭제"
+                        android:textColor="@color/darkgray"
+                        android:textSize="11sp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray"
+                        android:layout_alignParentBottom="true"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
         </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray"
-            android:layout_below="@+id/comment1"/>
-
-    </RelativeLayout>
+    </ScrollView>
 
 
 
     <LinearLayout
+        android:id="@+id/upload_comment"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
