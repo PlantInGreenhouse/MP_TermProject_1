@@ -62,4 +62,12 @@
         android:text="삭제"
         android:textColor="@color/darkgray"
         android:textSize="11sp" />
+    <View
+        android:id="@+id/horizontalLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/commentContent"
+        android:background="@color/gray"
+        android:layout_marginTop="16dp"/>
 </RelativeLayout>
+
