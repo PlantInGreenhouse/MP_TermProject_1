@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class lobby_3 extends AppCompatActivity {
@@ -85,20 +86,19 @@ public class lobby_3 extends AppCompatActivity {
                             String title = (String) lectureData.get("title");
                             String description = (String) lectureData.get("contents");
                             String thumbnailUrl = (String) lectureData.get("thumbnail");
+                            String category = (String) lectureData.get("category");
+                            String author = (String) userSnapshot.child("name").getValue(String.class);
+                            ArrayList<String> videosList = new ArrayList<>();
+                            for (DataSnapshot videoSnapshot : lectureSnapshot.child("videos").getChildren()) {
+                                videosList.add((String) videoSnapshot.getValue());
+                            }
 
                             if (title != null && description != null && thumbnailUrl != null) {
-                                addNewClassView(title, description, thumbnailUrl);
+                                addNewClassView(title, description, thumbnailUrl, category, author, videosList);
                             } else {
-                                // 로그로 누락된 필드를 확인
-                                if (title == null) {
-                                    System.err.println("Missing title for lecture.");
-                                }
-                                if (description == null) {
-                                    System.err.println("Missing description for lecture.");
-                                }
-                                if (thumbnailUrl == null) {
-                                    System.err.println("Missing thumbnailUrl for lecture.");
-                                }
+                                if (title == null) System.err.println("Missing title for lecture.");
+                                if (description == null) System.err.println("Missing description for lecture.");
+                                if (thumbnailUrl == null) System.err.println("Missing thumbnailUrl for lecture.");
                             }
                         }
                     }
@@ -113,8 +113,8 @@ public class lobby_3 extends AppCompatActivity {
     }
 
     @SuppressLint("InflateParams")
-    private void addNewClassView(String title, String description, String thumbnailUrl) {
-        View classView = getLayoutInflater().inflate(R.layout.activity_lobby, null);  // 변경된 레이아웃 파일명 확인
+    private void addNewClassView(String title, String description, String thumbnailUrl, String category, String author, ArrayList<String> videosList) {
+        View classView = getLayoutInflater().inflate(R.layout.activity_lobby, null);
 
         ImageView thumbnail = classView.findViewById(R.id.thumbnail);
         TextView titleView = classView.findViewById(R.id.title);
@@ -129,6 +129,21 @@ public class lobby_3 extends AppCompatActivity {
             thumbnail.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
         }
 
-        newClassContainer.addView(classView, 0); // 최신 항목이 위로 오도록 추가
+        classView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(lobby_3.this, lecture_8.class);
+                intent.putExtra("title", title);
+                intent.putExtra("description", description);
+                intent.putExtra("thumbnailUrl", thumbnailUrl);
+                intent.putExtra("category", category);
+                intent.putExtra("author", author);
+                if (videosList != null && !videosList.isEmpty()) {
+                    intent.putStringArrayListExtra("videos", videosList);
+                }
+                startActivity(intent);
+            }
+        });
+        newClassContainer.addView(classView, 0);
     }
 }
