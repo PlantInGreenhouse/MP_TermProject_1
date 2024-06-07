@@ -35,6 +35,7 @@ import java.util.UUID;
 public class lecture_upload extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int PICK_VIDEO_REQUEST = 2;
+    private static final int REGISTER_ITEMS_REQUEST = 3;
     private static final String TAG = "mypage_6";
 
     private FirebaseAuth mAuth;
@@ -136,7 +137,9 @@ public class lecture_upload extends AppCompatActivity {
         item_registeration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(lecture_upload.this, registeration_of_items.class));
+                saveCurrentState();
+                Intent intent = new Intent(lecture_upload.this, registeration_of_items.class);
+                startActivityForResult(intent, REGISTER_ITEMS_REQUEST);
             }
         });
 
@@ -144,7 +147,10 @@ public class lecture_upload extends AppCompatActivity {
         UploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadLecture();
+                if (validateFields()) {
+                    uploadLecture();
+                    startActivity(new Intent(lecture_upload.this, lectureMode_6_1.class));
+                }
             }
         });
 
@@ -163,6 +169,72 @@ public class lecture_upload extends AppCompatActivity {
                 chooseImage();
             }
         });
+
+        if (savedInstanceState != null) {
+            restoreSavedState(savedInstanceState);
+        } else if (getIntent().getExtras() != null) {
+            restoreSavedState(getIntent().getExtras());
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        saveCurrentStateToBundle(outState);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            imageUri = data.getData();
+        } else if (requestCode == PICK_VIDEO_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            videoUri = data.getData();
+            String subtitle = "Video " + (++videoCount);
+            videoSubtitles.put(subtitle, videoUri.toString());
+            addNewEditTextWithVideo(subtitle, videoUri);
+        } else if (requestCode == REGISTER_ITEMS_REQUEST && resultCode == RESULT_OK) {
+            if (data != null) {
+                restoreSavedState(data.getExtras());
+            }
+        }
+    }
+
+    private void saveCurrentState() {
+        Bundle outState = new Bundle();
+        saveCurrentStateToBundle(outState);
+        Intent intent = new Intent(this, registeration_of_items.class);
+        intent.putExtras(outState);
+        startActivity(intent);
+    }
+
+    private void saveCurrentStateToBundle(Bundle outState) {
+        outState.putString("title", titleEditText.getText().toString());
+        outState.putString("contents", contentsEditText.getText().toString());
+        outState.putString("selectedCategory", selectedCategory);
+        outState.putInt("videoCount", videoCount);
+
+        for (Map.Entry<String, String> entry : videoSubtitles.entrySet()) {
+            outState.putString(entry.getKey(), entry.getValue());
+        }
+    }
+
+    private void restoreSavedState(Bundle savedInstanceState) {
+        titleEditText.setText(savedInstanceState.getString("title"));
+        contentsEditText.setText(savedInstanceState.getString("contents"));
+        selectedCategory = savedInstanceState.getString("selectedCategory");
+
+        int position = ((ArrayAdapter<String>) categorySpinner.getAdapter()).getPosition(selectedCategory);
+        categorySpinner.setSelection(position);
+
+        videoCount = savedInstanceState.getInt("videoCount");
+        for (int i = 0; i < videoCount; i++) {
+            String subtitle = "Video " + (i + 1);
+            String videoUriString = savedInstanceState.getString(subtitle);
+            videoSubtitles.put(subtitle, videoUriString);
+            addNewEditTextWithVideo(subtitle, Uri.parse(videoUriString));
+        }
     }
 
     private void addNewEditText() {
@@ -189,6 +261,25 @@ public class lecture_upload extends AppCompatActivity {
         commentContainer.addView(newEditText);
     }
 
+    private void addNewEditTextWithVideo(String subtitle, Uri videoUri) {
+        EditText newEditText = new EditText(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, 0, 0, 25); // 기존 EditText와 동일한 아래 간격
+
+        newEditText.setLayoutParams(params);
+        newEditText.setBackground(getResources().getDrawable(R.drawable.stroke));
+        newEditText.setPadding(10, 10, 10, 10);
+        newEditText.setText(subtitle);
+        newEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.blueadd, 0);
+        newEditText.setCompoundDrawablePadding(10);
+
+        newEditText.setTag(videoUri); // 비디오 URI를 태그로 저장
+
+        commentContainer.addView(newEditText);
+    }
+
     private void chooseImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -203,17 +294,20 @@ public class lecture_upload extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Video"), PICK_VIDEO_REQUEST);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            imageUri = data.getData();
-        } else if (requestCode == PICK_VIDEO_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            videoUri = data.getData();
-            String subtitle = "Video " + (++videoCount);
-            videoSubtitles.put(subtitle, videoUri.toString());
+    private boolean validateFields() {
+        if (titleEditText.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Title is required", Toast.LENGTH_SHORT).show();
+            return false;
         }
+        if (contentsEditText.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Contents are required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (videoSubtitles.isEmpty()) {
+            Toast.makeText(this, "At least one video is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     private void uploadLecture() {
@@ -264,6 +358,7 @@ public class lecture_upload extends AppCompatActivity {
         String contents = contentsEditText.getText().toString();
         String userId = mAuth.getCurrentUser().getUid();
         String name = mAuth.getCurrentUser().getDisplayName();
+        long timestamp = System.currentTimeMillis();
 
         Map<String, Object> lectureData = new HashMap<>();
         lectureData.put("title", title);
@@ -272,6 +367,7 @@ public class lecture_upload extends AppCompatActivity {
         lectureData.put("contents", contents);
         lectureData.put("userId", userId);
         lectureData.put("name", name);
+        lectureData.put("timestamp", timestamp);
         lectureData.put("videos", videoSubtitles);
 
         mDatabase.child(userId).child("lectures").push().setValue(lectureData)
@@ -279,6 +375,7 @@ public class lecture_upload extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(lecture_upload.this, "Lecture Uploaded", Toast.LENGTH_SHORT).show();
+                        clearFields();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -288,5 +385,16 @@ public class lecture_upload extends AppCompatActivity {
                     }
                 });
     }
-}
 
+
+    private void clearFields() {
+        titleEditText.setText("");
+        contentsEditText.setText("");
+        categorySpinner.setSelection(0);
+        commentContainer.removeAllViews();
+        videoSubtitles.clear();
+        videoCount = 0;
+        imageUri = null;
+        videoUri = null;
+    }
+}

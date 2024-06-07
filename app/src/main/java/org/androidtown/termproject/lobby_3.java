@@ -2,7 +2,6 @@ package org.androidtown.termproject;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -19,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Map;
@@ -70,8 +70,9 @@ public class lobby_3 extends AppCompatActivity {
 
     private void loadNewClasses() {
         DatabaseReference lecturesRef = FirebaseDatabase.getInstance().getReference("users");
+        Query query = lecturesRef.orderByChild("lectures/timestamp");
 
-        lecturesRef.addValueEventListener(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 newClassContainer.removeAllViews();
@@ -85,7 +86,20 @@ public class lobby_3 extends AppCompatActivity {
                             String description = (String) lectureData.get("contents");
                             String thumbnailUrl = (String) lectureData.get("thumbnail");
 
-                            addNewClassView(title, description, thumbnailUrl);
+                            if (title != null && description != null && thumbnailUrl != null) {
+                                addNewClassView(title, description, thumbnailUrl);
+                            } else {
+                                // 로그로 누락된 필드를 확인
+                                if (title == null) {
+                                    System.err.println("Missing title for lecture.");
+                                }
+                                if (description == null) {
+                                    System.err.println("Missing description for lecture.");
+                                }
+                                if (thumbnailUrl == null) {
+                                    System.err.println("Missing thumbnailUrl for lecture.");
+                                }
+                            }
                         }
                     }
                 }
@@ -100,7 +114,7 @@ public class lobby_3 extends AppCompatActivity {
 
     @SuppressLint("InflateParams")
     private void addNewClassView(String title, String description, String thumbnailUrl) {
-        View classView = getLayoutInflater().inflate(R.layout.activity_lobby, null);
+        View classView = getLayoutInflater().inflate(R.layout.activity_lobby, null);  // 변경된 레이아웃 파일명 확인
 
         ImageView thumbnail = classView.findViewById(R.id.thumbnail);
         TextView titleView = classView.findViewById(R.id.title);
@@ -115,6 +129,6 @@ public class lobby_3 extends AppCompatActivity {
             thumbnail.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
         }
 
-        newClassContainer.addView(classView);
+        newClassContainer.addView(classView, 0); // 최신 항목이 위로 오도록 추가
     }
 }
