@@ -36,6 +36,7 @@ public class NewPostActivity extends AppCompatActivity {
     private DatabaseReference usersReference;
     private FirebaseAuth mAuth;
     private String author;
+    private String userId;
     private String selectedCategory;
 
     @Override
@@ -85,8 +86,8 @@ public class NewPostActivity extends AppCompatActivity {
         // Retrieve the author's name
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            String currentUserId = currentUser.getUid();
-            usersReference.child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+            userId = currentUser.getUid();
+            usersReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
@@ -118,11 +119,11 @@ public class NewPostActivity extends AppCompatActivity {
             return;
         }
 
-        if (author != null) {
+        if (author != null && userId != null) {
             String postId = databaseReference.push().getKey();
             List<String> categories = new ArrayList<>();
             categories.add(selectedCategory);
-            Post newPost = new Post(title, content, categories, author);
+            Post newPost = new Post(title, content, categories, author, userId);
 
             if (postId != null) {
                 databaseReference.child(postId).setValue(newPost).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -143,18 +144,19 @@ public class NewPostActivity extends AppCompatActivity {
     }
 
     private static class Post {
-        public String title, content, author;
+        public String title, content, author, userId;
         public List<String> category;
 
         public Post() {
             // Default constructor required for calls to DataSnapshot.getValue(Post.class)
         }
 
-        public Post(String title, String content, List<String> category, String author) {
+        public Post(String title, String content, List<String> category, String author, String userId) {
             this.title = title;
             this.content = content;
             this.category = category;
             this.author = author;
+            this.userId = userId;
         }
     }
 }

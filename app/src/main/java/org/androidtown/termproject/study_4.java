@@ -22,8 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -170,8 +168,8 @@ public class study_4 extends AppCompatActivity {
         authorTextView.setText(post.author);
 
         // 사용자 프로필 이미지를 불러오는 코드
-        if (post.authorId != null) {
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(post.authorId);
+        if (post.userId != null) {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(post.userId);
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -179,8 +177,7 @@ public class study_4 extends AppCompatActivity {
                         String profileImageUrl = dataSnapshot.child("profileImageUrl").getValue(String.class);
                         if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
                             // 프로필 이미지가 Firebase Storage에 저장된 경우 URL을 가져와서 Glide로 로드
-                            StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(profileImageUrl);
-                            storageReference.getDownloadUrl().addOnSuccessListener(uri -> Glide.with(study_4.this).load(uri).into(authorImageView)).addOnFailureListener(e -> authorImageView.setImageResource(R.drawable.ic_avatar));
+                            Glide.with(study_4.this).load(profileImageUrl).into(authorImageView);
                         } else {
                             authorImageView.setImageResource(R.drawable.ic_avatar); // 기본 이미지
                         }
@@ -210,19 +207,20 @@ public class study_4 extends AppCompatActivity {
 
     private static class Post {
         public String id;
-        public String title, content, author, authorId;
+        public String title, content, author, userId;
         public List<String> category;
 
         public Post() {
             // Default constructor required for calls to DataSnapshot.getValue(Post.class)
         }
 
-        public Post(String title, String content, List<String> category, String author, String authorId) {
+        public Post(String title, String content, List<String> category, String author, String userId) {
             this.title = title;
             this.content = content;
             this.category = category;
             this.author = author;
-            this.authorId = authorId;
+            this.userId = userId;
         }
     }
 }
+

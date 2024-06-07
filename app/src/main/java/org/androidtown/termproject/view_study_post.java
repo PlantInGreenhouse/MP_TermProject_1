@@ -38,6 +38,7 @@ public class view_study_post extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private TextView postTitleTextView, writerNameTextView, postContentTextView, postDateTextView;
+    private ImageView postAuthorImageView;
     private LinearLayout commentLayout;
     private EditText editTextComment;
     private Button buttonUpload, backBtn;
@@ -49,9 +50,10 @@ public class view_study_post extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         postTitleTextView = findViewById(R.id.post_title);
-        writerNameTextView = findViewById(R.id.writerName);
+        writerNameTextView = findViewById(R.id.postAuthorTextView);
         postContentTextView = findViewById(R.id.post_content);
         postDateTextView = findViewById(R.id.like_count1);
+        postAuthorImageView = findViewById(R.id.postAuthorImageView);
         commentLayout = findViewById(R.id.comment_layout);
         editTextComment = findViewById(R.id.editTextComment);
         buttonUpload = findViewById(R.id.buttonUpload);
@@ -98,11 +100,15 @@ public class view_study_post extends AppCompatActivity {
                     String author = dataSnapshot.child("author").getValue(String.class);
                     String content = dataSnapshot.child("content").getValue(String.class);
                     String postDate = dataSnapshot.child("postDate").getValue(String.class); // Assuming postDate is stored as a string
+                    String userId = dataSnapshot.child("userId").getValue(String.class);
 
                     postTitleTextView.setText(title);
                     writerNameTextView.setText(author);
                     postContentTextView.setText(content);
                     postDateTextView.setText(postDate);
+
+                    // Load author profile image based on userId
+                    loadAuthorProfileImage(userId);
                 } else {
                     Toast.makeText(view_study_post.this, "Post not found.", Toast.LENGTH_SHORT).show();
                 }
@@ -111,6 +117,31 @@ public class view_study_post extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(view_study_post.this, "Failed to load post.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void loadAuthorProfileImage(String userId) {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    String profileImageUrl = dataSnapshot.child("profileImageUrl").getValue(String.class);
+                    if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
+                        Glide.with(view_study_post.this).load(profileImageUrl).into(postAuthorImageView);
+                    } else {
+                        postAuthorImageView.setImageResource(R.drawable.ic_avatar); // 기본 이미지
+                    }
+                } else {
+                    postAuthorImageView.setImageResource(R.drawable.ic_avatar); // 기본 이미지
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(view_study_post.this, "Failed to load author image.", Toast.LENGTH_SHORT).show();
             }
         });
     }
