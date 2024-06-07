@@ -7,4 +7,5 @@
     <color name="gray">#C5C6CC</color>
     <color name="darkgray">#828282</color>
     <color name="signiture_color">#B6E6FC</color>
+    <color name="content_item_background">#F4F6FF</color>
 </resources>
