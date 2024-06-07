@@ -11,7 +11,8 @@
         android:id="@+id/thumbnail"
         android:layout_width="140dp"
         android:layout_height="100dp"
-        android:background="#CCCCCC" />
+        android:background="#CCCCCC"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/title"
