@@ -35,18 +35,26 @@
         android:textSize="16sp"
         android:textColor="#000" />
 
+    <ImageView
+        android:id="@+id/postAuthorImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/postTitleTextView"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_avatar" />
+
     <TextView
         android:id="@+id/postAuthorTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Leeseojeong"
         android:layout_below="@id/postTitleTextView"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        android:drawableLeft="@drawable/ic_avatar"
-        android:drawablePadding="10dp"
-        android:textSize="14sp"
-        android:textColor="#BDBDBD" />
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="12dp"
+        android:layout_toEndOf="@id/postAuthorImageView"
+        android:text="Leeseojeong"
+        android:textColor="#BDBDBD"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/like_count"

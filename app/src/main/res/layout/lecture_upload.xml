@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@color/background">
-
 
     <android.widget.Button
         android:id="@+id/button_back"
@@ -39,28 +37,44 @@
         android:layout_centerInParent="true"/>
 
     <!-- 제목 입력 필드 -->
-    <EditText
-        android:id="@+id/titleEditText"
+    <RelativeLayout
+        android:id="@+id/TitleRelative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_back"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/gray"
-        android:hint="Title"
-        android:paddingBottom="20dp"
-        android:paddingRight="10dp"
-        android:drawableRight="@drawable/ic_addphoto"
-        android:drawablePadding="5dp"
-        />
+        >
+
+        <EditText
+            android:id="@+id/titleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/gray"
+            android:hint="Title" />
+
+        <ImageButton
+            android:id="@+id/thumbnailUploadBtn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="5dp"
+            android:layout_alignRight="@id/titleEditText"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_addphoto" />
+    </RelativeLayout>
 
     <!-- 카테고리 스피너 -->
+
     <Spinner
         android:id="@+id/categorySpinner"
         android:layout_width="150dp"
         android:layout_height="30dp"
-        android:layout_below="@id/titleEditText"
+        android:layout_below="@id/TitleRelative"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="16dp"
@@ -76,9 +90,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/categorySpinner"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="15dp"
-        android:layout_weight="1"
         android:background="@drawable/stroke"
         android:backgroundTint="@color/gray"
         android:gravity="top"
@@ -86,7 +100,6 @@
         android:inputType="textMultiLine"
         android:minLines="3"
         android:padding="15dp" />
-
 
     <RelativeLayout
         android:id="@+id/contents"
@@ -105,15 +118,19 @@
             android:textSize="20sp"
             android:text="Contents"
             />
-        <ImageView
+
+        <ImageButton
+            android:id="@+id/contentsPlusBtn"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
+            android:clickable="true"
             android:scaleType="centerCrop"
             android:src="@drawable/plus"
-            android:clickable="true"/>
+            android:background="@android:color/transparent"
+            />
     </RelativeLayout>
 
     <ScrollView
@@ -125,68 +142,17 @@
         android:layout_marginEnd="25dp">
 
         <LinearLayout
+            android:id="@+id/commentContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginBottom="16dp"
             android:padding="10dp">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/stroke"
-                android:padding="10dp"
-                android:layout_marginBottom="16dp"
-                android:hint="Please enter your comment"
-                android:drawableRight="@drawable/blueadd"
-                android:drawablePadding="10dp"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/stroke"
-                android:padding="10dp"
-                android:layout_marginBottom="16dp"
-                android:hint="Please enter your comment"
-                android:drawableRight="@drawable/blueadd"
-                android:drawablePadding="10dp"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/stroke"
-                android:padding="10dp"
-                android:layout_marginBottom="16dp"
-                android:hint="Please enter your comment"
-                android:drawableRight="@drawable/blueadd"
-                android:drawablePadding="10dp"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/stroke"
-                android:padding="10dp"
-                android:layout_marginBottom="16dp"
-                android:hint="Please enter your comment"
-                android:drawableRight="@drawable/blueadd"
-                android:drawablePadding="10dp"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/stroke"
-                android:padding="10dp"
-                android:layout_marginBottom="16dp"
-                android:hint="Please enter your comment"
-                android:drawableRight="@drawable/blueadd"
-                android:drawablePadding="10dp"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/stroke"
-                android:padding="10dp"
-                android:layout_marginBottom="16dp"
-                android:hint="Please enter your comment"
-                android:drawableRight="@drawable/blueadd"
-                android:drawablePadding="10dp"/>
+            <!-- 기본적으로 포함된 EditText들 -->
+
         </LinearLayout>
     </ScrollView>
-
 
     <android.widget.Button
         android:id="@+id/item_registeration"
@@ -217,7 +183,6 @@
         android:text="Upload Lecture"
         android:textAllCaps="false"
         android:textSize="12sp" />
-
 
     <!-- 하단 네비게이션 바 -->
     <LinearLayout
@@ -312,6 +277,5 @@
                 android:text="My Page" />
         </LinearLayout>
     </LinearLayout>
-
 
 </RelativeLayout>
