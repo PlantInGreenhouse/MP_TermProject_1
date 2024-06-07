@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/thumbnail"
-        android:layout_width="match_parent"
+        android:layout_width="140dp"
         android:layout_height="100dp"
         android:background="#CCCCCC" />
 
