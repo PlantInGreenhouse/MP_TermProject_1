@@ -21,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class lobby_3 extends AppCompatActivity {
@@ -39,32 +38,10 @@ public class lobby_3 extends AppCompatActivity {
         ImageButton button4 = findViewById(R.id.myPageIcon);
         newClassContainer = findViewById(R.id.newClassContainer);
 
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(lobby_3.this, shoppinglist_7.class));
-            }
-        });
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(lobby_3.this, study_4.class));
-            }
-        });
-
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(lobby_3.this, learninglist_5.class));
-            }
-        });
-
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(lobby_3.this, mypage_6.class));
-            }
-        });
+        button1.setOnClickListener(v -> startActivity(new Intent(lobby_3.this, shoppinglist_7.class)));
+        button2.setOnClickListener(v -> startActivity(new Intent(lobby_3.this, study_4.class)));
+        button3.setOnClickListener(v -> startActivity(new Intent(lobby_3.this, learninglist_5.class)));
+        button4.setOnClickListener(v -> startActivity(new Intent(lobby_3.this, mypage_6.class)));
 
         loadNewClasses();
     }
@@ -88,13 +65,11 @@ public class lobby_3 extends AppCompatActivity {
                             String thumbnailUrl = (String) lectureData.get("thumbnail");
                             String category = (String) lectureData.get("category");
                             String author = (String) userSnapshot.child("name").getValue(String.class);
-                            ArrayList<String> videosList = new ArrayList<>();
-                            for (DataSnapshot videoSnapshot : lectureSnapshot.child("videos").getChildren()) {
-                                videosList.add((String) videoSnapshot.getValue());
-                            }
+                            String lectureId = lectureSnapshot.getKey();
+                            String userId = userSnapshot.getKey();
 
                             if (title != null && description != null && thumbnailUrl != null) {
-                                addNewClassView(title, description, thumbnailUrl, category, author, videosList);
+                                addNewClassView(userId, lectureId, title, description, thumbnailUrl, category, author);
                             } else {
                                 if (title == null) System.err.println("Missing title for lecture.");
                                 if (description == null) System.err.println("Missing description for lecture.");
@@ -113,7 +88,7 @@ public class lobby_3 extends AppCompatActivity {
     }
 
     @SuppressLint("InflateParams")
-    private void addNewClassView(String title, String description, String thumbnailUrl, String category, String author, ArrayList<String> videosList) {
+    private void addNewClassView(String userId, String lectureId, String title, String description, String thumbnailUrl, String category, String author) {
         View classView = getLayoutInflater().inflate(R.layout.activity_lobby, null);
 
         ImageView thumbnail = classView.findViewById(R.id.thumbnail);
@@ -129,20 +104,11 @@ public class lobby_3 extends AppCompatActivity {
             thumbnail.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
         }
 
-        classView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(lobby_3.this, lecture_8.class);
-                intent.putExtra("title", title);
-                intent.putExtra("description", description);
-                intent.putExtra("thumbnailUrl", thumbnailUrl);
-                intent.putExtra("category", category);
-                intent.putExtra("author", author);
-                if (videosList != null && !videosList.isEmpty()) {
-                    intent.putStringArrayListExtra("videos", videosList);
-                }
-                startActivity(intent);
-            }
+        classView.setOnClickListener(v -> {
+            Intent intent = new Intent(lobby_3.this, lecture_8.class);
+            intent.putExtra("userId", userId);
+            intent.putExtra("lectureId", lectureId);
+            startActivity(intent);
         });
         newClassContainer.addView(classView, 0);
     }
