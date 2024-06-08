@@ -1,15 +1,16 @@
 package org.androidtown.termproject;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,7 +21,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.Map;
 
 public class lobby_3 extends AppCompatActivity {
@@ -32,6 +32,7 @@ public class lobby_3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lobby_3);
 
+        EditText searchBar = findViewById(R.id.searchBar);
         ImageButton button1 = findViewById(R.id.cartIcon);
         ImageButton button3 = findViewById(R.id.marketIcon);
         ImageButton button2 = findViewById(R.id.studyIcon);
@@ -43,8 +44,37 @@ public class lobby_3 extends AppCompatActivity {
         button3.setOnClickListener(v -> startActivity(new Intent(lobby_3.this, learninglist_5.class)));
         button4.setOnClickListener(v -> startActivity(new Intent(lobby_3.this, mypage_6.class)));
 
+        // Category buttons
+        setupCategoryButton(R.id.button_art, "Art");
+        setupCategoryButton(R.id.button_cooking, "Cooking");
+        setupCategoryButton(R.id.button_programming, "Programming");
+        setupCategoryButton(R.id.button_workout, "Workout");
+        setupCategoryButton(R.id.button_photos_videos, "Photos & Videos");
+        setupCategoryButton(R.id.button_etc, "Etc");
+
+        searchBar.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                String query = searchBar.getText().toString();
+                Intent intent = new Intent(lobby_3.this, after_search.class);
+                intent.putExtra("query", query);
+                startActivity(intent);
+                return true;
+            }
+            return false;
+        });
+
         loadNewClasses();
     }
+
+    private void setupCategoryButton(int buttonId, String category) {
+        ImageButton button = findViewById(buttonId);  // Change FrameLayout to ImageButton
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(lobby_3.this, CategoryActivity.class);
+            intent.putExtra("category", category);
+            startActivity(intent);
+        });
+    }
+
 
     private void loadNewClasses() {
         DatabaseReference lecturesRef = FirebaseDatabase.getInstance().getReference("users");
@@ -87,7 +117,6 @@ public class lobby_3 extends AppCompatActivity {
         });
     }
 
-    @SuppressLint("InflateParams")
     private void addNewClassView(String userId, String lectureId, String title, String description, String thumbnailUrl, String category, String author) {
         View classView = getLayoutInflater().inflate(R.layout.activity_lobby, null);
 

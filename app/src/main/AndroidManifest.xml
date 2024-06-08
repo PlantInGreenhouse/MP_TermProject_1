@@ -26,7 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".after_search" />
         <activity android:name=".category" />
+        <activity android:name=".CategoryActivity" />
         <activity android:name=".learninglist_5" />
         <activity android:name=".lecture_8" />
         <activity android:name=".lecture_8_1" />
