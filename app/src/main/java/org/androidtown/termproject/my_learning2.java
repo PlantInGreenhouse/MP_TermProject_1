@@ -62,7 +62,7 @@ public class my_learning2 extends AppCompatActivity {
 
                     courseTitle.setText(title);
                     loadAuthorDetails(authorId);
-                    loadVideos(dataSnapshot.child("videos"), userId, lectureId);
+                    loadCommentsAndVideos(dataSnapshot.child("comments"), dataSnapshot.child("videos"), userId, lectureId);
                 }
             }
 
@@ -91,16 +91,22 @@ public class my_learning2 extends AppCompatActivity {
         });
     }
 
-    private void loadVideos(DataSnapshot videosSnapshot, String userId, String lectureId) {
-        if (videosSnapshot.exists()) {
+    private void loadCommentsAndVideos(DataSnapshot commentsSnapshot, DataSnapshot videosSnapshot, String userId, String lectureId) {
+        if (commentsSnapshot.exists() && videosSnapshot.exists()) {
             videoListContainer.removeAllViews();
-            int index = 1;
-            for (DataSnapshot videoSnapshot : videosSnapshot.getChildren()) {
-                String videoUrl = videoSnapshot.getValue(String.class);
-                if (videoUrl != null) {
-                    String videoTitle = "Video " + index;
-                    addVideoView(videoSnapshot.getKey(), videoTitle, videoUrl, userId, lectureId);
-                    index++;
+            int index = 0;
+            for (DataSnapshot commentSnapshot : commentsSnapshot.getChildren()) {
+                String comment = commentSnapshot.getValue(String.class);
+                String videoUrl = videosSnapshot.child("Video " + (++index)).getValue(String.class);
+
+                if (comment != null && videoUrl != null) {
+                    // (Video URI) 앞까지만 추출
+                    int uriIndex = comment.indexOf("(Video URI:");
+                    if (uriIndex != -1) {
+                        comment = comment.substring(0, uriIndex).trim();
+                    }
+
+                    addVideoView(commentSnapshot.getKey(), comment, videoUrl, userId, lectureId);
                 }
             }
         }
