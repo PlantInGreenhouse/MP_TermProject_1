@@ -60,7 +60,7 @@ public class lecture_upload extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
-        // 기존 코드
+        // Existing code
         ImageButton button1 = findViewById(R.id.myPageIcon);
         ImageButton button2 = findViewById(R.id.studyIcon);
         ImageButton button3 = findViewById(R.id.marketIcon);
@@ -85,7 +85,7 @@ public class lecture_upload extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedCategory = parent.getItemAtPosition(position).toString();
-                Toast.makeText(parent.getContext(), selectedCategory + " 선택됨", Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent.getContext(), selectedCategory + " selected", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -94,80 +94,37 @@ public class lecture_upload extends AppCompatActivity {
             }
         });
 
-        // 네비게이션 버튼들 설정
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(lecture_upload.this, mypage_6.class));
+        // Navigation buttons
+        button1.setOnClickListener(v -> startActivity(new Intent(lecture_upload.this, mypage_6.class)));
+        button2.setOnClickListener(v -> startActivity(new Intent(lecture_upload.this, study_4.class)));
+        button3.setOnClickListener(v -> startActivity(new Intent(lecture_upload.this, learninglist_5.class)));
+        button4.setOnClickListener(v -> startActivity(new Intent(lecture_upload.this, lobby_3.class)));
+
+        // Back button
+        backBtn.setOnClickListener(v -> {
+            // Use finish() instead of creating a new intent
+            finish();
+        });
+
+        // Item registration button
+        item_registeration.setOnClickListener(v -> {
+            Intent intent = new Intent(lecture_upload.this, registeration_of_items.class);
+            intent.putExtras(getCurrentState());
+            startActivityForResult(intent, REGISTER_ITEMS_REQUEST);
+        });
+
+        // Upload button
+        UploadBtn.setOnClickListener(v -> {
+            if (validateFields()) {
+                uploadLecture();
             }
         });
 
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(lecture_upload.this, study_4.class));
-            }
-        });
+        // Add new EditText on plus button click
+        contentsPlusBtn.setOnClickListener(v -> addNewEditText());
 
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(lecture_upload.this, learninglist_5.class));
-            }
-        });
-
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(lecture_upload.this, lobby_3.class));
-            }
-        });
-
-        // 뒤로가기 버튼 설정
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 아이템 등록 초기화 없이 돌아가기
-                Intent intent = new Intent(lecture_upload.this, lectureMode_6_1.class);
-                startActivity(intent);
-            }
-        });
-
-        // 아이템 등록 버튼 설정
-        item_registeration.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveCurrentState();
-                Intent intent = new Intent(lecture_upload.this, registeration_of_items.class);
-                startActivityForResult(intent, REGISTER_ITEMS_REQUEST);
-            }
-        });
-
-        // 업로드 버튼 설정
-        UploadBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (validateFields()) {
-                    uploadLecture();
-                }
-            }
-        });
-
-        // contentsPlusBtn 클릭 시 새로운 EditText 추가
-        contentsPlusBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addNewEditText();
-            }
-        });
-
-        // thumbnailUploadBtn 클릭 시 사진 업로드
-        thumbnailUploadBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseImage();
-            }
-        });
+        // Choose image on thumbnail upload button click
+        thumbnailUploadBtn.setOnClickListener(v -> chooseImage());
 
         if (savedInstanceState != null) {
             restoreSavedState(savedInstanceState);
@@ -190,8 +147,6 @@ public class lecture_upload extends AppCompatActivity {
             imageUri = data.getData();
         } else if (requestCode == PICK_VIDEO_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             videoUri = data.getData();
-
-            // Find the EditText with the "pending" tag
             for (int i = 0; i < commentContainer.getChildCount(); i++) {
                 View view = commentContainer.getChildAt(i);
                 if (view instanceof EditText) {
@@ -200,7 +155,7 @@ public class lecture_upload extends AppCompatActivity {
                         String subtitle = "Video " + (++videoCount);
                         videoSubtitles.put(subtitle, videoUri.toString());
                         editText.setText(subtitle);
-                        editText.setTag(videoUri); // store the video URI in the tag
+                        editText.setTag(videoUri);
                         break;
                     }
                 }
@@ -212,12 +167,10 @@ public class lecture_upload extends AppCompatActivity {
         }
     }
 
-    private void saveCurrentState() {
+    private Bundle getCurrentState() {
         Bundle outState = new Bundle();
         saveCurrentStateToBundle(outState);
-        Intent intent = new Intent(this, registeration_of_items.class);
-        intent.putExtras(outState);
-        startActivity(intent);
+        return outState;
     }
 
     private void saveCurrentStateToBundle(Bundle outState) {
@@ -253,7 +206,7 @@ public class lecture_upload extends AppCompatActivity {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(0, 0, 0, 25); // 기존 EditText와 동일한 아래 간격
+        params.setMargins(0, 0, 0, 25);
 
         newEditText.setLayoutParams(params);
         newEditText.setBackground(getResources().getDrawable(R.drawable.stroke));
@@ -262,12 +215,7 @@ public class lecture_upload extends AppCompatActivity {
         newEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.blueadd, 0);
         newEditText.setCompoundDrawablePadding(10);
 
-        newEditText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseVideo(newEditText);
-            }
-        });
+        newEditText.setOnClickListener(v -> chooseVideo(newEditText));
 
         commentContainer.addView(newEditText);
     }
@@ -277,7 +225,7 @@ public class lecture_upload extends AppCompatActivity {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(0, 0, 0, 25); // 기존 EditText와 동일한 아래 간격
+        params.setMargins(0, 0, 0, 25);
 
         newEditText.setLayoutParams(params);
         newEditText.setBackground(getResources().getDrawable(R.drawable.stroke));
@@ -286,7 +234,7 @@ public class lecture_upload extends AppCompatActivity {
         newEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.blueadd, 0);
         newEditText.setCompoundDrawablePadding(10);
 
-        newEditText.setTag(videoUri); // 비디오 URI를 태그로 저장
+        newEditText.setTag(videoUri);
 
         commentContainer.addView(newEditText);
     }
@@ -303,7 +251,7 @@ public class lecture_upload extends AppCompatActivity {
         intent.setType("video/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Video"), PICK_VIDEO_REQUEST);
-        editText.setTag("pending");  // indicate that this EditText is waiting for a video upload
+        editText.setTag("pending");
     }
 
     private boolean validateFields() {
