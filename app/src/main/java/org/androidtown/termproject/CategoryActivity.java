@@ -17,7 +17,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class CategoryActivity extends AppCompatActivity {
@@ -34,7 +33,6 @@ public class CategoryActivity extends AppCompatActivity {
         ImageButton button3 = findViewById(R.id.marketIcon);
         ImageButton button4 = findViewById(R.id.homeIcon);
         Button button5 = findViewById(R.id.button_back);
-
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +134,14 @@ public class CategoryActivity extends AppCompatActivity {
             intent.putExtra("lectureId", lectureId);
             startActivity(intent);
         });
+
+        // 마진 설정
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        layoutParams.setMargins(8, 8, 8, 8);
+        resultView.setLayoutParams(layoutParams);
 
         searchResultsContainer.addView(resultView);
     }

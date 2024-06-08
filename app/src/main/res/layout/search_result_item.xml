@@ -20,7 +20,8 @@
         android:text="Title"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_marginStart="10dp"/>
+        android:layout_marginStart="10dp"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/description"

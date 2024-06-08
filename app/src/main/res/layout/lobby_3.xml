@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
-                android:hint="Search"
+                android:hint="Search the title"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:padding="4dp" />

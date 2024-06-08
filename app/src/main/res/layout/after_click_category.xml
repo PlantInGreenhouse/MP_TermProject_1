@@ -22,7 +22,7 @@
             android:layout_marginBottom="8dp"
             android:src="@drawable/logo" />
 
-        <!--여기에 선택한 카테고리 적기 가능? -->
+        <!-- 선택된 카테고리 -->
         <TextView
             android:id="@+id/category"
             android:layout_width="wrap_content"
@@ -50,10 +50,9 @@
             android:layout_marginBottom="8dp"
             android:paddingLeft="15dp"
             android:paddingRight="17dp"/>
-
     </RelativeLayout>
 
-    <!--컨텐츠 부분 (스크롤) -->
+    <!-- 컨텐츠 부분 (스크롤) -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -65,7 +64,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
-
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -85,11 +83,8 @@
                         android:id="@+id/thumbnail"
                         android:layout_width="160dp"
                         android:layout_height="100dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="#CCCCCC" />
+                        android:background="#CCCCCC"
+                        android:scaleType="centerCrop" />
 
                     <TextView
                         android:id="@+id/title"
@@ -116,10 +111,6 @@
         </LinearLayout>
 
     </ScrollView>
-
-
-
-
 
     <!-- 하단 네비게이션 바 -->
     <LinearLayout
@@ -211,6 +202,7 @@
                 android:layout_height="24dp"
                 android:src="@drawable/ic_mypage"
                 android:background="@android:color/white"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
