@@ -11,12 +11,13 @@
         android:id="@+id/chapter1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1.   Introduction to Website Design"
+        android:text="1. Introduction to Website Design"
         android:textColor="#000000"
         android:textSize="16sp"
         android:paddingStart="5dp"/>
 
     <ImageView
+        android:id="@+id/playIcon"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_alignParentEnd="true"

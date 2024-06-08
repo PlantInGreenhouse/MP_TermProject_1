@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -177,7 +178,10 @@ public class study_4 extends AppCompatActivity {
                         String profileImageUrl = dataSnapshot.child("profileImageUrl").getValue(String.class);
                         if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
                             // 프로필 이미지가 Firebase Storage에 저장된 경우 URL을 가져와서 Glide로 로드
-                            Glide.with(study_4.this).load(profileImageUrl).into(authorImageView);
+                            Glide.with(study_4.this)
+                                    .load(profileImageUrl)
+                                    .apply(RequestOptions.circleCropTransform())
+                                    .into(authorImageView);
                         } else {
                             authorImageView.setImageResource(R.drawable.ic_avatar); // 기본 이미지
                         }
@@ -223,4 +227,3 @@ public class study_4 extends AppCompatActivity {
         }
     }
 }
-
