@@ -163,13 +163,12 @@ public class lobby_3 extends AppCompatActivity {
             thumbnail.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
         }
 
-<<<<<<< HEAD
         // 간격 설정
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        layoutParams.setMargins(8, 8, 8, 8);  // 상하좌우 간격을 16dp로 설정
+        layoutParams.setMargins(5, 8, 5, 8);  // 상하좌우 간격을 16dp로 설정
         classView.setLayoutParams(layoutParams);
 
         classView.setOnClickListener(new View.OnClickListener() {
