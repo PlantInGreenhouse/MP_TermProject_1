@@ -118,7 +118,7 @@ public class CategoryActivity extends AppCompatActivity {
         ImageView thumbnail = resultView.findViewById(R.id.thumbnail);
         TextView titleView = resultView.findViewById(R.id.title);
         TextView descriptionView = resultView.findViewById(R.id.description);
-
+        thumbnail.setScaleType(ImageView.ScaleType.CENTER_CROP);
         titleView.setText(title);
         descriptionView.setText(description);
 
