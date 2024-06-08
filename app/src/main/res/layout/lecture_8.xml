@@ -154,45 +154,6 @@
                 android:layout_below="@id/course_contents"
                 android:layout_marginTop="8dp"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/content_item_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#F4F6FF"
-                    android:padding="16dp"
-                    android:text="1. Introduction To Website Design"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:id="@+id/content_item_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="#F4F6FF"
-                    android:padding="16dp"
-                    android:text="2. What Is Figma?"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:id="@+id/content_item_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="#F4F6FF"
-                    android:padding="16dp"
-                    android:text="3. Figma Tools"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:id="@+id/content_item_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="#F4F6FF"
-                    android:padding="16dp"
-                    android:text="4. Practice"
-                    android:textColor="#000000" />
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

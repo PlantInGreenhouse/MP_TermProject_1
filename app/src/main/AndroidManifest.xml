@@ -4,8 +4,9 @@
 
     <!-- Firebase Storage 사용을 위한 권한 추가 -->
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -25,7 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".after_search" />
         <activity android:name=".category" />
+        <activity android:name=".CategoryActivity" />
         <activity android:name=".learninglist_5" />
         <activity android:name=".lecture_8" />
         <activity android:name=".lecture_8_1" />
@@ -33,6 +36,8 @@
         <activity android:name=".lectureMode_6_1" />
         <activity android:name=".lobby_3" />
         <activity android:name=".my_information" />
+        <activity android:name=".my_learning2" />
+        <activity android:name=".my_learning3" />
         <activity android:name=".mypage_6" />
         <activity android:name=".NewPostActivity" />
         <activity android:name=".OrderCheck" />
@@ -41,6 +46,7 @@
         <activity android:name=".question" />
         <activity android:name=".register_1" />
         <activity android:name=".registeration_of_items" />
+        <activity android:name=".review" />
         <activity android:name=".shoppinglist_7" />
         <activity android:name=".study_4" />
         <activity android:name=".upload_video" />
