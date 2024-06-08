@@ -89,7 +89,8 @@
                     android:id="@+id/newClassContainer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="10dp">
 
                 </LinearLayout>
             </HorizontalScrollView>
