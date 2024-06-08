@@ -3,6 +3,7 @@ package org.androidtown.termproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,6 +23,9 @@ public class my_learning2 extends AppCompatActivity {
     private TextView courseAuthor;
     private LinearLayout videoListContainer;
 
+    private String userId;
+    private String lectureId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,18 +35,26 @@ public class my_learning2 extends AppCompatActivity {
         ImageButton studyButton = findViewById(R.id.studyIcon);
         ImageButton marketButton = findViewById(R.id.marketIcon);
         ImageButton myPageButton = findViewById(R.id.myPageIcon);
+        Button reviewBtn = findViewById(R.id.button_review);
 
         myPageButton.setOnClickListener(v -> startActivity(new Intent(my_learning2.this, mypage_6.class)));
         studyButton.setOnClickListener(v -> startActivity(new Intent(my_learning2.this, study_4.class)));
         marketButton.setOnClickListener(v -> startActivity(new Intent(my_learning2.this, learninglist_5.class)));
         homeButton.setOnClickListener(v -> startActivity(new Intent(my_learning2.this, lobby_3.class)));
 
+        reviewBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(my_learning2.this, review.class);
+            intent.putExtra("userId", userId);
+            intent.putExtra("lectureId", lectureId);
+            startActivity(intent);
+        });
+
         courseTitle = findViewById(R.id.title);
         courseAuthor = findViewById(R.id.writerName);
         videoListContainer = findViewById(R.id.video_list_container);
 
-        String userId = getIntent().getStringExtra("userId");
-        String lectureId = getIntent().getStringExtra("lectureId");
+        userId = getIntent().getStringExtra("userId");
+        lectureId = getIntent().getStringExtra("lectureId");
 
         loadLectureDetails(userId, lectureId);
     }
