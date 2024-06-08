@@ -3,6 +3,7 @@ package org.androidtown.termproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,6 +23,9 @@ public class my_learning2 extends AppCompatActivity {
     private TextView courseAuthor;
     private LinearLayout videoListContainer;
 
+    private String userId;
+    private String lectureId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,41 +35,26 @@ public class my_learning2 extends AppCompatActivity {
         ImageButton studyButton = findViewById(R.id.studyIcon);
         ImageButton marketButton = findViewById(R.id.marketIcon);
         ImageButton myPageButton = findViewById(R.id.myPageIcon);
+        Button reviewBtn = findViewById(R.id.button_review);
 
-        myPageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(my_learning2.this, mypage_6.class));
-            }
-        });
+        myPageButton.setOnClickListener(v -> startActivity(new Intent(my_learning2.this, mypage_6.class)));
+        studyButton.setOnClickListener(v -> startActivity(new Intent(my_learning2.this, study_4.class)));
+        marketButton.setOnClickListener(v -> startActivity(new Intent(my_learning2.this, learninglist_5.class)));
+        homeButton.setOnClickListener(v -> startActivity(new Intent(my_learning2.this, lobby_3.class)));
 
-        studyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(my_learning2.this, study_4.class));
-            }
-        });
-
-        marketButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(my_learning2.this, learninglist_5.class));
-            }
-        });
-
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(my_learning2.this, lobby_3.class));
-            }
+        reviewBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(my_learning2.this, review.class);
+            intent.putExtra("userId", userId);
+            intent.putExtra("lectureId", lectureId);
+            startActivity(intent);
         });
 
         courseTitle = findViewById(R.id.title);
         courseAuthor = findViewById(R.id.writerName);
         videoListContainer = findViewById(R.id.video_list_container);
 
-        String userId = getIntent().getStringExtra("userId");
-        String lectureId = getIntent().getStringExtra("lectureId");
+        userId = getIntent().getStringExtra("userId");
+        lectureId = getIntent().getStringExtra("lectureId");
 
         loadLectureDetails(userId, lectureId);
     }
@@ -85,7 +74,7 @@ public class my_learning2 extends AppCompatActivity {
 
                     courseTitle.setText(title);
                     loadAuthorDetails(authorId);
-                    loadVideos(dataSnapshot.child("videos"), userId, lectureId);
+                    loadCommentsAndVideos(dataSnapshot.child("comments"), dataSnapshot.child("videos"), userId, lectureId);
                 }
             }
 
@@ -114,20 +103,28 @@ public class my_learning2 extends AppCompatActivity {
         });
     }
 
-    private void loadVideos(DataSnapshot videosSnapshot, String userId, String lectureId) {
-        if (videosSnapshot.exists()) {
+    private void loadCommentsAndVideos(DataSnapshot commentsSnapshot, DataSnapshot videosSnapshot, String userId, String lectureId) {
+        if (commentsSnapshot.exists() && videosSnapshot.exists()) {
             videoListContainer.removeAllViews();
-            int index = 1;
-            for (DataSnapshot videoSnapshot : videosSnapshot.getChildren()) {
-                String videoKey = videoSnapshot.getKey();
-                String videoTitle = "Video " + index;
-                addVideoView(videoKey, videoTitle, userId, lectureId);
-                index++;
+            int index = 0;
+            for (DataSnapshot commentSnapshot : commentsSnapshot.getChildren()) {
+                String comment = commentSnapshot.getValue(String.class);
+                String videoUrl = videosSnapshot.child("Video " + (++index)).getValue(String.class);
+
+                if (comment != null && videoUrl != null) {
+                    // (Video URI) 앞까지만 추출
+                    int uriIndex = comment.indexOf("(Video URI:");
+                    if (uriIndex != -1) {
+                        comment = comment.substring(0, uriIndex).trim();
+                    }
+
+                    addVideoView(commentSnapshot.getKey(), comment, videoUrl, userId, lectureId);
+                }
             }
         }
     }
 
-    private void addVideoView(String videoKey, String title, String userId, String lectureId) {
+    private void addVideoView(String videoKey, String title, String videoUrl, String userId, String lectureId) {
         View videoView = getLayoutInflater().inflate(R.layout.contents_list, null);
 
         TextView videoTitle = videoView.findViewById(R.id.chapter1);
@@ -138,6 +135,7 @@ public class my_learning2 extends AppCompatActivity {
         playButton.setOnClickListener(v -> {
             Intent intent = new Intent(my_learning2.this, my_learning3.class);
             intent.putExtra("videoKey", videoKey);
+            intent.putExtra("videoUrl", videoUrl); // 동영상 URL을 인텐트에 추가
             intent.putExtra("userId", userId);
             intent.putExtra("lectureId", lectureId);
             startActivity(intent);

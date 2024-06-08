@@ -33,7 +33,7 @@
             android:layout_centerInParent="true" />
 
         <!-- back button -->
-        <Button
+        <android.widget.Button
             android:id="@+id/button_back"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
@@ -95,12 +95,15 @@
             android:id="@+id/review_input"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:hint="Tell us everything."
-            android:background="@drawable/custom_edittext_background"
             android:layout_below="@id/instruction"
-            android:layout_margin="16dp"
-            android:padding="12dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/custom_edittext_background"
             android:gravity="top"
+            android:hint="Tell us everything."
+            android:padding="12dp"
             android:textColor="#000" />
 
         <Button

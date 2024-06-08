@@ -44,6 +44,7 @@
         <activity android:name=".question" />
         <activity android:name=".register_1" />
         <activity android:name=".registeration_of_items" />
+        <activity android:name=".review" />
         <activity android:name=".shoppinglist_7" />
         <activity android:name=".study_4" />
         <activity android:name=".upload_video" />

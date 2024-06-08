@@ -2,9 +2,11 @@ package org.androidtown.termproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +24,7 @@ public class lecture_8_1 extends AppCompatActivity {
     private ImageView courseImage;
     private TextView courseTitle;
     private TextView courseAuthor;
+    private LinearLayout reviewContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +32,11 @@ public class lecture_8_1 extends AppCompatActivity {
         setContentView(R.layout.lecture_8_1);
 
         ImageButton button1 = findViewById(R.id.homeIcon);
-        ImageButton button3 = findViewById(R.id.marketIcon);
         ImageButton button2 = findViewById(R.id.studyIcon);
+        ImageButton button3 = findViewById(R.id.marketIcon);
         ImageButton button4 = findViewById(R.id.myPageIcon);
         Button about = findViewById(R.id.tab_about);
+        Button reviewTab = findViewById(R.id.tab_reviews);
 
         button1.setOnClickListener(v -> startActivity(new Intent(lecture_8_1.this, lobby_3.class)));
         button2.setOnClickListener(v -> startActivity(new Intent(lecture_8_1.this, study_4.class)));
@@ -48,6 +52,7 @@ public class lecture_8_1 extends AppCompatActivity {
         courseImage = findViewById(R.id.course_image);
         courseTitle = findViewById(R.id.course_title);
         courseAuthor = findViewById(R.id.course_author);
+        reviewContainer = findViewById(R.id.review_container);
 
         String userId = getIntent().getStringExtra("userId");
         String lectureId = getIntent().getStringExtra("lectureId");
@@ -57,7 +62,8 @@ public class lecture_8_1 extends AppCompatActivity {
     private void loadLectureDetails(String userId, String lectureId) {
         DatabaseReference lectureRef = FirebaseDatabase.getInstance().getReference("users")
                 .child(userId)
-                .child("lectures").child(lectureId);
+                .child("lectures")
+                .child(lectureId);
 
         lectureRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -74,7 +80,9 @@ public class lecture_8_1 extends AppCompatActivity {
                     } else {
                         courseImage.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
                     }
+
                     loadAuthorDetails(authorId);
+                    loadReviews(dataSnapshot.child("reviews"));
                 }
             }
 
@@ -101,5 +109,50 @@ public class lecture_8_1 extends AppCompatActivity {
                 // Handle possible errors.
             }
         });
+    }
+
+    private void loadReviews(DataSnapshot reviewsSnapshot) {
+        reviewContainer.removeAllViews();
+
+        for (DataSnapshot reviewSnapshot : reviewsSnapshot.getChildren()) {
+            Review review = reviewSnapshot.getValue(Review.class);
+            addReviewView(review);
+        }
+    }
+
+    private void addReviewView(Review review) {
+        View reviewView = getLayoutInflater().inflate(R.layout.review_itme, null);
+
+        ImageView profileImage = ((View) reviewView).findViewById(R.id.profile_image);
+        TextView usernameTextView = reviewView.findViewById(R.id.usernameTextView);
+        TextView feedbackTextView = reviewView.findViewById(R.id.feedbackTextView);
+
+        feedbackTextView.setText(review.text);
+        usernameTextView.setText(review.username);
+
+        if (review.profileImageUrl != null && !review.profileImageUrl.isEmpty()) {
+            Glide.with(this).load(review.profileImageUrl).into(profileImage);
+        } else {
+            profileImage.setImageResource(R.drawable.profile);
+        }
+
+        reviewContainer.addView(reviewView);
+    }
+
+    public static class Review {
+        public String username;
+        public String profileImageUrl;
+        public String text;
+        public String userId;
+
+        public Review() {
+        }
+
+        public Review(String username, String profileImageUrl, String text, String userId) {
+            this.username = username;
+            this.profileImageUrl = profileImageUrl;
+            this.text = text;
+            this.userId = userId;
+        }
     }
 }
