@@ -149,7 +149,6 @@ public class lecture_upload extends AppCompatActivity {
             public void onClick(View v) {
                 if (validateFields()) {
                     uploadLecture();
-                    startActivity(new Intent(lecture_upload.this, lectureMode_6_1.class));
                 }
             }
         });
@@ -191,9 +190,21 @@ public class lecture_upload extends AppCompatActivity {
             imageUri = data.getData();
         } else if (requestCode == PICK_VIDEO_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             videoUri = data.getData();
-            String subtitle = "Video " + (++videoCount);
-            videoSubtitles.put(subtitle, videoUri.toString());
-            addNewEditTextWithVideo(subtitle, videoUri);
+
+            // Find the EditText with the "pending" tag
+            for (int i = 0; i < commentContainer.getChildCount(); i++) {
+                View view = commentContainer.getChildAt(i);
+                if (view instanceof EditText) {
+                    EditText editText = (EditText) view;
+                    if ("pending".equals(editText.getTag())) {
+                        String subtitle = "Video " + (++videoCount);
+                        videoSubtitles.put(subtitle, videoUri.toString());
+                        editText.setText(subtitle);
+                        editText.setTag(videoUri); // store the video URI in the tag
+                        break;
+                    }
+                }
+            }
         } else if (requestCode == REGISTER_ITEMS_REQUEST && resultCode == RESULT_OK) {
             if (data != null) {
                 restoreSavedState(data.getExtras());
@@ -292,6 +303,7 @@ public class lecture_upload extends AppCompatActivity {
         intent.setType("video/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Video"), PICK_VIDEO_REQUEST);
+        editText.setTag("pending");  // indicate that this EditText is waiting for a video upload
     }
 
     private boolean validateFields() {
@@ -314,7 +326,7 @@ public class lecture_upload extends AppCompatActivity {
         if (imageUri != null) {
             uploadImage();
         } else {
-            saveLectureData(null);
+            uploadAllVideosAndSaveLectureData(null);
         }
     }
 
@@ -332,7 +344,7 @@ public class lecture_upload extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
                                 progressDialog.dismiss();
-                                saveLectureData(uri.toString());
+                                uploadAllVideosAndSaveLectureData(uri.toString());
                             }
                         });
                     }
@@ -353,12 +365,73 @@ public class lecture_upload extends AppCompatActivity {
                 });
     }
 
-    private void saveLectureData(String imageUrl) {
+    private void uploadAllVideosAndSaveLectureData(final String imageUrl) {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Uploading Videos...");
+        progressDialog.show();
+
+        if (videoSubtitles.isEmpty()) {
+            saveLectureData(imageUrl, videoSubtitles);
+            return;
+        }
+
+        final Map<String, String> uploadedVideos = new HashMap<>();
+        final int[] uploadCounter = {0};
+
+        for (final Map.Entry<String, String> entry : videoSubtitles.entrySet()) {
+            Uri videoUri = Uri.parse(entry.getValue());
+            final String subtitle = entry.getKey();
+            final StorageReference videoRef = mStorageRef.child("videos/" + UUID.randomUUID().toString());
+
+            videoRef.putFile(videoUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            videoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    uploadedVideos.put(subtitle, uri.toString());
+                                    uploadCounter[0]++;
+                                    if (uploadCounter[0] == videoSubtitles.size()) {
+                                        progressDialog.dismiss();
+                                        saveLectureData(imageUrl, uploadedVideos);
+                                    }
+                                }
+                            });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(lecture_upload.this, "Failed to upload video: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
+    private void saveLectureData(String imageUrl, Map<String, String> uploadedVideos) {
         String title = titleEditText.getText().toString();
         String contents = contentsEditText.getText().toString();
         String userId = mAuth.getCurrentUser().getUid();
         String name = mAuth.getCurrentUser().getDisplayName();
         long timestamp = System.currentTimeMillis();
+
+        // EditText의 내용들과 동영상 URI들을 저장
+        Map<String, String> comments = new HashMap<>();
+        for (int i = 0; i < commentContainer.getChildCount(); i++) {
+            View view = commentContainer.getChildAt(i);
+            if (view instanceof EditText) {
+                EditText editText = (EditText) view;
+                String comment = editText.getText().toString();
+                String videoUri = editText.getTag() != null ? editText.getTag().toString() : null;
+                if (videoUri != null) {
+                    comments.put("comment_" + i, comment + " (Video URI: " + videoUri + ")");
+                } else {
+                    comments.put("comment_" + i, comment);
+                }
+            }
+        }
 
         Map<String, Object> lectureData = new HashMap<>();
         lectureData.put("title", title);
@@ -368,7 +441,8 @@ public class lecture_upload extends AppCompatActivity {
         lectureData.put("userId", userId);
         lectureData.put("name", name);
         lectureData.put("timestamp", timestamp);
-        lectureData.put("videos", videoSubtitles);
+        lectureData.put("videos", uploadedVideos);
+        lectureData.put("comments", comments);
 
         mDatabase.child(userId).child("lectures").push().setValue(lectureData)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -385,7 +459,6 @@ public class lecture_upload extends AppCompatActivity {
                     }
                 });
     }
-
 
     private void clearFields() {
         titleEditText.setText("");

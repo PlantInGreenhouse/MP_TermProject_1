@@ -21,6 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class lecture_8 extends AppCompatActivity {
 
     private ImageView courseImage;
@@ -94,7 +97,7 @@ public class lecture_8 extends AppCompatActivity {
                     }
 
                     loadAuthorDetails(authorId);
-                    loadVideos(dataSnapshot.child("videos"));
+                    loadVideos(dataSnapshot.child("comments"));
                 }
             }
 
@@ -123,26 +126,34 @@ public class lecture_8 extends AppCompatActivity {
         });
     }
 
-    private void loadVideos(DataSnapshot videosSnapshot) {
-        if (videosSnapshot.exists()) {
+    private void loadVideos(DataSnapshot commentsSnapshot) {
+        if (commentsSnapshot.exists()) {
             contentList.removeAllViews();
             int index = 1;
-            for (DataSnapshot videoSnapshot : videosSnapshot.getChildren()) {
-                String video = videoSnapshot.getValue(String.class);
-                TextView contentItem = new TextView(this);
-                contentItem.setText(index + ". " + video);
-                contentItem.setBackgroundColor(getResources().getColor(R.color.content_item_background));
-                contentItem.setPadding(16, 16, 16, 16);
-                if (index > 1) {
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                    );
-                    params.topMargin = 8;
-                    contentItem.setLayoutParams(params);
+            for (DataSnapshot commentSnapshot : commentsSnapshot.getChildren()) {
+                String comment = commentSnapshot.getValue(String.class);
+                if (comment != null) {
+                    // (Video URI) 앞까지만 추출
+                    int uriIndex = comment.indexOf("(Video URI:");
+                    if (uriIndex != -1) {
+                        comment = comment.substring(0, uriIndex).trim();
+                    }
+
+                    TextView contentItem = new TextView(this);
+                    contentItem.setText(index + ". " + comment);
+                    contentItem.setBackgroundColor(getResources().getColor(R.color.content_item_background));
+                    contentItem.setPadding(16, 16, 16, 16);
+                    if (index > 1) {
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        params.topMargin = 8;
+                        contentItem.setLayoutParams(params);
+                    }
+                    contentList.addView(contentItem);
+                    index++;
                 }
-                contentList.addView(contentItem);
-                index++;
             }
         }
     }
@@ -155,7 +166,11 @@ public class lecture_8 extends AppCompatActivity {
                     .child("subscriptions")
                     .child(lectureId);
 
-            subscriptionsRef.setValue(true).addOnCompleteListener(task -> {
+            Map<String, Object> subscriptionData = new HashMap<>();
+            subscriptionData.put("subscribed", true);
+            subscriptionData.put("timestamp", System.currentTimeMillis());
+
+            subscriptionsRef.setValue(subscriptionData).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(lecture_8.this, "Subscribed successfully", Toast.LENGTH_SHORT).show();
                 } else {

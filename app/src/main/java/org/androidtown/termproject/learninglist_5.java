@@ -22,6 +22,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class learninglist_5 extends AppCompatActivity {
 
     private LinearLayout learningListContainer;
@@ -61,11 +68,23 @@ public class learninglist_5 extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 learningListContainer.removeAllViews();
 
+                List<Map<String, Object>> subscriptions = new ArrayList<>();
                 for (DataSnapshot subscriptionSnapshot : dataSnapshot.getChildren()) {
-                    if (Boolean.TRUE.equals(subscriptionSnapshot.getValue(Boolean.class))) {
+                    if (Boolean.TRUE.equals(subscriptionSnapshot.child("subscribed").getValue(Boolean.class))) {
                         String lectureId = subscriptionSnapshot.getKey();
-                        loadLectureDetails(lectureId);
+                        Long timestamp = subscriptionSnapshot.child("timestamp").getValue(Long.class);
+                        Map<String, Object> subscription = new HashMap<>();
+                        subscription.put("lectureId", lectureId);
+                        subscription.put("timestamp", timestamp);
+                        subscriptions.add(subscription);
                     }
+                }
+
+                // 타임스탬프 기준으로 정렬
+                Collections.sort(subscriptions, (a, b) -> Long.compare((Long) b.get("timestamp"), (Long) a.get("timestamp")));
+
+                for (Map<String, Object> subscription : subscriptions) {
+                    loadLectureDetails((String) subscription.get("lectureId"));
                 }
             }
 

@@ -39,47 +39,18 @@ public class my_learning3 extends AppCompatActivity {
         ImageButton myPageButton = findViewById(R.id.myPageIcon);
         Button backBtn = findViewById(R.id.button_back);
 
-        myPageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(my_learning3.this, mypage_6.class));
-            }
-        });
+        myPageButton.setOnClickListener(v -> startActivity(new Intent(my_learning3.this, mypage_6.class)));
+        studyButton.setOnClickListener(v -> startActivity(new Intent(my_learning3.this, study_4.class)));
+        marketButton.setOnClickListener(v -> startActivity(new Intent(my_learning3.this, learninglist_5.class)));
+        homeButton.setOnClickListener(v -> startActivity(new Intent(my_learning3.this, lobby_3.class)));
+        backBtn.setOnClickListener(v -> startActivity(new Intent(my_learning3.this, my_learning2.class)));
 
-        studyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(my_learning3.this, study_4.class));
-            }
-        });
-
-        marketButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(my_learning3.this, learninglist_5.class));
-            }
-        });
-
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(my_learning3.this, lobby_3.class));
-            }
-        });
-
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(my_learning3.this, my_learning2.class));
-            }
-        });
-
-        String videoKey = getIntent().getStringExtra("videoKey");
+        String videoUrl = getIntent().getStringExtra("videoUrl");
         String userId = getIntent().getStringExtra("userId");
         String lectureId = getIntent().getStringExtra("lectureId");
 
         loadLectureDetails(userId, lectureId);
-        loadVideo(videoKey, userId, lectureId);
+        loadVideo(videoUrl);
     }
 
     private void loadLectureDetails(String userId, String lectureId) {
@@ -104,38 +75,20 @@ public class my_learning3 extends AppCompatActivity {
         });
     }
 
-    private void loadVideo(String videoKey, String userId, String lectureId) {
-        DatabaseReference videoRef = FirebaseDatabase.getInstance().getReference("users")
-                .child(userId)
-                .child("lectures")
-                .child(lectureId)
-                .child("videos")
-                .child(videoKey);
+    private void loadVideo(String videoUrl) {
+        if (videoUrl != null) {
+            Uri uri = Uri.parse(videoUrl);
+            videoView.setVideoURI(uri);
 
-        videoRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String videoUrl = dataSnapshot.getValue(String.class);
-                if (videoUrl != null) {
-                    Uri uri = Uri.parse(videoUrl);
-                    videoView.setVideoURI(uri);
+            // 미디어 컨트롤러 추가
+            MediaController mediaController = new MediaController(my_learning3.this);
+            mediaController.setAnchorView(videoView);
+            videoView.setMediaController(mediaController);
 
-                    // 미디어 컨트롤러 추가
-                    MediaController mediaController = new MediaController(my_learning3.this);
-                    mediaController.setAnchorView(videoView);
-                    videoView.setMediaController(mediaController);
-
-                    videoView.start();
-                } else {
-                    // 로그 또는 디버깅 메시지 추가
-                    Log.e("my_learning3", "Video URL is null");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle possible errors.
-            }
-        });
+            videoView.start();
+        } else {
+            // 로그 또는 디버깅 메시지 추가
+            Log.e("my_learning3", "Video URL is null");
+        }
     }
 }
