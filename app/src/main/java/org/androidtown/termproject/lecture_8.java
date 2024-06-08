@@ -74,7 +74,8 @@ public class lecture_8 extends AppCompatActivity {
     private void loadLectureDetails(String userId, String lectureId) {
         DatabaseReference lectureRef = FirebaseDatabase.getInstance().getReference("users")
                 .child(userId)
-                .child("lectures").child(lectureId);
+                .child("lectures")
+                .child(lectureId);
 
         lectureRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
