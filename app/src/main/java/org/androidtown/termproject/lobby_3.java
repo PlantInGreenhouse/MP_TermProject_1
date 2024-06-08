@@ -26,6 +26,8 @@ import java.util.Map;
 public class lobby_3 extends AppCompatActivity {
 
     private LinearLayout newClassContainer;
+    private LinearLayout likedCategoriesContainer;
+    private String userCategoryPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,10 @@ public class lobby_3 extends AppCompatActivity {
         ImageButton button2 = findViewById(R.id.studyIcon);
         ImageButton button4 = findViewById(R.id.myPageIcon);
         newClassContainer = findViewById(R.id.newClassContainer);
+        likedCategoriesContainer = findViewById(R.id.likedCategoriesContainer);
+
+        // 사용자 카테고리 선호도를 불러옵니다.
+        loadUserPreferences();
 
         button1.setOnClickListener(v -> startActivity(new Intent(lobby_3.this, shoppinglist_7.class)));
         button2.setOnClickListener(v -> startActivity(new Intent(lobby_3.this, study_4.class)));
@@ -75,6 +81,11 @@ public class lobby_3 extends AppCompatActivity {
         });
     }
 
+    private void loadUserPreferences() {
+        // 여기에서 Firebase 또는 다른 소스에서 사용자의 카테고리 선호도를 불러옵니다.
+        // 예시로 하드코딩된 문자열을 사용하겠습니다.
+        userCategoryPreferences = "Art, Cooking, Programming";
+    }
 
     private void loadNewClasses() {
         DatabaseReference lecturesRef = FirebaseDatabase.getInstance().getReference("users");
@@ -84,6 +95,7 @@ public class lobby_3 extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 newClassContainer.removeAllViews();
+                likedCategoriesContainer.removeAllViews();
 
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     for (DataSnapshot lectureSnapshot : userSnapshot.child("lectures").getChildren()) {
@@ -100,6 +112,11 @@ public class lobby_3 extends AppCompatActivity {
 
                             if (title != null && description != null && thumbnailUrl != null) {
                                 addNewClassView(userId, lectureId, title, description, thumbnailUrl, category, author);
+
+                                // 사용자의 선호 카테고리와 일치하는 강의를 추가
+                                if (matchesUserPreferences(category)) {
+                                    addLikedCategoryClassView(userId, lectureId, title, description, thumbnailUrl, category, author);
+                                }
                             } else {
                                 if (title == null) System.err.println("Missing title for lecture.");
                                 if (description == null) System.err.println("Missing description for lecture.");
@@ -115,6 +132,19 @@ public class lobby_3 extends AppCompatActivity {
                 Toast.makeText(lobby_3.this, "Failed to load data.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private boolean matchesUserPreferences(String category) {
+        if (userCategoryPreferences == null || category == null) {
+            return false;
+        }
+        String[] preferences = userCategoryPreferences.split(",");
+        for (String preference : preferences) {
+            if (category.trim().equalsIgnoreCase(preference.trim())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void addNewClassView(String userId, String lectureId, String title, String description, String thumbnailUrl, String category, String author) {
@@ -140,5 +170,30 @@ public class lobby_3 extends AppCompatActivity {
             startActivity(intent);
         });
         newClassContainer.addView(classView, 0);
+    }
+
+    private void addLikedCategoryClassView(String userId, String lectureId, String title, String description, String thumbnailUrl, String category, String author) {
+        View classView = getLayoutInflater().inflate(R.layout.liked_category_item, null);
+
+        ImageView thumbnail = classView.findViewById(R.id.thumbnail);
+        TextView titleView = classView.findViewById(R.id.title);
+        TextView descriptionView = classView.findViewById(R.id.description);
+
+        titleView.setText(title);
+        descriptionView.setText(description);
+
+        if (thumbnailUrl != null && !thumbnailUrl.isEmpty()) {
+            Glide.with(this).load(thumbnailUrl).into(thumbnail);
+        } else {
+            thumbnail.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+        }
+
+        classView.setOnClickListener(v -> {
+            Intent intent = new Intent(lobby_3.this, lecture_8.class);
+            intent.putExtra("userId", userId);
+            intent.putExtra("lectureId", lectureId);
+            startActivity(intent);
+        });
+        likedCategoriesContainer.addView(classView, 0);
     }
 }
