@@ -22,16 +22,16 @@
             android:layout_marginBottom="8dp"
             android:src="@drawable/logo" />
 
-        <!--여기에 선택한 카테고리 적기 가능? -->
+        <!-- 선택된 카테고리 적기 -->
         <TextView
             android:id="@+id/category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:text="선택된 카테고리"
-            android:textColor="#000"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_centerInParent="true" />
 
         <!-- back button -->
         <android.widget.Button
@@ -61,65 +61,13 @@
         android:layout_above="@id/bottomNavBar">
 
         <LinearLayout
+            android:id="@+id/searchResultsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <!-- 컨텐츠 1 -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/stroke"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:id="@+id/thumbnail"
-                        android:layout_width="160dp"
-                        android:layout_height="100dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="#CCCCCC" />
-
-                    <TextView
-                        android:id="@+id/title"
-                        android:layout_toRightOf="@id/thumbnail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Title 1"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_marginStart="10dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/title"
-                        android:layout_toRightOf="@id/thumbnail"
-                        android:text="Description"
-                        android:layout_margin="10dp"/>
-                </RelativeLayout>
-
-            </RelativeLayout>
-
         </LinearLayout>
-
     </ScrollView>
-
-
-
-
 
     <!-- 하단 네비게이션 바 -->
     <LinearLayout

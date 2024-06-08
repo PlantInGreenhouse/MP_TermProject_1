@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,6 +44,14 @@ public class lobby_3 extends AppCompatActivity {
         button3.setOnClickListener(v -> startActivity(new Intent(lobby_3.this, learninglist_5.class)));
         button4.setOnClickListener(v -> startActivity(new Intent(lobby_3.this, mypage_6.class)));
 
+        // Category buttons
+        setupCategoryButton(R.id.button_art, "Art");
+        setupCategoryButton(R.id.button_cooking, "Cooking");
+        setupCategoryButton(R.id.button_programming, "Programming");
+        setupCategoryButton(R.id.button_workout, "Workout");
+        setupCategoryButton(R.id.button_photos_videos, "Photos & Videos");
+        setupCategoryButton(R.id.button_etc, "Etc");
+
         searchBar.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 String query = searchBar.getText().toString();
@@ -56,6 +65,16 @@ public class lobby_3 extends AppCompatActivity {
 
         loadNewClasses();
     }
+
+    private void setupCategoryButton(int buttonId, String category) {
+        ImageButton button = findViewById(buttonId);  // Change FrameLayout to ImageButton
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(lobby_3.this, CategoryActivity.class);
+            intent.putExtra("category", category);
+            startActivity(intent);
+        });
+    }
+
 
     private void loadNewClasses() {
         DatabaseReference lecturesRef = FirebaseDatabase.getInstance().getReference("users");
