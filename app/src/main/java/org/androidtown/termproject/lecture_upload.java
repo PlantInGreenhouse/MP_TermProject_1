@@ -50,6 +50,7 @@ public class lecture_upload extends AppCompatActivity {
     private int videoCount = 0;
 
     private EditText titleEditText, contentsEditText;
+    private Button UploadBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class lecture_upload extends AppCompatActivity {
         ImageButton button4 = findViewById(R.id.homeIcon);
         Button backBtn = findViewById(R.id.button_back);
         Button item_registeration = findViewById(R.id.item_registeration);
-        Button UploadBtn = findViewById(R.id.lectureRegister);
+        UploadBtn = findViewById(R.id.lectureRegister);
         ImageButton contentsPlusBtn = findViewById(R.id.contentsPlusBtn);
         ImageButton thumbnailUploadBtn = findViewById(R.id.thumbnailUploadBtn);
         commentContainer = findViewById(R.id.commentContainer);
@@ -126,6 +127,9 @@ public class lecture_upload extends AppCompatActivity {
         // Choose image on thumbnail upload button click
         thumbnailUploadBtn.setOnClickListener(v -> chooseImage());
 
+        // 버튼 초기 상태를 설정
+        UploadBtn.setEnabled(false);
+
         if (savedInstanceState != null) {
             restoreSavedState(savedInstanceState);
         } else if (getIntent().getExtras() != null) {
@@ -165,6 +169,8 @@ public class lecture_upload extends AppCompatActivity {
                 restoreSavedState(data.getExtras());
             }
         }
+        // 비디오가 추가되었는지 확인하여 버튼 활성화 상태 업데이트
+        checkVideoCount();
     }
 
     private Bundle getCurrentState() {
@@ -199,6 +205,8 @@ public class lecture_upload extends AppCompatActivity {
             videoSubtitles.put(subtitle, videoUriString);
             addNewEditTextWithVideo(subtitle, Uri.parse(videoUriString));
         }
+        // 비디오가 추가되었는지 확인하여 버튼 활성화 상태 업데이트
+        checkVideoCount();
     }
 
     private void addNewEditText() {
@@ -237,6 +245,8 @@ public class lecture_upload extends AppCompatActivity {
         newEditText.setTag(videoUri);
 
         commentContainer.addView(newEditText);
+        // 비디오가 추가되었는지 확인하여 버튼 활성화 상태 업데이트
+        checkVideoCount();
     }
 
     private void chooseImage() {
@@ -417,5 +427,16 @@ public class lecture_upload extends AppCompatActivity {
         videoCount = 0;
         imageUri = null;
         videoUri = null;
+        // 비디오가 추가되었는지 확인하여 버튼 활성화 상태 업데이트
+        checkVideoCount();
+    }
+
+    // 비디오가 추가되었는지 확인하여 버튼 활성화 상태 업데이트
+    private void checkVideoCount() {
+        if (videoCount > 0) {
+            UploadBtn.setEnabled(true);
+        } else {
+            UploadBtn.setEnabled(false);
+        }
     }
 }

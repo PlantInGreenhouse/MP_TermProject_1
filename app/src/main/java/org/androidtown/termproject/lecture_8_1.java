@@ -2,6 +2,7 @@ package org.androidtown.termproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -26,6 +27,7 @@ public class lecture_8_1 extends AppCompatActivity {
     private TextView courseTitle;
     private TextView courseAuthor;
     private LinearLayout reviewContainer;
+    private ImageView authorImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class lecture_8_1 extends AppCompatActivity {
         ImageButton button4 = findViewById(R.id.myPageIcon);
         Button about = findViewById(R.id.tab_about);
         Button reviewTab = findViewById(R.id.tab_reviews);
+        authorImage = findViewById(R.id.author_icon);
 
         button1.setOnClickListener(v -> startActivity(new Intent(lecture_8_1.this, lobby_3.class)));
         button2.setOnClickListener(v -> startActivity(new Intent(lecture_8_1.this, study_4.class)));
@@ -101,7 +104,20 @@ public class lecture_8_1 extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String authorName = dataSnapshot.child("name").getValue(String.class);
+                    String authorPic = dataSnapshot.child("profileImageUrl").getValue(String.class); // 여기에 추가
+
                     courseAuthor.setText("By " + authorName);
+
+                    if (authorPic != null && !authorPic.isEmpty()) {
+                        Log.d("lecture_8", "Author Pic URL: " + authorPic); // URL 로그 확인
+                        Glide.with(lecture_8_1.this)
+                                .load(authorPic)
+                                .apply(RequestOptions.circleCropTransform())
+                                .error(R.drawable.profile) // 오류 발생 시 기본 이미지
+                                .into(authorImage);
+                    } else {
+                        authorImage.setImageResource(R.drawable.profile);
+                    }
                 }
             }
 
