@@ -353,27 +353,25 @@
                 android:textSize="12sp"
                 android:textColor="#000000" />
         </LinearLayout>
-        <!-- Market -->
+        <!-- My learning -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/marketIcon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_market"
-                android:background="@android:color/white"/>
+                android:src="@drawable/ic_learning" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Market"
-                android:textSize="12sp"
-                android:textColor="#000000" />
+                android:text="My learning"
+                android:textSize="12sp" />
         </LinearLayout>
         <!-- My Page -->
         <LinearLayout
