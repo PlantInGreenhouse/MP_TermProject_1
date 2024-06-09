@@ -23,6 +23,5 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="15dp"
-        android:scaleType="centerCrop"
         android:src="@drawable/ic_play"/>
 </RelativeLayout>
