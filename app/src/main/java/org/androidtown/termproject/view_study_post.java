@@ -19,6 +19,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -130,7 +133,10 @@ public class view_study_post extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     String profileImageUrl = dataSnapshot.child("profileImageUrl").getValue(String.class);
                     if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
-                        Glide.with(view_study_post.this).load(profileImageUrl).into(postAuthorImageView);
+                        Glide.with(view_study_post.this)
+                                .load(profileImageUrl)
+                                .apply(RequestOptions.circleCropTransform())
+                                .into(postAuthorImageView);
                     } else {
                         postAuthorImageView.setImageResource(R.drawable.ic_avatar); // 기본 이미지
                     }
@@ -235,7 +241,10 @@ public class view_study_post extends AppCompatActivity {
         commentContentTextView.setText(content);
 
         if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
-            Glide.with(this).load(profileImageUrl).into(writerImageView);
+            Glide.with(this)
+                    .load(profileImageUrl)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(writerImageView);
         } else {
             writerImageView.setImageResource(R.drawable.ic_avatar); // 기본 이미지
         }
