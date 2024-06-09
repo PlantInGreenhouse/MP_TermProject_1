@@ -2,6 +2,7 @@ package org.androidtown.termproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -32,6 +33,7 @@ public class lecture_8_1 extends AppCompatActivity {
     private TextView courseTitle;
     private TextView courseAuthor;
     private LinearLayout reviewContainer;
+    private ImageView authorImage;
     private Button orderingItemsButton;
     private String userId, lectureId;
 
@@ -40,12 +42,16 @@ public class lecture_8_1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lecture_8_1);
 
+        Button backBtn = findViewById(R.id.button_back);
+        backBtn.setOnClickListener(v -> startActivity(new Intent(lecture_8_1.this, lobby_3.class)));
+
         ImageButton button1 = findViewById(R.id.homeIcon);
         ImageButton button2 = findViewById(R.id.studyIcon);
         ImageButton button3 = findViewById(R.id.marketIcon);
         ImageButton button4 = findViewById(R.id.myPageIcon);
         Button about = findViewById(R.id.tab_about);
         Button reviewTab = findViewById(R.id.tab_reviews);
+        authorImage = findViewById(R.id.author_icon);
         orderingItemsButton = findViewById(R.id.ordering_items_button);
 
         button1.setOnClickListener(v -> startActivity(new Intent(lecture_8_1.this, lobby_3.class)));
@@ -63,6 +69,7 @@ public class lecture_8_1 extends AppCompatActivity {
         courseTitle = findViewById(R.id.course_title);
         courseAuthor = findViewById(R.id.course_author);
         reviewContainer = findViewById(R.id.review_container);
+
 
         userId = getIntent().getStringExtra("userId");
         lectureId = getIntent().getStringExtra("lectureId");
@@ -112,7 +119,20 @@ public class lecture_8_1 extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String authorName = dataSnapshot.child("name").getValue(String.class);
+                    String authorPic = dataSnapshot.child("profileImageUrl").getValue(String.class); // 여기에 추가
+
                     courseAuthor.setText("By " + authorName);
+
+                    if (authorPic != null && !authorPic.isEmpty()) {
+                        Log.d("lecture_8", "Author Pic URL: " + authorPic); // URL 로그 확인
+                        Glide.with(lecture_8_1.this)
+                                .load(authorPic)
+                                .apply(RequestOptions.circleCropTransform())
+                                .error(R.drawable.profile) // 오류 발생 시 기본 이미지
+                                .into(authorImage);
+                    } else {
+                        authorImage.setImageResource(R.drawable.profile);
+                    }
                 }
             }
 

@@ -2,6 +2,7 @@ package org.androidtown.termproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +30,7 @@ import java.util.Map;
 public class lecture_8 extends AppCompatActivity {
 
     private ImageView courseImage;
+    private ImageView authorImage;
     private TextView courseTitle;
     private Button categoryArt;
     private TextView courseAuthor;
@@ -48,6 +51,8 @@ public class lecture_8 extends AppCompatActivity {
         Button review = findViewById(R.id.tab_reviews);
         subscribeButton = findViewById(R.id.subscribe_button);
         orderingItemsButton = findViewById(R.id.ordering_items_button);
+        Button backBtn = findViewById(R.id.button_back);
+        backBtn.setOnClickListener(v -> startActivity(new Intent(lecture_8.this, lobby_3.class)));
 
         button1.setOnClickListener(v -> startActivity(new Intent(lecture_8.this, lobby_3.class)));
         button2.setOnClickListener(v -> startActivity(new Intent(lecture_8.this, study_4.class)));
@@ -66,6 +71,7 @@ public class lecture_8 extends AppCompatActivity {
         courseAuthor = findViewById(R.id.course_author);
         courseDescription = findViewById(R.id.course_description);
         contentList = findViewById(R.id.content_list);
+        authorImage = findViewById(R.id.author_icon);
 
         userId = getIntent().getStringExtra("userId");
         lectureId = getIntent().getStringExtra("lectureId");
@@ -100,6 +106,7 @@ public class lecture_8 extends AppCompatActivity {
                         courseImage.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
                     }
 
+                    // 작가 세부 정보를 로드할 때 프로필 이미지 URL을 가져옵니다.
                     loadAuthorDetails(authorId);
                     loadVideos(dataSnapshot.child("comments"));
                 }
@@ -119,7 +126,20 @@ public class lecture_8 extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String authorName = dataSnapshot.child("name").getValue(String.class);
+                    String authorPic = dataSnapshot.child("profileImageUrl").getValue(String.class); // 여기에 추가
+
                     courseAuthor.setText("By " + authorName);
+
+                    if (authorPic != null && !authorPic.isEmpty()) {
+                        Log.d("lecture_8", "Author Pic URL: " + authorPic); // URL 로그 확인
+                        Glide.with(lecture_8.this)
+                                .load(authorPic)
+                                .apply(RequestOptions.circleCropTransform())
+                                .error(R.drawable.profile) // 오류 발생 시 기본 이미지
+                                .into(authorImage);
+                    } else {
+                        authorImage.setImageResource(R.drawable.profile);
+                    }
                 }
             }
 
@@ -129,6 +149,8 @@ public class lecture_8 extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void loadVideos(DataSnapshot commentsSnapshot) {
         if (commentsSnapshot.exists()) {
