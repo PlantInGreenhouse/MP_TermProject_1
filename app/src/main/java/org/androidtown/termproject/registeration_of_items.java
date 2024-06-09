@@ -51,6 +51,7 @@ public class registeration_of_items extends AppCompatActivity {
     private Button uploadButton;
     private LinearLayout itemContainer;
     private Button backBtn;
+    private String lectureId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,9 @@ public class registeration_of_items extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mStorageRef = FirebaseStorage.getInstance().getReference();
+
+        // 강의 ID 가져오기
+        lectureId = getIntent().getStringExtra("lectureId");
 
         // Plus 버튼 클릭 리스너 추가
         ImageView plusBtn = findViewById(R.id.plusBtn);
@@ -227,6 +231,7 @@ public class registeration_of_items extends AppCompatActivity {
                     itemData.put("title", titleInput.getText().toString());
                     itemData.put("price", priceInput.getText().toString());
                     itemData.put("userName", userName);
+                    itemData.put("lectureId", lectureId); // 강의 ID 추가
                     if (imageUrl != null) {
                         itemData.put("imageUrl", imageUrl);
                     }
@@ -291,7 +296,7 @@ public class registeration_of_items extends AppCompatActivity {
             String userId = user.getUid();
             DatabaseReference itemRef = mDatabase.child("registeration_of_item").child(userId);
 
-            itemRef.addValueEventListener(new ValueEventListener() {
+            itemRef.orderByChild("lectureId").equalTo(lectureId).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     itemContainer.removeAllViews();

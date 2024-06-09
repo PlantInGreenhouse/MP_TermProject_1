@@ -140,7 +140,7 @@ public class shoppinglist_7 extends AppCompatActivity {
 
     private void updateItemPrice(TextView priceTextView, double price, int quantity) {
         double totalPrice = price * quantity;
-        priceTextView.setText(String.format("$%.0f", totalPrice)); // Update price with two decimal places
+        priceTextView.setText(String.format("%.0f", totalPrice)); // Update price with two decimal places
     }
 
     private double calculateTotalPrice() {
