@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,19 +14,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class lobby_3 extends AppCompatActivity {
 
     private LinearLayout newClassContainer;
     private LinearLayout likedCategoriesContainer;
-    private String userCategoryPreferences;
+    private List<String> userCategoryPreferences = new ArrayList<>(); // 유저의 선호 카테고리 리스트
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,6 @@ public class lobby_3 extends AppCompatActivity {
             return false;
         });
 
-        loadNewClasses();
     }
 
     private void setupCategoryButton(int buttonId, String category) {
@@ -82,16 +83,34 @@ public class lobby_3 extends AppCompatActivity {
     }
 
     private void loadUserPreferences() {
-        // 여기에서 Firebase 또는 다른 소스에서 사용자의 카테고리 선호도를 불러옵니다.
-        // 예시로 하드코딩된 문자열을 사용하겠습니다.
-        userCategoryPreferences = "Art, Cooking, Programming";
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(currentUserId);
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String categories = dataSnapshot.child("category").getValue(String.class);
+                if (categories != null && !categories.isEmpty()) {
+                    String[] categoryArray = categories.split(", ");
+                    for (String category : categoryArray) {
+                        userCategoryPreferences.add(category.trim());
+                    }
+                }
+                loadNewClasses(); // 사용자 카테고리 선호도를 불러온 후 강의를 로드
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(lobby_3.this, "Failed to load user preferences.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void loadNewClasses() {
         DatabaseReference lecturesRef = FirebaseDatabase.getInstance().getReference("users");
         Query query = lecturesRef.orderByChild("lectures/timestamp");
 
-        query.addValueEventListener(new ValueEventListener() {
+        ((Query) query).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 newClassContainer.removeAllViews();
@@ -138,13 +157,7 @@ public class lobby_3 extends AppCompatActivity {
         if (userCategoryPreferences == null || category == null) {
             return false;
         }
-        String[] preferences = userCategoryPreferences.split(",");
-        for (String preference : preferences) {
-            if (category.trim().equalsIgnoreCase(preference.trim())) {
-                return true;
-            }
-        }
-        return false;
+        return userCategoryPreferences.contains(category.trim());
     }
 
     private void addNewClassView(String userId, String lectureId, String title, String description, String thumbnailUrl, String category, String author) {
@@ -180,7 +193,6 @@ public class lobby_3 extends AppCompatActivity {
 
         newClassContainer.addView(classView, 0);
     }
-
 
     private void addLikedCategoryClassView(String userId, String lectureId, String title, String description, String thumbnailUrl, String category, String author) {
         View classView = getLayoutInflater().inflate(R.layout.liked_category_item, null);
