@@ -16,7 +16,7 @@
         android:textSize="16sp"
         android:paddingStart="5dp"/>
 
-    <ImageView
+    <ImageButton
         android:id="@+id/playIcon"
         android:layout_width="25dp"
         android:layout_height="25dp"
