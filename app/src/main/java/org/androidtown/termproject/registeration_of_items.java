@@ -50,6 +50,7 @@ public class registeration_of_items extends AppCompatActivity {
     private ImageButton uploadImageButton;
     private Button uploadButton;
     private LinearLayout itemContainer;
+    private Button backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +87,7 @@ public class registeration_of_items extends AppCompatActivity {
         ImageButton button2 = findViewById(R.id.studyIcon);
         ImageButton button3 = findViewById(R.id.marketIcon);
         ImageButton button4 = findViewById(R.id.homeIcon);
-        Button backBtn = findViewById(R.id.button_back);
+        backBtn = findViewById(R.id.button_back);
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,12 +116,15 @@ public class registeration_of_items extends AppCompatActivity {
                 startActivity(new Intent(registeration_of_items.this, lobby_3.class));
             }
         });
+
+        // Handle back button click
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemContainer.removeAllViews();
-                // 'DELETE_ITEMS' 플래그 없이 이동
-                startActivity(new Intent(registeration_of_items.this, lecture_upload.class));
+                Intent intent = new Intent();
+                intent.putExtras(getIntent().getExtras());
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }
