@@ -33,7 +33,6 @@ public class after_search extends AppCompatActivity {
         ImageButton button4 = findViewById(R.id.homeIcon);
         ImageButton button5 = findViewById(R.id.cartIcon);
 
-
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +95,7 @@ public class after_search extends AppCompatActivity {
                         String userId = userSnapshot.getKey();
 
                         if (title != null && description != null && thumbnailUrl != null && title.contains(query)) {
-                            addSearchResultView(userId, lectureId, title, description, thumbnailUrl);
+                            addSearchResultView(userId, lectureId, title, truncateDescription(description), thumbnailUrl);
                         }
                     }
                 }
@@ -133,5 +132,13 @@ public class after_search extends AppCompatActivity {
         });
 
         searchResultsContainer.addView(resultView);
+    }
+
+    private String truncateDescription(String description) {
+        if (description != null && description.length() > 13) {
+            return description.substring(0, 13) + "...";
+        } else {
+            return description;
+        }
     }
 }

@@ -99,7 +99,7 @@ public class CategoryActivity extends AppCompatActivity {
                         String userId = userSnapshot.getKey();
 
                         if (lectureCategory != null && lectureCategory.equalsIgnoreCase(category)) {
-                            addSearchResultView(userId, lectureId, title, description, thumbnailUrl);
+                            addSearchResultView(userId, lectureId, title, truncateDescription(description), thumbnailUrl);
                         }
                     }
                 }
@@ -144,5 +144,13 @@ public class CategoryActivity extends AppCompatActivity {
         resultView.setLayoutParams(layoutParams);
 
         searchResultsContainer.addView(resultView);
+    }
+
+    private String truncateDescription(String description) {
+        if (description != null && description.length() > 13) {
+            return description.substring(0, 20) + "...";
+        } else {
+            return description;
+        }
     }
 }
