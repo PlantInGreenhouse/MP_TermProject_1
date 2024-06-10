@@ -62,194 +62,15 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-
-            <RelativeLayout
+            <!-- RecyclerView 추가 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lecturerecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/my_learning_item_background"
-                android:clickable="true"
-                android:padding="16dp">
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp" />
 
-                <ImageView
-                    android:id="@+id/thumbnail_1"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="15dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/not_yet" />
-
-                <TextView
-                    android:id="@+id/title_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_toEndOf="@id/thumbnail_1"
-                    android:text="Oil pastel drawing"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_below="@id/title_1"
-                    android:layout_alignStart="@id/title_1"
-                    android:text="Leeseojeong"
-                    android:textColor="#888888"
-                    android:textSize="14sp" />
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="15dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/right_errow" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/my_learning_item_background"
-                android:clickable="true"
-                android:padding="16dp">
-
-                <ImageView
-                    android:id="@+id/thumbnail_2"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="15dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/not_yet" />
-
-                <TextView
-                    android:id="@+id/title_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_toEndOf="@id/thumbnail_2"
-                    android:text="UI/UX"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_below="@id/title_2"
-                    android:layout_alignStart="@id/title_2"
-                    android:text="Leeseojeong"
-                    android:textColor="#888888"
-                    android:textSize="14sp" />
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="15dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/right_errow" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/my_learning_item_background"
-                android:clickable="true"
-                android:padding="16dp">
-
-                <ImageView
-                    android:id="@+id/thumbnail_3"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="15dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/not_yet" />
-
-                <TextView
-                    android:id="@+id/title_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_toEndOf="@id/thumbnail_3"
-                    android:text="Baking"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_below="@id/title_3"
-                    android:layout_alignStart="@id/title_3"
-                    android:text="Leeseojeong"
-                    android:textColor="#888888"
-                    android:textSize="14sp" />
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="15dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/right_errow" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/my_learning_item_background"
-                android:clickable="true"
-                android:padding="16dp">
-
-                <ImageView
-                    android:id="@+id/thumbnail_4"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="15dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/not_yet" />
-
-                <TextView
-                    android:id="@+id/title_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_toEndOf="@id/thumbnail_4"
-                    android:text="Stealing a Bicycle"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_below="@id/title_4"
-                    android:layout_alignStart="@id/title_4"
-                    android:text="Leeseojeong"
-                    android:textColor="#888888"
-                    android:textSize="14sp" />
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="15dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/right_errow" />
-            </RelativeLayout>
+            <!-- 기존의 RelativeLayout 목록들은 제거 -->
         </LinearLayout>
     </ScrollView>
 
@@ -272,7 +93,7 @@
         android:textSize="13dp" />
 
     <android.widget.Button
-        android:id="@+id/order_check"
+        android:id="@+id/ordercheck"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_above="@id/bottomNavBar"
