@@ -130,11 +130,11 @@ public class lobby_3 extends AppCompatActivity {
                             String userId = userSnapshot.getKey();
 
                             if (title != null && description != null && thumbnailUrl != null) {
-                                addNewClassView(userId, lectureId, title, description, thumbnailUrl, category, author);
+                                addNewClassView(userId, lectureId, title, truncateDescription(description), thumbnailUrl, category, author);
 
                                 // 사용자의 선호 카테고리와 일치하는 강의를 추가
                                 if (matchesUserPreferences(category)) {
-                                    addLikedCategoryClassView(userId, lectureId, title, description, thumbnailUrl, category, author);
+                                    addLikedCategoryClassView(userId, lectureId, title, truncateDescription(description), thumbnailUrl, category, author);
                                 }
                             } else {
                                 if (title == null) System.err.println("Missing title for lecture.");
@@ -224,5 +224,13 @@ public class lobby_3 extends AppCompatActivity {
         layoutParams.setMargins(8, 8, 22, 8);
         classView.setLayoutParams(layoutParams);
         likedCategoriesContainer.addView(classView, 0);
+    }
+
+    private String truncateDescription(String description) {
+        if (description.length() > 13) {
+            return description.substring(0, 13) + "...";
+        } else {
+            return description;
+        }
     }
 }
