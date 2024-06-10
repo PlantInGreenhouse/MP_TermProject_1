@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class shoppinglist_7 extends AppCompatActivity {
 
     private LinearLayout shoppingListContainer;
@@ -50,6 +52,8 @@ public class shoppinglist_7 extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        findViewById(R.id.payment_button).setOnClickListener(v -> processPayment());
 
         loadShoppingList();
     }
@@ -98,10 +102,13 @@ public class shoppinglist_7 extends AppCompatActivity {
         ImageButton deleteButton = itemView.findViewById(R.id.item_title_minus);
 
         titleTextView.setText(title);
-        priceTextView.setText(String.format("%.0f", price)); // Use two decimal places for price
+        priceTextView.setText(String.format("%.0f", price));
         if (imageUrl != null) {
             Glide.with(this).load(imageUrl).into(imageView);
         }
+
+        // Save imageUrl as tag for later retrieval
+        imageView.setTag(imageUrl);
 
         itemCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> updateTotalPrice());
 
@@ -140,7 +147,7 @@ public class shoppinglist_7 extends AppCompatActivity {
 
     private void updateItemPrice(TextView priceTextView, double price, int quantity) {
         double totalPrice = price * quantity;
-        priceTextView.setText(String.format("%.0f", totalPrice)); // Update price with two decimal places
+        priceTextView.setText(String.format("%.0f", totalPrice));
     }
 
     private double calculateTotalPrice() {
@@ -151,9 +158,9 @@ public class shoppinglist_7 extends AppCompatActivity {
             if (itemCheckbox.isChecked()) {
                 TextView priceTextView = itemView.findViewById(R.id.item_price);
                 TextView quantityTextView = itemView.findViewById(R.id.item_count);
-                double price = Double.parseDouble(priceTextView.getText().toString().replace("$", ""));
+                double price = Double.parseDouble(priceTextView.getText().toString());
                 int quantity = Integer.parseInt(quantityTextView.getText().toString());
-                totalPrice += price;
+                totalPrice += price * quantity;
             }
         }
         return totalPrice;
@@ -161,6 +168,41 @@ public class shoppinglist_7 extends AppCompatActivity {
 
     private void updateTotalPrice() {
         double totalPrice = calculateTotalPrice();
-        totalPriceTextView.setText(String.format("%.0f", totalPrice)); // Update total price with two decimal places
+        totalPriceTextView.setText(String.format("%.0f", totalPrice));
+    }
+
+    private void processPayment() {
+        ArrayList<String> titles = new ArrayList<>();
+        ArrayList<Double> prices = new ArrayList<>();
+        ArrayList<String> imageUrls = new ArrayList<>();
+        ArrayList<Integer> quantities = new ArrayList<>();
+
+        for (int i = 0; i < shoppingListContainer.getChildCount(); i++) {
+            View itemView = shoppingListContainer.getChildAt(i);
+            CheckBox itemCheckbox = itemView.findViewById(R.id.item_checkbox);
+            if (itemCheckbox.isChecked()) {
+                TextView titleTextView = itemView.findViewById(R.id.item_title);
+                TextView priceTextView = itemView.findViewById(R.id.item_price);
+                ImageView imageView = itemView.findViewById(R.id.item_image);
+                TextView quantityTextView = itemView.findViewById(R.id.item_count);
+
+                String title = titleTextView.getText().toString();
+                double price = Double.parseDouble(priceTextView.getText().toString());
+                String imageUrl = (String) imageView.getTag();
+                int quantity = Integer.parseInt(quantityTextView.getText().toString());
+
+                titles.add(title);
+                prices.add(price);
+                imageUrls.add(imageUrl);
+                quantities.add(quantity);
+            }
+        }
+
+        Intent intent = new Intent(shoppinglist_7.this, OrderList.class);
+        intent.putStringArrayListExtra("titles", titles);
+        intent.putExtra("prices", prices);
+        intent.putStringArrayListExtra("imageUrls", imageUrls);
+        intent.putExtra("quantities", quantities);
+        startActivity(intent);
     }
 }
